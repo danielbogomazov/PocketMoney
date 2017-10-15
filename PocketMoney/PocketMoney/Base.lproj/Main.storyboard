@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -266,12 +267,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wrw-5X-uDE" customClass="ProgressView" customModule="PocketMoney" customModuleProvider="target">
+                                <rect key="frame" x="67" y="206" width="240" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wrw-5X-uDE" secondAttribute="height" multiplier="1:1" id="or4-Bo-T0W"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="RkB-uc-fzt" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" constant="8" id="CpT-S5-Y8i"/>
                             <constraint firstItem="qka-cM-hvY" firstAttribute="trailing" secondItem="WvL-Pg-NZn" secondAttribute="trailing" id="OBc-EE-st3"/>
+                            <constraint firstItem="Wrw-5X-uDE" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" constant="67" id="RjU-Zh-Gx3"/>
+                            <constraint firstItem="Wrw-5X-uDE" firstAttribute="top" secondItem="RkB-uc-fzt" secondAttribute="bottom" constant="19" id="TAG-Ni-1HQ"/>
                             <constraint firstItem="WvL-Pg-NZn" firstAttribute="trailing" secondItem="RkB-uc-fzt" secondAttribute="trailing" constant="8" id="W76-8E-5vw"/>
+                            <constraint firstItem="WvL-Pg-NZn" firstAttribute="trailing" secondItem="Wrw-5X-uDE" secondAttribute="trailing" constant="68" id="bik-2C-mlm"/>
                             <constraint firstItem="RkB-uc-fzt" firstAttribute="top" secondItem="qka-cM-hvY" secondAttribute="bottom" constant="21" id="hWf-U0-cct"/>
                             <constraint firstItem="qka-cM-hvY" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" id="iLU-6a-Q9u"/>
                             <constraint firstItem="qka-cM-hvY" firstAttribute="top" secondItem="Xfx-Zb-fZ0" secondAttribute="top" id="oDH-y8-CjT"/>
