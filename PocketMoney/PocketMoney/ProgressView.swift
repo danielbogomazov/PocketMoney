@@ -13,7 +13,7 @@ import UIKit
 class ProgressView: UIView {
     
     var tGaol: Double = 100.0
-    var tSpent: Double = 69.2
+    var tSpent: Double = 220.0
     
     var circleLayer: CAShapeLayer!
     
@@ -39,7 +39,7 @@ class ProgressView: UIView {
         
         view.backgroundColor = UIColor.clear
         
-        let path = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: (frame.size.width - 10)/2, startAngle: 0.0, endAngle: endAngle(), clockwise: true)
+        let path = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: (frame.size.width - 10)/2, startAngle: CGFloat(0 - (Double.pi / 2)), endAngle: endAngle(), clockwise: true)
         circleLayer = CAShapeLayer()
         circleLayer.path = path.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
@@ -69,14 +69,13 @@ class ProgressView: UIView {
     
     
     func endAngle() -> CGFloat {
-        let percentageSpent = tSpent / tGaol
-
-        if percentageSpent < 1.0 {
-            let radian = CGFloat(percentageSpent * .pi * 2)
-            return radian
+        var percentageSpent = tSpent / tGaol
+        if percentageSpent > 1.0 {
+            percentageSpent = 1.0
         }
-
-        return CGFloat(Double.pi * 2)
+        var radian = CGFloat(percentageSpent * .pi * 2)
+        radian = radian - CGFloat(Double.pi * 0.5)
+        return radian
     }
 }
 
