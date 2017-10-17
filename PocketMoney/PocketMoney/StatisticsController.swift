@@ -9,11 +9,15 @@
 import UIKit
 
 class StatisticsController: UIViewController {
-
+    
+    @IBOutlet weak var progressView: ProgressView2!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         
     }
 

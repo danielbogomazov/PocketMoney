@@ -46,6 +46,7 @@ class ProgressView: UIView {
         view.backgroundColor = UIColor.clear
         
         drawPath()
+        
     }
     
     func loadFromNib() -> UIView! {

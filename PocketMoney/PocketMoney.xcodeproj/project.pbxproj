@@ -23,6 +23,7 @@
 		65EDB0161F8D876200BC33DC /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDB0121F8D876200BC33DC /* Item+CoreDataProperties.swift */; };
 		65EDB0241F8D9E7C00BC33DC /* StatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */; };
 		65EDB02C1F8DAFE500BC33DC /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDB02B1F8DAFE500BC33DC /* Section.swift */; };
+		A499D0E71F968CB6001AD5CB /* ProgressView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A499D0E61F968CB6001AD5CB /* ProgressView2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		65EDB0121F8D876200BC33DC /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
 		65EDB02B1F8DAFE500BC33DC /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		A499D0E61F968CB6001AD5CB /* ProgressView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				65D281FE1F92F92A00A7FCED /* ProgressView.swift */,
 				65D282001F92FC6D00A7FCED /* ProgressView.xib */,
+				A499D0E61F968CB6001AD5CB /* ProgressView2.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				65C8B7FF1F8992E700AB1D2F /* PocketMoney.xcdatamodeld in Sources */,
 				65D281FF1F92F92A00A7FCED /* ProgressView.swift in Sources */,
 				65EDB02C1F8DAFE500BC33DC /* Section.swift in Sources */,
+				A499D0E71F968CB6001AD5CB /* ProgressView2.swift in Sources */,
 				65EDB0141F8D876200BC33DC /* Goal+CoreDataProperties.swift in Sources */,
 				65D281F71F92EDD800A7FCED /* Util.swift in Sources */,
 				65EDB0161F8D876200BC33DC /* Item+CoreDataProperties.swift in Sources */,
