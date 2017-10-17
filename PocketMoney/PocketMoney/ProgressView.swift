@@ -13,7 +13,7 @@ import UIKit
 class ProgressView: UIView {
     
     var tGoal: Double = 100.0
-    var tSpent: Double = 220.0
+    var tSpent: Double = 89.0
     
     var circleLayer: CAShapeLayer!
     
@@ -63,25 +63,6 @@ class ProgressView: UIView {
         }
         
         drawDangerPath(completion: {})
-        
-//        if percentage <= 0.5 {
-//            drawInitialPath(completion: {})
-//        } else if percentage > 0.5 && percentage < 0.75 {
-//            drawWarningPath(completion: {})
-//        } else {
-//            drawDangerPath(completion: {})
-//        }
-        
-//        let path = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: (frame.size.width - 10)/2, startAngle: CGFloat(0 - (Double.pi / 2)), endAngle: endAngle(), clockwise: true)
-//        circleLayer = CAShapeLayer()
-//        circleLayer.path = path.cgPath
-//        circleLayer.fillColor = UIColor.clear.cgColor
-//        circleLayer.strokeColor = UIColor.red.cgColor
-//
-//        circleLayer.lineWidth = 15.0;
-//
-//        layer.addSublayer(circleLayer)
-//        animateCircle()
     }
     
     func drawInitialPath(completion: () -> Void) {
@@ -99,7 +80,7 @@ class ProgressView: UIView {
         circleLayer.lineWidth = lineWidth
         
         layer.addSublayer(circleLayer)
-        
+        animateCircle()
         if tSpent / tGoal > 0.5 {
             completion()
         }
@@ -123,6 +104,7 @@ class ProgressView: UIView {
             circleLayer.lineWidth = lineWidth
             
             layer.addSublayer(circleLayer)
+            animateCircle()
             if tSpent / tGoal > 0.75 {
                 completion()
             }
@@ -133,9 +115,12 @@ class ProgressView: UIView {
     func drawDangerPath(completion: () -> Void) {
         drawWarningPath(completion: {
             var percentage = tSpent / tGoal
+            if percentage > 1.0 {
+                percentage = 1.0
+            }
             percentage = percentage - 0.75
             let endAngle = findEndAngle(for: pathType.danger, percentage: percentage)
-            let path = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2, y: frame.size.height / 2), radius: (frame.size.width - lineWidth) / 2, startAngle: degToRad(135), endAngle: endAngle, clockwise: true)
+            let path = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2, y: frame.size.height / 2), radius: (frame.size.width - lineWidth) / 2, startAngle: degToRad(180), endAngle: endAngle, clockwise: true)
             
             circleLayer = CAShapeLayer()
             circleLayer.path = path.cgPath
@@ -144,7 +129,7 @@ class ProgressView: UIView {
             circleLayer.lineWidth = lineWidth
             
             layer.addSublayer(circleLayer)
-            
+            animateCircle()
             completion()
         })
     }
@@ -176,18 +161,9 @@ class ProgressView: UIView {
             let percentage = percentage / tGoal * 100
             var radian = CGFloat(percentage * .pi * 4)
             radian = radian - CGFloat(Double.pi * 0.5)
-            radian = radian + degToRad(135)
+            radian = radian + degToRad(180)
             return radian
         }
-        
-        
-//        var percentageSpent = tSpent / tGoal
-//        if percentageSpent > 1.0 {
-//            percentageSpent = 1.0
-//        }
-//        var radian = CGFloat(percentageSpent * .pi * 2)
-//        radian = radian - CGFloat(Double.pi * 0.5)
-//        return radian
     }
     
     func radToDeg(_ rad: CGFloat) -> CGFloat {
