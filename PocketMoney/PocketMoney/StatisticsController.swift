@@ -8,9 +8,12 @@
 
 import UIKit
 
+var tSpent = 180.42
+var tGoal = 250.0
+
 class StatisticsController: UIViewController {
     
-    @IBOutlet weak var progressView: ProgressView2!
+    @IBOutlet weak var percentageLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
