@@ -48,7 +48,7 @@ class ProgressView: UIView {
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         circleLayer.add(animation, forKey: "animateCircle")
     }
-    
+        
     func endAngle() -> CGFloat {
         let percentage = tSpent / tGoal
         if percentage >= 1 {
