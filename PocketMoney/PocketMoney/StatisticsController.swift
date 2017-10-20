@@ -8,38 +8,73 @@
 
 import UIKit
 
-var tSpent = 537.21
-var tGoal = 250.0
+// TEST DATA - Delete when implementing Core Data
+var tSpent: Double = 100.0
+var tGoal: Double = 250.0
+
+struct Item {
+    var name: String!
+    var price: Double!
+    var quantity: Int16!
+    
+    init() {
+        name = "Unknown"
+        price = 0.0
+        quantity = 0
+    }
+    
+    init(name: String, price: Double, quantity: Int16) {
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+    }
+}
+
+struct CurrentGoal {
+    var goalAmount: Double!
+    var amountSpend: Double!
+    var items: [Item]!
+    var description: String!
+    
+    init() {
+        goalAmount = 0.0
+        amountSpend = 0.0
+        items = []
+        description = ""
+    }
+    
+    init(goalAmount: Double, description: String) {
+        self.goalAmount = goalAmount
+        amountSpend = 0.0
+        items = []
+        self.description = description
+    }
+}
+
+var currentGoal: CurrentGoal?
+var items: [Item]?
+
+let defaultColor = UIColor(red: 0.329933, green: 0.329994, blue: 0.329925, alpha: 1.0)
 
 class StatisticsController: UIViewController {
     
     @IBOutlet weak var percentageLabel: UILabel!
     var percentage: Int = 0
     
-    var seconds: Double = 2
     var timer = Timer()
+    var seconds: Double = 2
     var isTimerRunning = false
     var timeInterval: TimeInterval!
-    var red: CGFloat!
-    var green: CGFloat!
-    var blue: CGFloat!
-    
-    var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTestData()
         timeInterval = seconds / (tSpent / tGoal * 100)
         percentageLabel.text = "\(percentage)%"
-        red = 0
-        green = 1
-        blue = 0
-        percentageLabel.textColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
-        runTimer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
-//        animatePercentage()
+        runTimer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,33 +87,22 @@ class StatisticsController: UIViewController {
         
     }
     
-    
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(StatisticsController.updateTimer)), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer() {
-        count = count + 1
         seconds -= timeInterval
         percentage += 1
         percentageLabel.text = "\(percentage)%"
         
-        // TODO : FIX COLOR
-        red = red + 2.55 / 255
-        green = green - 2.55 / 255
-        blue = blue + 2.55 / 255
-        
-        if percentage <= 100 {
-            percentageLabel.textColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
-        } else {
-            // TODO :  SHIFT COLOR TO BLACK
-            percentageLabel.textColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
-        }
-        
         if percentage >= Int(tSpent / tGoal * 100) {
-            print(count)
             timer.invalidate()
         }
+    }
+    
+    func setupTestData() {
+        // TODO: Create dummy data to test
     }
     
 }

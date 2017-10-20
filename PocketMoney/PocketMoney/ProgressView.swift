@@ -15,32 +15,45 @@ class ProgressView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupCircle()
+        initProgressView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupCircle()
+        initProgressView()
     }
     
-    func setupCircle() {
+    func initProgressView() {
         let lineWidth: CGFloat = 12.0
         let arcCenter = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         let radius: CGFloat = (frame.size.width - lineWidth) / 2
-        let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: CGFloat(270).degreesToRadians, endAngle: endAngle(), clockwise: true)
         
+        // Inner circle
+        var path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(360).degreesToRadians, clockwise: true)
+        
+        let innerCircleLayer = CAShapeLayer()
+        innerCircleLayer.path = path.cgPath
+        innerCircleLayer.fillColor = UIColor.clear.cgColor
+        innerCircleLayer.strokeColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 0.5).cgColor
+        innerCircleLayer.lineWidth = lineWidth
+        
+        layer.addSublayer(innerCircleLayer)
+
+        // Animated circle
+        path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: CGFloat(270).degreesToRadians, endAngle: endAngle(), clockwise: true)
+
         circleLayer = CAShapeLayer()
         circleLayer.path = path.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
-        circleLayer.strokeColor = UIColor.red.cgColor
+        circleLayer.strokeColor = defaultColor.cgColor
         circleLayer.lineWidth = lineWidth
         
         layer.addSublayer(circleLayer)
         
-        animateCircle()
+        animateProgressView()
     }
     
-    func animateCircle() {
+    func animateProgressView() {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = animationDuration
         animation.fromValue = 0
