@@ -7,78 +7,39 @@
 //
 
 import UIKit
-
-// TEST DATA - Delete when implementing Core Data
-var tSpent: Double = 100.0
-var tGoal: Double = 250.0
-
-struct Item {
-    var name: String!
-    var price: Double!
-    var quantity: Int16!
-    
-    init() {
-        name = "Unknown"
-        price = 0.0
-        quantity = 0
-    }
-    
-    init(name: String, price: Double, quantity: Int16) {
-        self.name = name
-        self.price = price
-        self.quantity = quantity
-    }
-    
-}
-
-struct CurrentGoal {
-    var goalAmount: Double!
-    var amountSpend: Double!
-    var items: [Item]!
-    var description: String!
-    
-    init() {
-        goalAmount = 0.0
-        amountSpend = 0.0
-        items = []
-        description = "Goal"
-    }
-    
-    init(goalAmount: Double, description: String?) {
-        self.goalAmount = goalAmount
-        amountSpend = 0.0
-        items = []
-        self.description = (description != nil) ? description! : "Goal"
-    }
-    
-    mutating func addItems(items: [Item]) {
-        for item in items {
-            self.items.append(item)
-        }
-    }
-}
+import CoreData
 
 var currentGoal: CurrentGoal?
-var items: [Item] = []
+var items: NSSet?
 
 let defaultColor = UIColor(red: 0.329933, green: 0.329994, blue: 0.329925, alpha: 1.0)
 
 class StatisticsController: UIViewController {
     
     @IBOutlet weak var itemsTableView: UITableView!
+    @IBOutlet weak var statisticsInfoButton: UIButton!
+    @IBOutlet weak var goalDescriptionLabel: UILabel!
     @IBOutlet weak var percentageLabel: UILabel!
+    @IBOutlet weak var progressView: ProgressView!
     var percentage: Int = 0
-    
     var timer = Timer()
     var seconds: Double = 2
     var isTimerRunning = false
     var timeInterval: TimeInterval!
     
+    var itemArray: [Item] = []
+    
     override func viewDidLoad() {
+        
+
+        testingDELETE(completionHandler: {
+            testingPERSIST()
+        })
+//        testingLOAD()
+        
         super.viewDidLoad()
-        setupTestData()
-        timeInterval = seconds / (tSpent / tGoal * 100)
-        percentageLabel.text = "\(percentage)%"
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -90,10 +51,83 @@ class StatisticsController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func statisticsInfoButtonPressed(_ sender: UIButton) {
+    }
     func animatePercentage() {
         percentageLabel.text = "\(percentage)%"
-        
     }
+    
+    func populateItemArray() {
+        for (_, item) in currentGoal!.items!.enumerated() {
+            itemArray.append(item as! Item)
+        }
+        itemsTableView.reloadData()
+    }
+    
+    // MARK:- DELETE AFTER TESTING
+    
+    func testingDELETE(completionHandler: () -> () ) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrentGoal")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            let _ = try PersistenceService.context.execute(deleteRequest)
+            completionHandler()
+        } catch {
+            
+            
+        }
+    }
+    func testingPERSIST() {
+        currentGoal = CurrentGoal(context: PersistenceService.context)
+        currentGoal!.amountSpent = 0.0
+        currentGoal!.goalAmount = 100.00
+        currentGoal!.goalDescription = ""
+        
+        var itemsArr: [Item] = []
+        
+        for i in 0 ..< 7 {
+            itemsArr.append(Item(context: PersistenceService.context))
+            itemsArr[i].name = "ITEM \(i)"
+            itemsArr[i].price = Double(i + 1)
+            var q = 10 % (i + 1)
+            if q == 0 {
+                q = 1
+            }
+            itemsArr[i].quantity = Int16(q)
+            currentGoal!.amountSpent += Double(itemsArr[i].quantity) * itemsArr[i].price
+        }
+        
+        items = NSSet(array: itemsArr)
+        
+        currentGoal!.items = items
+        
+        PersistenceService.saveContext()
+        
+        timeInterval = seconds / (currentGoal!.amountSpent / currentGoal!.goalAmount * 100)
+        percentageLabel.text = "\(percentage)%"
+        
+        populateItemArray()
+        progressView.initProgressView()
+    }
+    func testingLOAD() {
+        let fetchRequest: NSFetchRequest<CurrentGoal> = CurrentGoal.fetchRequest()
+        
+        do {
+            let goal = try PersistenceService.context.fetch(fetchRequest)
+            currentGoal = goal[0]
+            progressView.initProgressView()
+            populateItemArray()
+            goalDescriptionLabel.text = (currentGoal!.goalDescription != "") ? currentGoal!.goalDescription : "Current Goal"
+            
+            timeInterval = seconds / (currentGoal!.amountSpent / currentGoal!.goalAmount * 100)
+            percentageLabel.text = "\(percentage)%"
+            
+        } catch {
+            // TODO
+        }
+    }
+
     
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(StatisticsController.updateTimer)), userInfo: nil, repeats: true)
@@ -104,45 +138,32 @@ class StatisticsController: UIViewController {
         percentage += 1
         percentageLabel.text = "\(percentage)%"
         
-        if percentage >= Int(tSpent / tGoal * 100) {
+        if percentage >= Int(currentGoal!.amountSpent / currentGoal!.goalAmount * 100) {
             timer.invalidate()
         }
-    }
-    
-    func setupTestData() {
-        items.append(Item(name: "McDonalds Big Mac Meal", price: 5.99, quantity: 1))
-        items.append(Item(name: "Quarter Pounder with Cheese", price: 4.79, quantity: 2))
-        items.append(Item(name: "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz", price: 10.22, quantity: 5))
-        items.append(Item(name: "Foo", price: 2.0, quantity: 1))
-        items.append(Item(name: "Bar", price: 3.0, quantity: 1))
-        items.append(Item(name: "Item", price: 10.01, quantity: 10))
-        
-        currentGoal = CurrentGoal(goalAmount: 100.00, description: nil)
-        
-        currentGoal?.addItems(items: items)
-        
-        itemsTableView.reloadData()
     }
 }
 
 extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return currentGoal!.items!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
         
-        let string = "\(items[indexPath.row].quantity!)x \(items[indexPath.row].name!)"
-        let substring = "\(items[indexPath.row].quantity!)x"
+        
+        let string = "\(itemArray[indexPath.row].quantity)x \(itemArray[indexPath.row].name!)"
+        let substring = "\(itemArray[indexPath.row].quantity)x"
         let range = (string as NSString).range(of: substring)
         let itemString = NSMutableAttributedString(string: string)
+        itemString.addAttribute(NSAttributedStringKey.foregroundColor, value: Util.Constant.TINT_COLOR, range: (string as NSString).range(of: string))
         itemString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.lightGray.withAlphaComponent(0.6), range: range)
-        
+
         cell.textLabel?.attributedText = itemString
-        
-        cell.detailTextLabel?.text = "$\(items[indexPath.row].price! * Double(items[indexPath.row].quantity!)) ($\(items[indexPath.row].price!) each)"
+
+        cell.detailTextLabel?.text = "$\(itemArray[indexPath.row].price * Double(itemArray[indexPath.row].quantity)) ($\(itemArray[indexPath.row].price) each)"
         cell.detailTextLabel?.textColor = UIColor.lightGray.withAlphaComponent(0.6)
         
         return cell

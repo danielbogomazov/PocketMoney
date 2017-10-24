@@ -234,15 +234,18 @@
                                             <constraint firstAttribute="height" constant="40" id="1F2-rs-vaR"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                        <color key="textColor" red="0.32996906729999997" green="0.32996906729999997" blue="0.32996906729999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" red="0.32937228679656982" green="0.32943451404571533" blue="0.32936835289001465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLo-nO-BOJ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLo-nO-BOJ">
                                         <rect key="frame" x="340.5" y="110.5" width="22" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="GGY-a2-XST"/>
                                             <constraint firstAttribute="width" constant="22" id="VHa-og-heo"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="statisticsInfoButtonPressed:" destination="DaW-P2-y81" eventType="touchUpInside" id="ADF-l6-Eld"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96579552660000001" green="0.96579552660000001" blue="0.96579552660000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -343,8 +346,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="EF2-We-NbG"/>
                     <connections>
+                        <outlet property="goalDescriptionLabel" destination="RkB-uc-fzt" id="WRL-uX-dYf"/>
                         <outlet property="itemsTableView" destination="96J-SR-NoG" id="N4t-MD-hlW"/>
                         <outlet property="percentageLabel" destination="gYv-rw-gNR" id="nhg-hW-CPw"/>
+                        <outlet property="progressView" destination="Wrw-5X-uDE" id="Inv-nT-gSD"/>
+                        <outlet property="statisticsInfoButton" destination="GLo-nO-BOJ" id="Ppl-SF-WwB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qr3-lC-vWs" userLabel="First Responder" sceneMemberID="firstResponder"/>

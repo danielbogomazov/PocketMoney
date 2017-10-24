@@ -2,11 +2,12 @@
 //  ProgressView2.swift
 //  PocketMoney
 //
-//  Created by MEDIC on 2017-10-17.
+//  Created by Daniel on 2017-10-17.
 //  Copyright © 2017 Daniel Bogomazov. All rights reserved.
 //
 
 import UIKit
+import CoreData
 
 class ProgressView: UIView {
     
@@ -24,6 +25,10 @@ class ProgressView: UIView {
     }
     
     func initProgressView() {
+        if currentGoal == nil {
+            return
+        }
+        
         let lineWidth: CGFloat = 12.0
         let arcCenter = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         let radius: CGFloat = (frame.size.width - lineWidth) / 2
@@ -63,7 +68,7 @@ class ProgressView: UIView {
     }
         
     func endAngle() -> CGFloat {
-        let percentage = tSpent / tGoal
+        let percentage = currentGoal!.amountSpent / currentGoal!.goalAmount
         if percentage >= 1 {
             return CGFloat(630).degreesToRadians
         } else if percentage < 0 {
