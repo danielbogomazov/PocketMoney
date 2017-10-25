@@ -17,10 +17,14 @@ extension CurrentGoal {
         return NSFetchRequest<CurrentGoal>(entityName: "CurrentGoal")
     }
 
+    @NSManaged public var id: UUID
     @NSManaged public var amountSpent: Double
     @NSManaged public var goalAmount: Double
+    @NSManaged public var endDate: Date?
+    @NSManaged public var startDate: Date
     @NSManaged public var goalDescription: String?
     @NSManaged public var items: NSSet?
+
 
 }
 

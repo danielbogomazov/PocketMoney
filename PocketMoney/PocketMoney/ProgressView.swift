@@ -9,8 +9,13 @@
 import UIKit
 import CoreData
 
+protocol ProgressViewDelegate {
+    func viewSwipedLeft()
+}
+
 class ProgressView: UIView {
     
+    var delegate: ProgressViewDelegate!
     var circleLayer: CAShapeLayer!
     let animationDuration: TimeInterval = 2
     
@@ -25,13 +30,18 @@ class ProgressView: UIView {
     }
     
     func initProgressView() {
+
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeLeft.direction = .left
+        addGestureRecognizer(swipeLeft)
+        
         if currentGoal == nil {
             return
         }
         
         let lineWidth: CGFloat = 12.0
         let arcCenter = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-        let radius: CGFloat = (frame.size.width - lineWidth) / 2
+        let radius: CGFloat = (frame.size.height - lineWidth) / 2
         
         // Inner circle
         var path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(360).degreesToRadians, clockwise: true)
@@ -56,6 +66,14 @@ class ProgressView: UIView {
         layer.addSublayer(circleLayer)
         
         animateProgressView()
+    }
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            if swipeGesture.direction == .left {
+                delegate.viewSwipedLeft()
+            }
+        }
     }
     
     func animateProgressView() {

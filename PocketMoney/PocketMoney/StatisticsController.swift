@@ -26,20 +26,20 @@ class StatisticsController: UIViewController {
     var seconds: Double = 2
     var isTimerRunning = false
     var timeInterval: TimeInterval!
-    
+    var pickerPopoverContent: UIViewController?
     var itemArray: [Item] = []
     
     override func viewDidLoad() {
-        
-
         testingDELETE(completionHandler: {
             testingPERSIST()
         })
 //        testingLOAD()
         
+        progressView.delegate = self
+        setTitle()
+        
         super.viewDidLoad()
         
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,8 +51,8 @@ class StatisticsController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func statisticsInfoButtonPressed(_ sender: UIButton) {
-    }
+
+
     func animatePercentage() {
         percentageLabel.text = "\(percentage)%"
     }
@@ -83,6 +83,9 @@ class StatisticsController: UIViewController {
         currentGoal!.amountSpent = 0.0
         currentGoal!.goalAmount = 100.00
         currentGoal!.goalDescription = ""
+        currentGoal!.id = UUID()
+        currentGoal!.startDate = Util.stringToDate("01/01/1995")
+        currentGoal!.endDate = Date()
         
         var itemsArr: [Item] = []
         
@@ -128,6 +131,17 @@ class StatisticsController: UIViewController {
         }
     }
 
+    func setTitle() {
+        if currentGoal!.goalDescription != nil && currentGoal!.goalDescription != "" {
+            goalDescriptionLabel.text = currentGoal!.goalDescription!
+        } else {
+            if currentGoal!.endDate != nil {
+                goalDescriptionLabel.text = "\(Util.dateToString(currentGoal!.startDate)) - \(Util.dateToString(currentGoal!.endDate!))"
+            } else {
+                goalDescriptionLabel.text = Util.dateToString(currentGoal!.startDate)
+            }
+        }
+    }
     
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(StatisticsController.updateTimer)), userInfo: nil, repeats: true)
@@ -168,6 +182,11 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
+}
+
+extension StatisticsController: ProgressViewDelegate {
+    func viewSwipedLeft() {
+        print("Left")
+        // TODO
+    }
 }
