@@ -9,15 +9,17 @@
 import UIKit
 import CoreData
 
-protocol ProgressViewDelegate {
-    func viewSwipedLeft()
-}
-
 class ProgressView: UIView {
     
-    var delegate: ProgressViewDelegate!
     var circleLayer: CAShapeLayer!
     let animationDuration: TimeInterval = 2
+    
+    var percentageLabel: UILabel = UILabel()
+    var percentage: Int = 0
+    var timer = Timer()
+    var seconds: Double = 2
+    var isTimerRunning = false
+    var timeInterval: TimeInterval = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,10 +32,6 @@ class ProgressView: UIView {
     }
     
     func initProgressView() {
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-        swipeLeft.direction = .left
-        addGestureRecognizer(swipeLeft)
         
         if currentGoal == nil {
             return
@@ -66,14 +64,18 @@ class ProgressView: UIView {
         layer.addSublayer(circleLayer)
         
         animateProgressView()
-    }
-    
-    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            if swipeGesture.direction == .left {
-                delegate.viewSwipedLeft()
-            }
-        }
+        
+        percentageLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height / 2 - 20, width: frame.size.width, height: 40))
+        percentageLabel.textAlignment = .center
+        percentageLabel.textColor = UIColor.black
+        percentageLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
+        
+        addSubview(percentageLabel)
+        
+        timeInterval = seconds / (currentGoal!.amountSpent / currentGoal!.goalAmount * 100)
+        percentageLabel.text = "\(percentage)%"
+        
+        runTimer()
     }
     
     func animateProgressView() {
@@ -83,6 +85,10 @@ class ProgressView: UIView {
         animation.toValue = 1
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         circleLayer.add(animation, forKey: "animateCircle")
+    }
+    
+    func animatePercentage() {
+        percentageLabel.text = "\(percentage)%"
     }
         
     func endAngle() -> CGFloat {
@@ -94,6 +100,20 @@ class ProgressView: UIView {
         } else {
             let percentage = 360 * percentage
             return CGFloat(percentage + 270).degreesToRadians
+        }
+    }
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(ProgressView.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        seconds -= timeInterval
+        percentage += 1
+        percentageLabel.text = "\(percentage)%"
+        
+        if percentage >= Int(currentGoal!.amountSpent / currentGoal!.goalAmount * 100) {
+            timer.invalidate()
         }
     }
 }
