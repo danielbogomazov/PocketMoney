@@ -17,7 +17,6 @@ let defaultColor = UIColor(red: 0.329933, green: 0.329994, blue: 0.329925, alpha
 class StatisticsController: UIViewController {
     
     @IBOutlet weak var itemsTableView: UITableView!
-    @IBOutlet weak var goalDescriptionLabel: UILabel!
     @IBOutlet weak var progressScrollView: UIScrollView!
     var pickerPopoverContent: UIViewController?
     var itemArray: [Item] = []
@@ -51,8 +50,6 @@ class StatisticsController: UIViewController {
             progressScrollView.addSubview(currentView)
         }
 
-        setTitle()
-        
         super.viewDidLoad()
         
     }
@@ -125,21 +122,8 @@ class StatisticsController: UIViewController {
             let goal = try PersistenceService.context.fetch(fetchRequest)
             currentGoal = goal[0]
             populateItemArray()
-            goalDescriptionLabel.text = (currentGoal!.goalDescription != "") ? currentGoal!.goalDescription : "Current Goal"
         } catch {
             // TODO
-        }
-    }
-
-    func setTitle() {
-        if currentGoal!.goalDescription != nil && currentGoal!.goalDescription != "" {
-            goalDescriptionLabel.text = currentGoal!.goalDescription!
-        } else {
-            if currentGoal!.endDate != nil {
-                goalDescriptionLabel.text = "\(Util.dateToString(currentGoal!.startDate)) - \(Util.dateToString(currentGoal!.endDate!))"
-            } else {
-                goalDescriptionLabel.text = Util.dateToString(currentGoal!.startDate)
-            }
         }
     }
 }

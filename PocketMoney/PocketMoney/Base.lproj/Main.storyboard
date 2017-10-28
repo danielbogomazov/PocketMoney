@@ -106,17 +106,8 @@
                                     <constraint firstAttribute="trailing" secondItem="raS-OY-U2g" secondAttribute="trailing" constant="8" id="xLd-Bn-9ca"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkB-uc-fzt">
-                                <rect key="frame" x="8" y="166" width="359" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="lEe-ur-Ptp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="96J-SR-NoG">
-                                <rect key="frame" x="16" y="500" width="343" height="102"/>
+                                <rect key="frame" x="16" y="499" width="343" height="103"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" textLabel="Hxu-yQ-DOd" detailTextLabel="Plf-I9-xn9" style="IBUITableViewCellStyleSubtitle" id="nL1-Gi-aLg">
@@ -150,33 +141,29 @@
                                 </connections>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNl-SO-89q">
-                                <rect key="frame" x="0.0" y="209" width="375" height="264"/>
+                                <rect key="frame" x="0.0" y="172" width="375" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="264" id="aLY-co-7sF"/>
+                                    <constraint firstAttribute="height" constant="300" id="C39-O2-SpZ"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WvL-Pg-NZn" firstAttribute="bottom" secondItem="96J-SR-NoG" secondAttribute="bottom" constant="16" id="7xc-BQ-tFk"/>
-                            <constraint firstItem="RNl-SO-89q" firstAttribute="top" secondItem="RkB-uc-fzt" secondAttribute="bottom" constant="22" id="8pB-LS-PTy"/>
-                            <constraint firstItem="WvL-Pg-NZn" firstAttribute="trailing" secondItem="RkB-uc-fzt" secondAttribute="trailing" constant="8" id="GU4-hR-R93"/>
-                            <constraint firstItem="96J-SR-NoG" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" constant="16" id="IV0-Ji-3Lz"/>
-                            <constraint firstItem="RkB-uc-fzt" firstAttribute="top" secondItem="qka-cM-hvY" secondAttribute="bottom" constant="21" id="KT7-ev-2OC"/>
+                            <constraint firstItem="96J-SR-NoG" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" constant="16" id="93a-ZD-Z5Z"/>
+                            <constraint firstItem="RNl-SO-89q" firstAttribute="top" secondItem="qka-cM-hvY" secondAttribute="bottom" constant="27" id="Ezg-QE-Oea"/>
+                            <constraint firstItem="96J-SR-NoG" firstAttribute="top" secondItem="RNl-SO-89q" secondAttribute="bottom" constant="27" id="HTu-fH-xWR"/>
                             <constraint firstItem="qka-cM-hvY" firstAttribute="trailing" secondItem="WvL-Pg-NZn" secondAttribute="trailing" id="OBc-EE-st3"/>
-                            <constraint firstItem="96J-SR-NoG" firstAttribute="top" secondItem="RNl-SO-89q" secondAttribute="bottom" constant="27" id="bMU-eD-f0X"/>
-                            <constraint firstItem="RkB-uc-fzt" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" constant="8" id="cxq-Pw-HT6"/>
-                            <constraint firstItem="RNl-SO-89q" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" id="fan-7t-iuc"/>
+                            <constraint firstItem="WvL-Pg-NZn" firstAttribute="bottom" secondItem="96J-SR-NoG" secondAttribute="bottom" constant="16" id="Owz-M2-hdm"/>
+                            <constraint firstItem="WvL-Pg-NZn" firstAttribute="trailing" secondItem="96J-SR-NoG" secondAttribute="trailing" constant="16" id="bY2-HF-sVF"/>
+                            <constraint firstItem="RNl-SO-89q" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" id="bjc-zu-pAI"/>
                             <constraint firstItem="qka-cM-hvY" firstAttribute="leading" secondItem="WvL-Pg-NZn" secondAttribute="leading" id="iLU-6a-Q9u"/>
-                            <constraint firstItem="WvL-Pg-NZn" firstAttribute="trailing" secondItem="96J-SR-NoG" secondAttribute="trailing" constant="16" id="jZF-YN-CoL"/>
+                            <constraint firstItem="RNl-SO-89q" firstAttribute="trailing" secondItem="WvL-Pg-NZn" secondAttribute="trailing" id="o2W-ln-Jvf"/>
                             <constraint firstItem="qka-cM-hvY" firstAttribute="top" secondItem="Xfx-Zb-fZ0" secondAttribute="top" id="oDH-y8-CjT"/>
-                            <constraint firstItem="RNl-SO-89q" firstAttribute="trailing" secondItem="WvL-Pg-NZn" secondAttribute="trailing" id="uIQ-q4-Cby"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WvL-Pg-NZn"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="EF2-We-NbG"/>
                     <connections>
-                        <outlet property="goalDescriptionLabel" destination="RkB-uc-fzt" id="WRL-uX-dYf"/>
                         <outlet property="itemsTableView" destination="96J-SR-NoG" id="N4t-MD-hlW"/>
                         <outlet property="progressScrollView" destination="RNl-SO-89q" id="q19-bu-d3L"/>
                     </connections>
