@@ -36,10 +36,9 @@ class StatisticsController: UIViewController {
         progressScrollView.frame.size.width = view.frame.width
 
         let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: progressScrollView.frame.width, height: progressScrollView.frame.height))
-        let blueView = UIView(frame: progressScrollView.frame)
-        blueView.backgroundColor = UIColor.blue
+        let detailsView = DetailsView(frame: CGRect(x: 0, y: 0, width: progressScrollView.frame.width, height: progressScrollView.frame.height))
         
-        viewArray = [progressView, blueView]
+        viewArray = [progressView, detailsView]
 
         
         for i in 0 ..< viewArray.count {
