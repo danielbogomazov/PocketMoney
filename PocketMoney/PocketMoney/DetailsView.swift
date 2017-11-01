@@ -90,10 +90,10 @@ class DetailsView: UIView {
     
     func setupTextFields() {
         
-        let textFieldWidth = (frame.width - frame.width / 3) - 18
+        let textFieldWidth = (frame.width - frame.width / 3) - 36
         heightMargin = (frame.height - labelHeight * 5.0) / 6.0
         
-        goalDescriptionTextField = UITextField(frame: CGRect(x: 0, y: 0, width: frame.width, height: labelHeight))
+        goalDescriptionTextField = UITextField(frame: CGRect(x: 18, y: 0, width: frame.width - 36, height: labelHeight))
         goalDescriptionTextField.textAlignment = .center
         goalDescriptionTextField.font = UIFont.boldSystemFont(ofSize: 20)
         goalDescriptionTextField.textColor = Util.Constant.TINT_COLOR

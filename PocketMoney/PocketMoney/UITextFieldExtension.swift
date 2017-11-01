@@ -17,6 +17,7 @@ extension UITextField {
             layer.borderColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.1).cgColor
         }
         layer.borderWidth = 1.0
+        layer.cornerRadius = 5.0
     }
 
     func addLeftMargin() {
