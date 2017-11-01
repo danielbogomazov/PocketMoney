@@ -100,6 +100,8 @@ class DetailsView: UIView {
         goalDescriptionTextField.text = "Current Goal"
         goalDescriptionTextField.isUserInteractionEnabled = true
         goalDescriptionTextField.delegate = self
+        goalDescriptionTextField.addBorder()
+        goalDescriptionTextField.addLeftMargin()
         
         goalAmountTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin + labelHeight, width: textFieldWidth, height: labelHeight))
         goalAmountTextField.textAlignment = .left
@@ -108,7 +110,9 @@ class DetailsView: UIView {
         goalAmountTextField.text = "\(currentGoal!.goalAmount)"
         goalAmountTextField.isUserInteractionEnabled = true
         goalAmountTextField.delegate = self
-        
+        goalAmountTextField.addBorder()
+        goalAmountTextField.addLeftMargin()
+
         amountSpentTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin * 2 + labelHeight * 2, width: textFieldWidth, height: labelHeight))
         amountSpentTextField.textAlignment = .left
         amountSpentTextField.font = UIFont.boldSystemFont(ofSize: 16)
@@ -116,6 +120,8 @@ class DetailsView: UIView {
         amountSpentTextField.text = "\(currentGoal!.amountSpent)"
         amountSpentTextField.isUserInteractionEnabled = false
         amountSpentTextField.delegate = self
+        amountSpentTextField.addBorder()
+        amountSpentTextField.addLeftMargin()
 
         startDateTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin * 3 + labelHeight * 3, width: textFieldWidth, height: labelHeight))
         startDateTextField.textAlignment = .left
@@ -124,6 +130,8 @@ class DetailsView: UIView {
         startDateTextField.text = Util.dateToString(currentGoal!.startDate)
         startDateTextField.isUserInteractionEnabled = false
         startDateTextField.delegate = self
+        startDateTextField.addBorder()
+        startDateTextField.addLeftMargin()
 
         endDateTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin * 4 + labelHeight * 4, width: textFieldWidth, height: labelHeight))
         endDateTextField.textAlignment = .left
@@ -132,6 +140,8 @@ class DetailsView: UIView {
         endDateTextField.text = Util.dateToString(currentGoal!.endDate!)
         endDateTextField.isUserInteractionEnabled = true
         endDateTextField.delegate = self
+        endDateTextField.addBorder()
+        endDateTextField.addLeftMargin()
 
         addSubview(goalDescriptionTextField)
         addSubview(goalAmountTextField)
@@ -165,4 +175,5 @@ extension DetailsView: UITextFieldDelegate {
         self.endEditing(true)
         return true
     }
+
 }

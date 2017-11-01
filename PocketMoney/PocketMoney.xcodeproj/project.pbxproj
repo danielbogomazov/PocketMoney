@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		65514E481F8AF81500F46342 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65514E471F8AF81500F46342 /* PersistenceService.swift */; };
 		659992141FA9791100E15715 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659992131FA9791100E15715 /* UIViewControllerExtension.swift */; };
+		659992161FA97ABF00E15715 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659992151FA97ABF00E15715 /* UITextFieldExtension.swift */; };
 		65C8B7F71F8992E700AB1D2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C8B7F61F8992E700AB1D2F /* AppDelegate.swift */; };
 		65C8B7FC1F8992E700AB1D2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B7FA1F8992E700AB1D2F /* Main.storyboard */; };
 		65C8B7FF1F8992E700AB1D2F /* PocketMoney.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65C8B7FD1F8992E700AB1D2F /* PocketMoney.xcdatamodeld */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		65514E471F8AF81500F46342 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		659992131FA9791100E15715 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		659992151FA97ABF00E15715 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		65C8B7F31F8992E700AB1D2F /* PocketMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C8B7F61F8992E700AB1D2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65C8B7FB1F8992E700AB1D2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				659992131FA9791100E15715 /* UIViewControllerExtension.swift */,
+				659992151FA97ABF00E15715 /* UITextFieldExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				A4AEDDEE1F9FB1D20060A575 /* Item+CoreDataProperties.swift in Sources */,
 				65C8B7FF1F8992E700AB1D2F /* PocketMoney.xcdatamodeld in Sources */,
 				65F76ECA1FA3EF7D00B65440 /* DetailsView.swift in Sources */,
+				659992161FA97ABF00E15715 /* UITextFieldExtension.swift in Sources */,
 				A499D0E71F968CB6001AD5CB /* ProgressView.swift in Sources */,
 				659992141FA9791100E15715 /* UIViewControllerExtension.swift in Sources */,
 				65D281F71F92EDD800A7FCED /* Util.swift in Sources */,
