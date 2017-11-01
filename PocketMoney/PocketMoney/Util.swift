@@ -18,13 +18,13 @@ open class Util {
     // MARK:- Date functions
     public class func stringToDate(_ date: String) -> Date {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "MM-dd-yyyy"
         return formatter.date(from: date)!
     }
     
     public class func dateToString(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "MM-dd-yyyy"
         return formatter.string(from: date)
     }
 }

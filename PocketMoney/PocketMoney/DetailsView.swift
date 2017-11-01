@@ -11,11 +11,17 @@ import CoreData
 
 class DetailsView: UIView {
     
-    var goalDescriptionLabel: UILabel!
     var goalAmountLabel: UILabel!
     var amountSpentLabel: UILabel!
     var startDateLabel: UILabel!
     var endDateLabel: UILabel!
+    
+    var goalDescriptionTextField: UITextField!
+    var goalAmountTextField: UITextField!
+    var amountSpentTextField: UITextField!
+    var startDateTextField: UITextField!
+    var endDateTextField: UITextField!
+    
     var editButton: UIButton!
     
     var labels: [[String: UILabel]] = [[:]]
@@ -52,13 +58,7 @@ class DetailsView: UIView {
         labelWidth = frame.width / 3.0
         heightMargin = (frame.height - labelHeight * 5.0) / 6.0
 
-        goalDescriptionLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: labelHeight))
-        goalDescriptionLabel.textAlignment = .center
-        goalDescriptionLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        goalDescriptionLabel.textColor = Util.Constant.TINT_COLOR
-        goalDescriptionLabel.text = "Current Goal"
-
-        goalAmountLabel = UILabel(frame: CGRect(x: 0, y: heightMargin * 1 + labelHeight, width: labelWidth, height: labelHeight))
+        goalAmountLabel = UILabel(frame: CGRect(x: 0, y: heightMargin + labelHeight, width: labelWidth, height: labelHeight))
         goalAmountLabel.textAlignment = .right
         goalAmountLabel.font = UIFont.boldSystemFont(ofSize: 16)
         goalAmountLabel.textColor = Util.Constant.TINT_COLOR
@@ -82,7 +82,6 @@ class DetailsView: UIView {
         endDateLabel.textColor = Util.Constant.TINT_COLOR
         endDateLabel.text = "End Date : "
 
-        addSubview(goalDescriptionLabel)
         addSubview(goalAmountLabel)
         addSubview(amountSpentLabel)
         addSubview(startDateLabel)
@@ -91,6 +90,54 @@ class DetailsView: UIView {
     
     func setupTextFields() {
         
+        let textFieldWidth = (frame.width - frame.width / 3) - 18
+        heightMargin = (frame.height - labelHeight * 5.0) / 6.0
+        
+        goalDescriptionTextField = UITextField(frame: CGRect(x: 0, y: 0, width: frame.width, height: labelHeight))
+        goalDescriptionTextField.textAlignment = .center
+        goalDescriptionTextField.font = UIFont.boldSystemFont(ofSize: 20)
+        goalDescriptionTextField.textColor = Util.Constant.TINT_COLOR
+        goalDescriptionTextField.text = "Current Goal"
+        goalDescriptionTextField.isUserInteractionEnabled = true
+        goalDescriptionTextField.delegate = self
+        
+        goalAmountTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin + labelHeight, width: textFieldWidth, height: labelHeight))
+        goalAmountTextField.textAlignment = .left
+        goalAmountTextField.font = UIFont.boldSystemFont(ofSize: 16)
+        goalAmountTextField.textColor = Util.Constant.TINT_COLOR
+        goalAmountTextField.text = "\(currentGoal!.goalAmount)"
+        goalAmountTextField.isUserInteractionEnabled = true
+        goalAmountTextField.delegate = self
+        
+        amountSpentTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin * 2 + labelHeight * 2, width: textFieldWidth, height: labelHeight))
+        amountSpentTextField.textAlignment = .left
+        amountSpentTextField.font = UIFont.boldSystemFont(ofSize: 16)
+        amountSpentTextField.textColor = Util.Constant.TINT_COLOR
+        amountSpentTextField.text = "\(currentGoal!.amountSpent)"
+        amountSpentTextField.isUserInteractionEnabled = false
+        amountSpentTextField.delegate = self
+
+        startDateTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin * 3 + labelHeight * 3, width: textFieldWidth, height: labelHeight))
+        startDateTextField.textAlignment = .left
+        startDateTextField.font = UIFont.boldSystemFont(ofSize: 16)
+        startDateTextField.textColor = Util.Constant.TINT_COLOR
+        startDateTextField.text = Util.dateToString(currentGoal!.startDate)
+        startDateTextField.isUserInteractionEnabled = false
+        startDateTextField.delegate = self
+
+        endDateTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin * 4 + labelHeight * 4, width: textFieldWidth, height: labelHeight))
+        endDateTextField.textAlignment = .left
+        endDateTextField.font = UIFont.boldSystemFont(ofSize: 16)
+        endDateTextField.textColor = Util.Constant.TINT_COLOR
+        endDateTextField.text = Util.dateToString(currentGoal!.endDate!)
+        endDateTextField.isUserInteractionEnabled = true
+        endDateTextField.delegate = self
+
+        addSubview(goalDescriptionTextField)
+        addSubview(goalAmountTextField)
+        addSubview(amountSpentTextField)
+        addSubview(startDateTextField)
+        addSubview(endDateTextField)
     }
     
     func setupEditButton() {
@@ -109,5 +156,13 @@ class DetailsView: UIView {
         // TODO
         // NOTE:- When a textfield is changed, enable the edit button. When it's saved, disable it
         print("edit")
+    }
+}
+
+extension DetailsView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return true
     }
 }
