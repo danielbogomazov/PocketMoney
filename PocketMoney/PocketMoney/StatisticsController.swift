@@ -30,7 +30,7 @@ class StatisticsController: UIViewController {
         })
 //        testingLOAD()
         
-        
+        hideKeyboardOnTap()
         
         progressScrollView.frame.size.width = view.frame.width
 
@@ -90,7 +90,7 @@ class StatisticsController: UIViewController {
         currentGoal!.goalAmount = 100.00
         currentGoal!.goalDescription = ""
         currentGoal!.id = UUID()
-        currentGoal!.startDate = Util.stringToDate("01/01/1995")
+        currentGoal!.startDate = Util.stringToDate("01-01-1995")
         currentGoal!.endDate = Date()
         
         var itemsArr: [Item] = []
