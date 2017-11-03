@@ -95,18 +95,42 @@ class StatisticsController: UIViewController {
         
         var itemsArr: [Item] = []
         
-        for i in 0 ..< 7 {
-            itemsArr.append(Item(context: PersistenceService.context))
-            itemsArr[i].name = "ITEM \(i)"
-            itemsArr[i].price = Double(i + 1)
-            var q = 10 % (i + 1)
-            if q == 0 {
-                q = 1
-            }
-            itemsArr[i].quantity = Int16(q)
-            currentGoal!.amountSpent += Double(itemsArr[i].quantity) * itemsArr[i].price
-        }
+        let item1 = Item(context: PersistenceService.context)
+        let item2 = Item(context: PersistenceService.context)
+        let item3 = Item(context: PersistenceService.context)
+        let item4 = Item(context: PersistenceService.context)
+        let item5 = Item(context: PersistenceService.context)
+
+        item1.name = "Lay's Chips (Ketchup)"
+        item1.price = 2.48
+        item1.quantity = 2
         
+        item2.name = "Tim Horton's Coffee (L)"
+        item2.price = 2.00
+        item2.quantity = 1
+        
+        item3.name = "5 Gum (3)"
+        item3.price = 3.83
+        item3.quantity = 2
+        
+        item4.name = "Starbucks Frappuccino (Glass)"
+        item4.price = 3.30
+        item4.quantity = 5
+        
+        item5.name = "Tim Horton's Iced Cappuccino (M)"
+        item5.price = 2.99
+        item5.quantity = 3
+        
+        itemsArr.append(item1)
+        itemsArr.append(item2)
+        itemsArr.append(item3)
+        itemsArr.append(item4)
+        itemsArr.append(item5)
+        
+        for item in itemsArr {
+            currentGoal!.amountSpent += Double(item.quantity) * item.price
+        }
+
         items = NSSet(array: itemsArr)
         
         currentGoal!.items = items
