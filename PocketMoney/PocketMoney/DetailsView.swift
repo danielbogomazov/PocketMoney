@@ -161,7 +161,6 @@ class DetailsView: UIView {
         editButton = UIButton(frame: frame)
         editButton.setTitle("Edit", for: .normal)
         editButton.setTitleColor(UIColor.blue.withAlphaComponent(0.6), for: .normal)
-        editButton.isEnabled = false
         
         editButton.addTarget(self, action: #selector(editGoal), for: .touchUpInside)
         
@@ -169,9 +168,10 @@ class DetailsView: UIView {
     }
     
     @objc func editGoal() {
-        // TODO
-        // NOTE:- When a textfield is changed, enable the edit button. When it's saved, disable it
-        print("edit")
+        currentGoal!.goalDescription = currentGoal!.goalDescription
+        currentGoal!.goalAmount = Double(goalAmountTextField.text!)!
+        currentGoal!.endDate = Util.stringToDate(endDateTextField.text!)
+        delegate.updateProgressView()
     }
 }
 
@@ -201,13 +201,11 @@ extension DetailsView: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField == goalAmountTextField {
             if textField.text!.isEmpty {
-                currentGoal!.goalAmount = 0.0
+                textField.text = Util.doubleToDecimalString(0.0)
             } else {
                 let value = textField.text! as NSString
-                currentGoal!.goalAmount = value.doubleValue
+                textField.text = Util.doubleToDecimalString(value.doubleValue)
             }
-            textField.text = Util.doubleToDecimalString(currentGoal!.goalAmount)
-            delegate.updateProgressView()
         }
         return true
     }

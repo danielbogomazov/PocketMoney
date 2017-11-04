@@ -46,7 +46,7 @@ open class Util {
     }
     
     open class func doubleToDecimalString(_ double: Double) -> String {
-        return String(format: "%.2f", currentGoal!.goalAmount)
+        return String(format: "%.2f", double)
     }
 }
 
