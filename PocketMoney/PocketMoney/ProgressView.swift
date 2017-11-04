@@ -67,7 +67,7 @@ class ProgressView: UIView {
         
         percentageLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height / 2 - 20, width: frame.size.width, height: 40))
         percentageLabel.textAlignment = .center
-        percentageLabel.textColor = UIColor.black
+        percentageLabel.textColor = Util.Constant.TINT_COLOR
         percentageLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
         
         addSubview(percentageLabel)
