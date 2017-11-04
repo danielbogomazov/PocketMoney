@@ -18,7 +18,6 @@ class ProgressView: UIView {
     var percentage: Int = 0
     var timer = Timer()
     var seconds: Double = 2
-    var isTimerRunning = false
     var timeInterval: TimeInterval = 0
     
     override init(frame: CGRect) {
@@ -36,6 +35,13 @@ class ProgressView: UIView {
         if currentGoal == nil {
             return
         }
+        
+        layer.sublayers?.removeAll()
+        timer.invalidate()
+        percentage = 0
+        seconds = 2
+        timeInterval = 0
+        
         
         let lineWidth: CGFloat = 12.0
         let arcCenter = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
@@ -86,10 +92,6 @@ class ProgressView: UIView {
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         circleLayer.add(animation, forKey: "animateCircle")
     }
-    
-    func animatePercentage() {
-        percentageLabel.text = "\(percentage)%"
-    }
         
     func endAngle() -> CGFloat {
         let percentage = currentGoal!.amountSpent / currentGoal!.goalAmount
@@ -104,15 +106,22 @@ class ProgressView: UIView {
     }
     
     func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(ProgressView.updateTimer)), userInfo: nil, repeats: true)
+        if currentGoal!.goalAmount <= 0.0 {
+            percentageLabel.text = ""
+        } else if currentGoal!.amountSpent / currentGoal!.goalAmount * 100 >= 750 {
+            percentageLabel.text = "\(Int(currentGoal!.amountSpent / currentGoal!.goalAmount * 100))%"
+        } else {
+            timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(ProgressView.updateTimer)), userInfo: nil, repeats: true)
+        }
     }
     
     @objc func updateTimer() {
         seconds -= timeInterval
         percentage += 1
         percentageLabel.text = "\(percentage)%"
-        
+
         if percentage >= Int(currentGoal!.amountSpent / currentGoal!.goalAmount * 100) {
+            seconds = 2
             timer.invalidate()
         }
     }

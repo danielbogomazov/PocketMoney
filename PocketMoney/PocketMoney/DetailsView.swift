@@ -9,7 +9,13 @@
 import UIKit
 import CoreData
 
+protocol DetailsViewDelegate {
+    func updateProgressView()
+}
+
 class DetailsView: UIView {
+    
+    var delegate: DetailsViewDelegate!
     
     var goalAmountLabel: UILabel!
     var amountSpentLabel: UILabel!
@@ -176,13 +182,6 @@ extension DetailsView: UITextFieldDelegate {
         return true
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == goalAmountTextField {
-            textField.keyboardType = .decimalPad
-        }
-        return true
-    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         // Numeric only
@@ -208,7 +207,7 @@ extension DetailsView: UITextFieldDelegate {
                 currentGoal!.goalAmount = value.doubleValue
             }
             textField.text = Util.doubleToDecimalString(currentGoal!.goalAmount)
-            
+            delegate.updateProgressView()
         }
         return true
     }

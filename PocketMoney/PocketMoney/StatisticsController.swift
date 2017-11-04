@@ -22,6 +22,9 @@ class StatisticsController: UIViewController {
     var itemArray: [Item] = []
     var viewArray: [UIView] = []
     
+    var progressView: ProgressView!
+    var detailsView: DetailsView!
+    
     
     override func viewDidLoad() {
         
@@ -34,11 +37,12 @@ class StatisticsController: UIViewController {
         
         progressScrollView.frame.size.width = view.frame.width
 
-        let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: progressScrollView.frame.width, height: progressScrollView.frame.height))
-        let detailsView = DetailsView(frame: CGRect(x: 0, y: 0, width: progressScrollView.frame.width, height: progressScrollView.frame.height))
+        progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: progressScrollView.frame.width, height: progressScrollView.frame.height))
+        
+        detailsView = DetailsView(frame: CGRect(x: 0, y: 0, width: progressScrollView.frame.width, height: progressScrollView.frame.height))
+        detailsView.delegate = self
         
         viewArray = [progressView, detailsView]
-
         
         for i in 0 ..< viewArray.count {
             let currentView = viewArray[i]
@@ -175,5 +179,11 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.textColor = UIColor.lightGray.withAlphaComponent(0.6)
         
         return cell
+    }
+}
+
+extension StatisticsController:  DetailsViewDelegate {
+    func updateProgressView() {
+        progressView.initProgressView()
     }
 }
