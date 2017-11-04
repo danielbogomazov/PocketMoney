@@ -16,16 +16,37 @@ open class Util {
     }
     
     // MARK:- Date functions
-    public class func stringToDate(_ date: String) -> Date {
+    
+    open class func stringToDate(_ date: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
         return formatter.date(from: date)!
     }
     
-    public class func dateToString(_ date: Date) -> String {
+    open class func dateToString(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
         return formatter.string(from: date)
+    }
+    
+    // MARK:- String functions
+    
+    open class func checkIfDecimal(_ string: String, newString: String) -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "^\\d*(\\.\\d*)?$", options: [])
+            
+            let result = regex.firstMatch(in: newString, options: [], range: NSRange(location: 0, length: newString.characters.count))
+            return (result != nil)
+            
+        } catch let error as NSError {
+            print(error)
+        }
+        
+        return false
+    }
+    
+    open class func doubleToDecimalString(_ double: Double) -> String {
+        return String(format: "%.2f", currentGoal!.goalAmount)
     }
 }
 

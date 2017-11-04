@@ -107,7 +107,7 @@ class DetailsView: UIView {
         goalAmountTextField.textAlignment = .left
         goalAmountTextField.font = UIFont.boldSystemFont(ofSize: 16)
         goalAmountTextField.textColor = Util.Constant.TINT_COLOR
-        goalAmountTextField.text = "\(currentGoal!.goalAmount)"
+        goalAmountTextField.text = Util.doubleToDecimalString(currentGoal!.goalAmount)
         goalAmountTextField.isUserInteractionEnabled = true
         goalAmountTextField.delegate = self
         goalAmountTextField.addBorder()
@@ -175,5 +175,41 @@ extension DetailsView: UITextFieldDelegate {
         self.endEditing(true)
         return true
     }
-
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == goalAmountTextField {
+            textField.keyboardType = .decimalPad
+        }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        // Numeric only
+        if textField == goalAmountTextField {
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            
+            if Util.checkIfDecimal(textField.text!, newString: newString) {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField == goalAmountTextField {
+            if textField.text!.isEmpty {
+                currentGoal!.goalAmount = 0.0
+            } else {
+                let value = textField.text! as NSString
+                currentGoal!.goalAmount = value.doubleValue
+            }
+            textField.text = Util.doubleToDecimalString(currentGoal!.goalAmount)
+            
+        }
+        return true
+    }
 }
