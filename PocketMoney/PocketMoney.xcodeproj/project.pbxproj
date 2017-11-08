@@ -18,11 +18,11 @@
 		65D281F71F92EDD800A7FCED /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D281F61F92EDD800A7FCED /* Util.swift */; };
 		65EDB0241F8D9E7C00BC33DC /* StatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */; };
 		65F76ECA1FA3EF7D00B65440 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F76EC91FA3EF7D00B65440 /* DetailsView.swift */; };
+		A41F78221FB3A13200AC6A94 /* CurrentGoal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F781E1FB3A13200AC6A94 /* CurrentGoal+CoreDataClass.swift */; };
+		A41F78231FB3A13200AC6A94 /* CurrentGoal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F781F1FB3A13200AC6A94 /* CurrentGoal+CoreDataProperties.swift */; };
+		A41F78241FB3A13200AC6A94 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F78201FB3A13200AC6A94 /* Item+CoreDataClass.swift */; };
+		A41F78251FB3A13200AC6A94 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F78211FB3A13200AC6A94 /* Item+CoreDataProperties.swift */; };
 		A499D0E71F968CB6001AD5CB /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A499D0E61F968CB6001AD5CB /* ProgressView.swift */; };
-		A4AEDDEB1F9FB1D20060A575 /* CurrentGoal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEDDE71F9FB1D20060A575 /* CurrentGoal+CoreDataClass.swift */; };
-		A4AEDDEC1F9FB1D20060A575 /* CurrentGoal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEDDE81F9FB1D20060A575 /* CurrentGoal+CoreDataProperties.swift */; };
-		A4AEDDED1F9FB1D20060A575 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEDDE91F9FB1D20060A575 /* Item+CoreDataClass.swift */; };
-		A4AEDDEE1F9FB1D20060A575 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEDDEA1F9FB1D20060A575 /* Item+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,11 +39,11 @@
 		65D281F61F92EDD800A7FCED /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
 		65F76EC91FA3EF7D00B65440 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		A41F781E1FB3A13200AC6A94 /* CurrentGoal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentGoal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A41F781F1FB3A13200AC6A94 /* CurrentGoal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentGoal+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A41F78201FB3A13200AC6A94 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A41F78211FB3A13200AC6A94 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A499D0E61F968CB6001AD5CB /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
-		A4AEDDE71F9FB1D20060A575 /* CurrentGoal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentGoal+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A4AEDDE81F9FB1D20060A575 /* CurrentGoal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentGoal+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A4AEDDE91F9FB1D20060A575 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A4AEDDEA1F9FB1D20060A575 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +113,10 @@
 			isa = PBXGroup;
 			children = (
 				65514E471F8AF81500F46342 /* PersistenceService.swift */,
-				A4AEDDE71F9FB1D20060A575 /* CurrentGoal+CoreDataClass.swift */,
-				A4AEDDE81F9FB1D20060A575 /* CurrentGoal+CoreDataProperties.swift */,
-				A4AEDDE91F9FB1D20060A575 /* Item+CoreDataClass.swift */,
-				A4AEDDEA1F9FB1D20060A575 /* Item+CoreDataProperties.swift */,
+				A41F781E1FB3A13200AC6A94 /* CurrentGoal+CoreDataClass.swift */,
+				A41F781F1FB3A13200AC6A94 /* CurrentGoal+CoreDataProperties.swift */,
+				A41F78201FB3A13200AC6A94 /* Item+CoreDataClass.swift */,
+				A41F78211FB3A13200AC6A94 /* Item+CoreDataProperties.swift */,
 				65C8B7FD1F8992E700AB1D2F /* PocketMoney.xcdatamodeld */,
 			);
 			name = "Core Data";
@@ -217,19 +217,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4AEDDEC1F9FB1D20060A575 /* CurrentGoal+CoreDataProperties.swift in Sources */,
 				65EDB0241F8D9E7C00BC33DC /* StatisticsController.swift in Sources */,
 				65514E481F8AF81500F46342 /* PersistenceService.swift in Sources */,
-				A4AEDDED1F9FB1D20060A575 /* Item+CoreDataClass.swift in Sources */,
-				A4AEDDEE1F9FB1D20060A575 /* Item+CoreDataProperties.swift in Sources */,
 				65C8B7FF1F8992E700AB1D2F /* PocketMoney.xcdatamodeld in Sources */,
 				65F76ECA1FA3EF7D00B65440 /* DetailsView.swift in Sources */,
+				A41F78221FB3A13200AC6A94 /* CurrentGoal+CoreDataClass.swift in Sources */,
+				A41F78251FB3A13200AC6A94 /* Item+CoreDataProperties.swift in Sources */,
 				659992161FA97ABF00E15715 /* UITextFieldExtension.swift in Sources */,
+				A41F78241FB3A13200AC6A94 /* Item+CoreDataClass.swift in Sources */,
 				A499D0E71F968CB6001AD5CB /* ProgressView.swift in Sources */,
 				659992141FA9791100E15715 /* UIViewControllerExtension.swift in Sources */,
 				65D281F71F92EDD800A7FCED /* Util.swift in Sources */,
+				A41F78231FB3A13200AC6A94 /* CurrentGoal+CoreDataProperties.swift in Sources */,
 				65C8B7F71F8992E700AB1D2F /* AppDelegate.swift in Sources */,
-				A4AEDDEB1F9FB1D20060A575 /* CurrentGoal+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

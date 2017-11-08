@@ -9,7 +9,18 @@
 import UIKit
 import CoreData
 
+protocol ProgressViewDelegate {
+    
+}
+
 class ProgressView: UIView {
+    
+    var delegate: ProgressViewDelegate? = nil {
+        didSet {
+            initProgressView()
+        }
+    }
+    var goal: CurrentGoal!
     
     var circleLayer: CAShapeLayer!
     let animationDuration: TimeInterval = 2
@@ -22,17 +33,19 @@ class ProgressView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initProgressView()
+//        initProgressView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initProgressView()
+//        initProgressView()
     }
     
     func initProgressView() {
         
-        if currentGoal == nil {
+        goal = (delegate as! StatisticsController).goal
+        
+        if goal == nil {
             return
         }
         
@@ -78,7 +91,7 @@ class ProgressView: UIView {
         
         addSubview(percentageLabel)
         
-        timeInterval = seconds / (currentGoal!.amountSpent / currentGoal!.goalAmount * 100)
+        timeInterval = seconds / (goal.amountSpent / goal.goalAmount * 100)
         percentageLabel.text = "\(percentage)%"
         
         runTimer()
@@ -94,7 +107,7 @@ class ProgressView: UIView {
     }
         
     func endAngle() -> CGFloat {
-        let percentage = currentGoal!.amountSpent / currentGoal!.goalAmount
+        let percentage = goal.amountSpent / goal.goalAmount
         if percentage >= 1 {
             return CGFloat(630).degreesToRadians
         } else if percentage < 0 {
@@ -106,10 +119,10 @@ class ProgressView: UIView {
     }
     
     func runTimer() {
-        if currentGoal!.goalAmount <= 0.0 {
+        if goal.goalAmount <= 0.0 {
             percentageLabel.text = ""
-        } else if currentGoal!.amountSpent / currentGoal!.goalAmount * 100 >= 750 {
-            percentageLabel.text = "\(Int(currentGoal!.amountSpent / currentGoal!.goalAmount * 100))%"
+        } else if goal.amountSpent / goal.goalAmount * 100 >= 750 {
+            percentageLabel.text = "\(Int(goal.amountSpent / goal.goalAmount * 100))%"
         } else {
             timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(ProgressView.updateTimer)), userInfo: nil, repeats: true)
         }
@@ -120,7 +133,7 @@ class ProgressView: UIView {
         percentage += 1
         percentageLabel.text = "\(percentage)%"
 
-        if percentage >= Int(currentGoal!.amountSpent / currentGoal!.goalAmount * 100) {
+        if percentage >= Int(goal.amountSpent / goal.goalAmount * 100) {
             seconds = 2
             timer.invalidate()
         }

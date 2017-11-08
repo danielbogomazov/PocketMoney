@@ -8,12 +8,82 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 open class Util {
     
     struct Constant {
         static let TINT_COLOR = UIColor(red: 84/255, green: 84/255, blue: 84/255, alpha: 1.0)
     }
+    
+    // MARK:- Core Data functions
+    
+    open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?, completion: () -> Void) {
+        let newGoal = CurrentGoal(context: PersistenceService.context)
+        newGoal.id = UUID()
+        newGoal.items = nil
+        newGoal.amountSpent = 0.0
+        newGoal.goalAmount = goalAmount
+        newGoal.startDate = startDate
+        newGoal.endDate = endDate
+        
+        if goalDescription != nil {
+            newGoal.goalDescription = goalDescription
+        } else {
+            let fetchRequest: NSFetchRequest<CurrentGoal> = CurrentGoal.fetchRequest()
+            do {
+                let goals = try PersistenceService.context.fetch(fetchRequest)
+                newGoal.goalDescription = "Goal \(goals.count + 1)"
+            } catch {
+                newGoal.goalDescription = "Goal 1"
+            }
+        }
+        
+        PersistenceService.saveContext()
+        
+        completion()
+    }
+    
+    open class func createItem(name: String, price: Double, completion: () -> Void) {
+        let newItem = Item(context: PersistenceService.context)
+        newItem.id = UUID()
+        newItem.name = name
+        newItem.price = price
+        
+        PersistenceService.saveContext()
+        
+        completion()
+    }
+    
+    open class func deleteGoal(completion: (Bool) -> Void) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrentGoal")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            let _ = try PersistenceService.context.execute(deleteRequest)
+            completion(true)
+        } catch {
+            // TODO
+            completion(false)
+        }
+    }
+    
+    open class func loadGoal(completion: (Bool, CurrentGoal?) -> Void) {
+        let fetchRequest: NSFetchRequest<CurrentGoal> = CurrentGoal.fetchRequest()
+        
+        do {
+            let goal = try PersistenceService.context.fetch(fetchRequest)
+            if goal.isEmpty {
+                completion(true, nil)
+            } else {
+                completion(true, goal[0])
+            }
+        } catch {
+            // TODO
+            completion(false, nil)
+        }
+    }
+
     
     // MARK:- Date functions
     
