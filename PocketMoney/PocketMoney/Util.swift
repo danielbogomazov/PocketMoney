@@ -35,7 +35,7 @@ open class Util {
         do {
             let regex = try NSRegularExpression(pattern: "^\\d*(\\.\\d*)?$", options: [])
             
-            let result = regex.firstMatch(in: newString, options: [], range: NSRange(location: 0, length: newString.characters.count))
+            let result = regex.firstMatch(in: newString, options: [], range: NSRange(location: 0, length: newString.count))
             return (result != nil)
             
         } catch let error as NSError {

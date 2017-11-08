@@ -28,12 +28,6 @@ class DetailsView: UIView {
     var startDateTextField: UITextField!
     var endDateTextField: UITextField!
     
-    var currentGoalDescription: String!
-    var currentGoalAmount: String!
-    var currentEndDate: String!
-    
-    var editButton: UIButton!
-    
     var labels: [[String: UILabel]] = [[:]]
     let rows = 5
     
@@ -59,7 +53,6 @@ class DetailsView: UIView {
         
         setupLabels()
         setupTextFields()
-        setupEditButton()
         
     }
     
@@ -112,9 +105,7 @@ class DetailsView: UIView {
         goalDescriptionTextField.delegate = self
         goalDescriptionTextField.addBorder()
         goalDescriptionTextField.addLeftMargin()
-        
-        currentGoalDescription = goalDescriptionTextField.text
-        
+
         goalAmountTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin + labelHeight, width: textFieldWidth, height: labelHeight))
         goalAmountTextField.textAlignment = .left
         goalAmountTextField.font = UIFont.boldSystemFont(ofSize: 16)
@@ -124,8 +115,6 @@ class DetailsView: UIView {
         goalAmountTextField.delegate = self
         goalAmountTextField.addBorder()
         goalAmountTextField.addLeftMargin()
-        
-        currentGoalAmount = goalAmountTextField.text
 
         amountSpentTextField = UITextField(frame: CGRect(x: labelWidth + 18, y: heightMargin * 2 + labelHeight * 2, width: textFieldWidth, height: labelHeight))
         amountSpentTextField.textAlignment = .left
@@ -156,34 +145,12 @@ class DetailsView: UIView {
         endDateTextField.delegate = self
         endDateTextField.addBorder()
         endDateTextField.addLeftMargin()
-        
-        currentEndDate = endDateTextField.text
 
         addSubview(goalDescriptionTextField)
         addSubview(goalAmountTextField)
         addSubview(amountSpentTextField)
         addSubview(startDateTextField)
         addSubview(endDateTextField)
-    }
-    
-    func setupEditButton() {
-        let frame = CGRect(x: self.frame.width / 2 - 50, y: self.frame.height - 30, width: 100, height: 30)
-        editButton = UIButton(frame: frame)
-        editButton.setTitle("Edit", for: .normal)
-        editButton.setTitleColor(UIColor.blue.withAlphaComponent(0.6), for: .normal)
-        editButton.setTitleColor(UIColor.blue.withAlphaComponent(0.1), for: .disabled)
-        
-        editButton.addTarget(self, action: #selector(editGoal), for: .touchUpInside)
-        editButton.isEnabled = false
-        addSubview(editButton)
-    }
-    
-    @objc func editGoal() {
-        currentGoal!.goalDescription = currentGoal!.goalDescription
-        currentGoal!.goalAmount = Double(goalAmountTextField.text!)!
-        currentGoal!.endDate = Util.stringToDate(endDateTextField.text!)
-        delegate.updateProgressView()
-        editButton.isEnabled = false
     }
 }
 
@@ -209,13 +176,13 @@ extension DetailsView: UITextFieldDelegate {
         
         return true
     }
-    
+//    currentGoal!.goalDescription = currentGoal!.goalDescription
+//    currentGoal!.goalAmount = Double(goalAmountTextField.text!)!
+//    currentGoal!.endDate = Util.stringToDate(endDateTextField.text!)
+
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField == goalDescriptionTextField {
-            if textField.text! != currentGoalDescription! {
-                editButton.isEnabled = true
-                currentGoalDescription = textField.text!
-            }
+            currentGoal!.goalDescription = goalDescriptionTextField.text
         } else if textField == goalAmountTextField {
             if textField.text!.isEmpty {
                 textField.text = Util.doubleToDecimalString(0.0)
@@ -223,15 +190,12 @@ extension DetailsView: UITextFieldDelegate {
                 let value = textField.text! as NSString
                 textField.text = Util.doubleToDecimalString(value.doubleValue)
             }
-            if textField.text! != currentGoalAmount! {
-                editButton.isEnabled = true
-                currentGoalAmount = textField.text!
-            }
+            
+            currentGoal!.goalAmount = Double(textField.text!)!
+            delegate.updateProgressView()
+            
         } else if textField == endDateTextField {
-            if textField.text! != currentEndDate! {
-                editButton.isEnabled = true
-                currentEndDate = textField.text!
-            }
+            currentGoal!.endDate = Util.stringToDate(endDateTextField.text!)
         }
         return true
     }
