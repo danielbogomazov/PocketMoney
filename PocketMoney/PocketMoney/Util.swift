@@ -18,7 +18,29 @@ open class Util {
     
     // MARK:- Core Data functions
     
-    open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?, completion: () -> Void) {
+    /*
+     func deleteAllData(entity: String)
+     {
+     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+     let managedContext = appDelegate.managedObjectContext
+     let fetchRequest = NSFetchRequest(entityName: entity)
+     fetchRequest.returnsObjectsAsFaults = false
+     
+     do
+     {
+     let results = try managedContext.executeFetchRequest(fetchRequest)
+     for managedObject in results
+     {
+     let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
+     managedContext.deleteObject(managedObjectData)
+     }
+     } catch let error as NSError {
+     print("Detele all data in \(entity) error : \(error) \(error.userInfo)")
+     }
+     }
+     */
+    
+    open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?) -> CurrentGoal {
         let newGoal = CurrentGoal(context: PersistenceService.context)
         newGoal.id = UUID()
         newGoal.items = nil
@@ -33,7 +55,7 @@ open class Util {
             let fetchRequest: NSFetchRequest<CurrentGoal> = CurrentGoal.fetchRequest()
             do {
                 let goals = try PersistenceService.context.fetch(fetchRequest)
-                newGoal.goalDescription = "Goal \(goals.count + 1)"
+                newGoal.goalDescription = "Goal \(goals.count)"
             } catch {
                 newGoal.goalDescription = "Goal 1"
             }
@@ -41,7 +63,7 @@ open class Util {
         
         PersistenceService.saveContext()
         
-        completion()
+        return newGoal
     }
     
     open class func createItem(name: String, price: Double, completion: () -> Void) {
@@ -55,7 +77,7 @@ open class Util {
         completion()
     }
     
-    open class func deleteGoal(completion: (Bool) -> Void) {
+    open class func deleteGoals(completion: (Bool) -> Void) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrentGoal")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         

@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 
-let defaultColor = UIColor(red: 0.329933, green: 0.329994, blue: 0.329925, alpha: 1.0)
-
 class StatisticsController: UIViewController {
     
     @IBOutlet weak var itemsTableView: UITableView!
@@ -27,14 +25,8 @@ class StatisticsController: UIViewController {
     
     override func viewDidLoad() {
         
-        Util.loadGoal(completion: { (result, goal) in
-            if result {
-                print("AAA")
-            } else {
-                print("BBB")
-            }
-        })
-        
+        goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: nil, goalDescription: nil)
+      
         
 //populateItemArray()
         
@@ -94,7 +86,7 @@ class StatisticsController: UIViewController {
 extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return goal!.items != nil ? goal!.items!.count : 0
+        return goal?.items != nil ? goal!.items!.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
