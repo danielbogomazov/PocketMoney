@@ -18,28 +18,6 @@ open class Util {
     
     // MARK:- Core Data functions
     
-    /*
-     func deleteAllData(entity: String)
-     {
-     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-     let managedContext = appDelegate.managedObjectContext
-     let fetchRequest = NSFetchRequest(entityName: entity)
-     fetchRequest.returnsObjectsAsFaults = false
-     
-     do
-     {
-     let results = try managedContext.executeFetchRequest(fetchRequest)
-     for managedObject in results
-     {
-     let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
-     managedContext.deleteObject(managedObjectData)
-     }
-     } catch let error as NSError {
-     print("Detele all data in \(entity) error : \(error) \(error.userInfo)")
-     }
-     }
-     */
-    
     open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?) -> CurrentGoal {
         let newGoal = CurrentGoal(context: PersistenceService.context)
         newGoal.id = UUID()
@@ -90,19 +68,19 @@ open class Util {
         }
     }
     
-    open class func loadGoal(completion: (Bool, CurrentGoal?) -> Void) {
+    open class func loadGoal() -> CurrentGoal? {
         let fetchRequest: NSFetchRequest<CurrentGoal> = CurrentGoal.fetchRequest()
         
         do {
             let goal = try PersistenceService.context.fetch(fetchRequest)
             if goal.isEmpty {
-                completion(true, nil)
+                return nil
             } else {
-                completion(true, goal[0])
+                return goal[0]
             }
         } catch {
             // TODO
-            completion(false, nil)
+            return nil
         }
     }
 

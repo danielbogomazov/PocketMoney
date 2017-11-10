@@ -25,19 +25,16 @@ class StatisticsController: UIViewController {
     
     override func viewDidLoad() {
         
-        goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: nil, goalDescription: nil)
-      
+        goal = Util.loadGoal()
         
-//populateItemArray()
-        
-//        Util.loadGoal(completion: { result in
-//            if result {
-//                populateItemArray()
-//            } else {
-//                // TODO
-//            }
-//        })
-        
+        if goal != nil {
+            print("LOADED")
+            print(goal!)
+        } else {
+            goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: nil, goalDescription: nil)
+            print("NEW GOAL")
+            print(goal!)
+        }
         
         hideKeyboardOnTap()
         
