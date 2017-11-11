@@ -2,7 +2,7 @@
 //  CurrentGoal+CoreDataProperties.swift
 //  PocketMoney
 //
-//  Created by Daniel on 2017-10-24.
+//  Created by Daniel on 2017-11-08.
 //  Copyright © 2017 Daniel Bogomazov. All rights reserved.
 //
 //
@@ -17,14 +17,13 @@ extension CurrentGoal {
         return NSFetchRequest<CurrentGoal>(entityName: "CurrentGoal")
     }
 
-    @NSManaged public var id: UUID
     @NSManaged public var amountSpent: Double
-    @NSManaged public var goalAmount: Double
     @NSManaged public var endDate: Date?
+    @NSManaged public var goalAmount: Double
+    @NSManaged public var goalDescription: String!
+    @NSManaged public var id: UUID
     @NSManaged public var startDate: Date
-    @NSManaged public var goalDescription: String?
     @NSManaged public var items: NSSet?
-
 
 }
 

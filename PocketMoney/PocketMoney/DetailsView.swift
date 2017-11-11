@@ -15,7 +15,12 @@ protocol DetailsViewDelegate {
 
 class DetailsView: UIView {
     
-    var delegate: DetailsViewDelegate!
+    var delegate: DetailsViewDelegate? = nil {
+        didSet {
+            initDetailsView()
+        }
+    }
+    var goal: CurrentGoal!
     
     var goalAmountLabel: UILabel!
     var amountSpentLabel: UILabel!
@@ -37,20 +42,22 @@ class DetailsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initDetailsView()
+//        initDetailsView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initDetailsView()
+//        initDetailsView()
     }
     
     func initDetailsView() {
         
-        if currentGoal == nil {
+        goal = (delegate as! StatisticsController).goal
+        
+        if goal == nil {
             return
         }
-        
+
         setupLabels()
         setupTextFields()
         
@@ -110,7 +117,7 @@ class DetailsView: UIView {
         goalAmountTextField.textAlignment = .left
         goalAmountTextField.font = UIFont.boldSystemFont(ofSize: 16)
         goalAmountTextField.textColor = Util.Constant.TINT_COLOR
-        goalAmountTextField.text = Util.doubleToDecimalString(currentGoal!.goalAmount)
+        goalAmountTextField.text = Util.doubleToDecimalString(goal.goalAmount)
         goalAmountTextField.isUserInteractionEnabled = true
         goalAmountTextField.delegate = self
         goalAmountTextField.addBorder()
@@ -120,7 +127,7 @@ class DetailsView: UIView {
         amountSpentTextField.textAlignment = .left
         amountSpentTextField.font = UIFont.boldSystemFont(ofSize: 16)
         amountSpentTextField.textColor = Util.Constant.TINT_COLOR
-        amountSpentTextField.text = "\(currentGoal!.amountSpent)"
+        amountSpentTextField.text = "\(goal.amountSpent)"
         amountSpentTextField.isUserInteractionEnabled = false
         amountSpentTextField.delegate = self
         amountSpentTextField.addBorder()
@@ -130,7 +137,7 @@ class DetailsView: UIView {
         startDateTextField.textAlignment = .left
         startDateTextField.font = UIFont.boldSystemFont(ofSize: 16)
         startDateTextField.textColor = Util.Constant.TINT_COLOR
-        startDateTextField.text = Util.dateToString(currentGoal!.startDate)
+        startDateTextField.text = Util.dateToString(goal.startDate)
         startDateTextField.isUserInteractionEnabled = false
         startDateTextField.delegate = self
         startDateTextField.addBorder()
@@ -140,7 +147,11 @@ class DetailsView: UIView {
         endDateTextField.textAlignment = .left
         endDateTextField.font = UIFont.boldSystemFont(ofSize: 16)
         endDateTextField.textColor = Util.Constant.TINT_COLOR
-        endDateTextField.text = Util.dateToString(currentGoal!.endDate!)
+        if let endDate = goal.endDate {
+            endDateTextField.text = Util.dateToString(endDate)
+        } else {
+            endDateTextField.text = "No End Date"
+        }
         endDateTextField.isUserInteractionEnabled = true
         endDateTextField.delegate = self
         endDateTextField.addBorder()
@@ -182,7 +193,7 @@ extension DetailsView: UITextFieldDelegate {
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField == goalDescriptionTextField {
-            currentGoal!.goalDescription = goalDescriptionTextField.text
+            goal.goalDescription = goalDescriptionTextField.text
         } else if textField == goalAmountTextField {
             if textField.text!.isEmpty {
                 textField.text = Util.doubleToDecimalString(0.0)
@@ -191,11 +202,11 @@ extension DetailsView: UITextFieldDelegate {
                 textField.text = Util.doubleToDecimalString(value.doubleValue)
             }
             
-            currentGoal!.goalAmount = Double(textField.text!)!
-            delegate.updateProgressView()
+            goal.goalAmount = Double(textField.text!)!
+            delegate?.updateProgressView()
             
         } else if textField == endDateTextField {
-            currentGoal!.endDate = Util.stringToDate(endDateTextField.text!)
+            goal.endDate = Util.stringToDate(endDateTextField.text!)
         }
         return true
     }
