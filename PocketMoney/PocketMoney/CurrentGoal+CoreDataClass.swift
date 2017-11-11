@@ -2,7 +2,7 @@
 //  CurrentGoal+CoreDataClass.swift
 //  PocketMoney
 //
-//  Created by MEDIC on 2017-11-08.
+//  Created by Daniel on 2017-11-08.
 //  Copyright © 2017 Daniel Bogomazov. All rights reserved.
 //
 //
