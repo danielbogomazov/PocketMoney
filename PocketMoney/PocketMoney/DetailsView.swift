@@ -147,7 +147,11 @@ class DetailsView: UIView {
         endDateTextField.textAlignment = .left
         endDateTextField.font = UIFont.boldSystemFont(ofSize: 16)
         endDateTextField.textColor = Util.Constant.TINT_COLOR
-        endDateTextField.text = Util.dateToString(goal.endDate!)
+        if let endDate = goal.endDate {
+            endDateTextField.text = Util.dateToString(endDate)
+        } else {
+            endDateTextField.text = "No End Date"
+        }
         endDateTextField.isUserInteractionEnabled = true
         endDateTextField.delegate = self
         endDateTextField.addBorder()
