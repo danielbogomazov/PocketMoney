@@ -21,7 +21,7 @@ class StatisticsController: UIViewController {
     var detailsView: DetailsView!
     
     var goal: CurrentGoal?
-    var items: [Item]?
+    var items: [Item] = []
     
     override func viewDidLoad() {
         
@@ -29,13 +29,32 @@ class StatisticsController: UIViewController {
         goal = Util.loadGoal()
         
         if goal != nil {
-            print("LOADED")
+            print("GOAL -- LOADED")
             print(goal!)
         } else {
             goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: nil, goalDescription: nil)
             print("NEW GOAL")
             print(goal!)
         }
+        
+        Util.deleteItems()
+        
+        if goal!.items?.count == 0 {
+            print("NEW ITEMS")
+            items.append(Util.createItem(name: "Item One", price: 10.00))
+            items.append(Util.createItem(name: "Item Two", price: 1.0))
+            items.append(Util.createItem(name: "Item Three", price: 31.22))
+            items.append(Util.createItem(name: "Items Four", price: 12.21))
+            items.append(Util.loadItem(uuid: items[1].id)!)
+            Util.addItemsToGoal(goal!, items: items)
+        } else {
+            print ("ITEMS -- LOADED")
+            for item in goal!.items! {
+                items.append(Util.loadItem(uuid: (item as! Item).id)!)
+            }
+        }
+        
+        populateItemArray()
         
         hideKeyboardOnTap()
         
@@ -90,21 +109,12 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
         
-        
-//        let string = "\(itemArray[indexPath.row].quantity)x \(itemArray[indexPath.row].name!)"
-//        let substring = "\(itemArray[indexPath.row].quantity)x"
-//        let range = (string as NSString).range(of: substring)
-//        let itemString = NSMutableAttributedString(string: string)
-//        itemString.addAttribute(NSAttributedStringKey.foregroundColor, value: Util.Constant.TINT_COLOR, range: (string as NSString).range(of: string))
-//        itemString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.lightGray.withAlphaComponent(0.6), range: range)
-//
-//        cell.textLabel?.attributedText = itemString
-//
-//        cell.detailTextLabel?.text = "$\(itemArray[indexPath.row].price * Double(itemArray[indexPath.row].quantity)) ($\(itemArray[indexPath.row].price) each)"
-//        cell.detailTextLabel?.textColor = UIColor.lightGray.withAlphaComponent(0.6)
-        
-        // TEMP
         cell.textLabel?.text = itemArray[indexPath.row].name
+        cell.textLabel?.textColor = Util.Constant.TINT_COLOR
+        
+        cell.detailTextLabel?.text = "$ \(itemArray[indexPath.row].price) each"
+        cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
+
         return cell
     }
 }

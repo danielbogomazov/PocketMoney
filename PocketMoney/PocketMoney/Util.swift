@@ -44,7 +44,7 @@ open class Util {
         return newGoal
     }
     
-    open class func createItem(name: String, price: Double, completion: () -> Void) {
+    open class func createItem(name: String, price: Double) -> Item {
         let newItem = Item(context: PersistenceService.context)
         newItem.id = UUID()
         newItem.name = name
@@ -52,19 +52,28 @@ open class Util {
         
         PersistenceService.saveContext()
         
-        completion()
+        return newItem
     }
     
-    open class func deleteGoals(completion: (Bool) -> Void) {
+    open class func deleteGoals() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrentGoal")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
             let _ = try PersistenceService.context.execute(deleteRequest)
-            completion(true)
         } catch {
             // TODO
-            completion(false)
+        }
+    }
+    
+    open class func deleteItems() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            let _ = try PersistenceService.context.execute(deleteRequest)
+        } catch {
+            // TODO
         }
     }
     
@@ -72,18 +81,46 @@ open class Util {
         let fetchRequest: NSFetchRequest<CurrentGoal> = CurrentGoal.fetchRequest()
         
         do {
-            let goal = try PersistenceService.context.fetch(fetchRequest)
-            if goal.isEmpty {
+            let goals = try PersistenceService.context.fetch(fetchRequest)
+            if goals.isEmpty {
                 return nil
             } else {
-                return goal[0]
+                // TODO - Return specified goal
+                return goals[0]
             }
         } catch {
             // TODO
             return nil
         }
     }
-
+    
+    open class func loadItem(uuid: UUID) -> Item? {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        do {
+            let items = try PersistenceService.context.fetch(fetchRequest)
+            if items.isEmpty {
+                return nil
+            } else {
+                for item in items {
+                    if item.id == uuid {
+                        return item
+                    }
+                }
+                return nil
+            }
+        } catch {
+            // TODO
+            return nil
+        }
+    }
+    
+    open class func addItemsToGoal(_ goal: CurrentGoal, items: [Item]) {
+        for item in items {
+            goal.addToItems(item)
+        }
+        PersistenceService.saveContext()
+    }
     
     // MARK:- Date functions
     
