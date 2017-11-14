@@ -20,13 +20,16 @@ class StatisticsController: UIViewController {
     var progressView: ProgressView!
     var detailsView: DetailsView!
     
-    var goal: CurrentGoal?
+    var goal: Goal?
     var items: [Item] = []
     
     override func viewDidLoad() {
         
         // MARK:- TEMPORARY - DELETE THIS AFTER TESTING
-        goal = Util.loadGoal()
+        Util.deleteItems()
+        Util.deleteGoals()
+        
+//        goal = Util.loadGoal()
         
         if goal != nil {
             print("GOAL -- LOADED")
@@ -36,8 +39,6 @@ class StatisticsController: UIViewController {
             print("NEW GOAL")
             print(goal!)
         }
-        
-        Util.deleteItems()
         
         if goal!.items?.count == 0 {
             print("NEW ITEMS")
@@ -93,9 +94,10 @@ class StatisticsController: UIViewController {
     
     func populateItemArray() {
         for (_, item) in goal!.items!.enumerated() {
+            print(item)
             itemArray.append(item as! Item)
         }
-        itemsTableView.reloadData()
+        itemsTableView.reloadData() 
     }
     
 }

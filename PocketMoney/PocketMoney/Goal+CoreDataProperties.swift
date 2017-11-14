@@ -1,8 +1,8 @@
 //
-//  CurrentGoal+CoreDataProperties.swift
+//  Goal+CoreDataProperties.swift
 //  PocketMoney
 //
-//  Created by Daniel on 2017-11-08.
+//  Created by Daniel on 2017-11-13.
 //  Copyright © 2017 Daniel Bogomazov. All rights reserved.
 //
 //
@@ -11,16 +11,16 @@ import Foundation
 import CoreData
 
 
-extension CurrentGoal {
+extension Goal {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrentGoal> {
-        return NSFetchRequest<CurrentGoal>(entityName: "CurrentGoal")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Goal> {
+        return NSFetchRequest<Goal>(entityName: "Goal")
     }
 
     @NSManaged public var amountSpent: Double
     @NSManaged public var endDate: Date?
     @NSManaged public var goalAmount: Double
-    @NSManaged public var goalDescription: String!
+    @NSManaged public var goalDescription: String
     @NSManaged public var id: UUID
     @NSManaged public var startDate: Date
     @NSManaged public var items: NSSet?
@@ -28,7 +28,7 @@ extension CurrentGoal {
 }
 
 // MARK: Generated accessors for items
-extension CurrentGoal {
+extension Goal {
 
     @objc(addItemsObject:)
     @NSManaged public func addToItems(_ value: Item)

@@ -20,7 +20,7 @@ class DetailsView: UIView {
             initDetailsView()
         }
     }
-    var goal: CurrentGoal!
+    var goal: Goal!
     
     var goalAmountLabel: UILabel!
     var amountSpentLabel: UILabel!
@@ -193,7 +193,7 @@ extension DetailsView: UITextFieldDelegate {
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField == goalDescriptionTextField {
-            goal.goalDescription = goalDescriptionTextField.text
+            goal.goalDescription = goalDescriptionTextField.text!
         } else if textField == goalAmountTextField {
             if textField.text!.isEmpty {
                 textField.text = Util.doubleToDecimalString(0.0)

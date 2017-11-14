@@ -18,8 +18,8 @@ open class Util {
     
     // MARK:- Core Data functions
     
-    open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?) -> CurrentGoal {
-        let newGoal = CurrentGoal(context: PersistenceService.context)
+    open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?) -> Goal {
+        let newGoal = Goal(context: PersistenceService.context)
         newGoal.id = UUID()
         newGoal.items = nil
         newGoal.amountSpent = 0.0
@@ -28,9 +28,9 @@ open class Util {
         newGoal.endDate = endDate
         
         if goalDescription != nil {
-            newGoal.goalDescription = goalDescription
+            newGoal.goalDescription = goalDescription!
         } else {
-            let fetchRequest: NSFetchRequest<CurrentGoal> = CurrentGoal.fetchRequest()
+            let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
             do {
                 let goals = try PersistenceService.context.fetch(fetchRequest)
                 newGoal.goalDescription = "Goal \(goals.count)"
@@ -56,7 +56,7 @@ open class Util {
     }
     
     open class func deleteGoals() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrentGoal")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
@@ -77,8 +77,8 @@ open class Util {
         }
     }
     
-    open class func loadGoal() -> CurrentGoal? {
-        let fetchRequest: NSFetchRequest<CurrentGoal> = CurrentGoal.fetchRequest()
+    open class func loadGoal() -> Goal? {
+        let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
         
         do {
             let goals = try PersistenceService.context.fetch(fetchRequest)
@@ -115,9 +115,10 @@ open class Util {
         }
     }
     
-    open class func addItemsToGoal(_ goal: CurrentGoal, items: [Item]) {
+    open class func addItemsToGoal(_ goal: Goal, items: [Item]) {
         for item in items {
             goal.addToItems(item)
+            goal.amountSpent += item.price
         }
         PersistenceService.saveContext()
     }

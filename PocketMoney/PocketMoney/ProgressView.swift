@@ -20,7 +20,7 @@ class ProgressView: UIView {
             initProgressView()
         }
     }
-    var goal: CurrentGoal!
+    var goal: Goal!
     
     var circleLayer: CAShapeLayer!
     let animationDuration: TimeInterval = 2

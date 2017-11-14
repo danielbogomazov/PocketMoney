@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.swift
 //  PocketMoney
 //
-//  Created by Daniel on 2017-11-08.
+//  Created by Daniel on 2017-11-13.
 //  Copyright © 2017 Daniel Bogomazov. All rights reserved.
 //
 //
@@ -17,9 +17,9 @@ extension Item {
         return NSFetchRequest<Item>(entityName: "Item")
     }
 
+    @NSManaged public var id: UUID
     @NSManaged public var name: String
     @NSManaged public var price: Double
-    @NSManaged public var id: UUID
-    @NSManaged public var goals: CurrentGoal?
+    @NSManaged public var goals: Goal?
 
 }
