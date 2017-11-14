@@ -20,23 +20,23 @@ extension Item {
     @NSManaged public var id: UUID
     @NSManaged public var name: String
     @NSManaged public var price: Double
-    @NSManaged public var itemGoalBridges: NSSet?
+    @NSManaged public var goalItemBridges: NSSet?
 
 }
 
-// MARK: Generated accessors for itemGoalBridges
+// MARK: Generated accessors for goalItemBridges
 extension Item {
 
-    @objc(addItemGoalBridgesObject:)
-    @NSManaged public func addToItemGoalBridges(_ value: GoalItemBridge)
+    @objc(addGoalItemBridgesObject:)
+    @NSManaged public func addToGoalItemBridges(_ value: GoalItemBridge)
 
-    @objc(removeItemGoalBridgesObject:)
-    @NSManaged public func removeFromItemGoalBridges(_ value: GoalItemBridge)
+    @objc(removeGoalItemBridgesObject:)
+    @NSManaged public func removeFromGoalItemBridges(_ value: GoalItemBridge)
 
-    @objc(addItemGoalBridges:)
-    @NSManaged public func addToItemGoalBridges(_ values: NSSet)
+    @objc(addGoalItemBridges:)
+    @NSManaged public func addToGoalItemBridges(_ values: NSSet)
 
-    @objc(removeItemGoalBridges:)
-    @NSManaged public func removeFromItemGoalBridges(_ values: NSSet)
+    @objc(removeGoalItemBridges:)
+    @NSManaged public func removeFromGoalItemBridges(_ values: NSSet)
 
 }

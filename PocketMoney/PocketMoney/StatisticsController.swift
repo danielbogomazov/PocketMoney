@@ -41,7 +41,7 @@ class StatisticsController: UIViewController {
             print(goal!)
         }
         
-        if goal!.itemGoalBridges?.count == 0 {
+        if goal!.goalItemBridges?.count == 0 {
             print("NEW ITEMS")
             items.append(Util.createItem(name: "Item One", price: 10.00))
             items.append(Util.createItem(name: "Item Two", price: 1.0))
@@ -96,7 +96,7 @@ class StatisticsController: UIViewController {
     }
     
     func populateItemArray() {
-        if let bridges: [GoalItemBridge] = goal?.itemGoalBridges?.allObjects as? [GoalItemBridge] {
+        if let bridges: [GoalItemBridge] = goal?.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
                 print(bridge.item)
                 itemArray.append(bridge.item)
@@ -110,7 +110,7 @@ class StatisticsController: UIViewController {
 extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return goal?.itemGoalBridges != nil ? goal!.itemGoalBridges!.count : 0
+        return goal?.goalItemBridges != nil ? goal!.goalItemBridges!.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

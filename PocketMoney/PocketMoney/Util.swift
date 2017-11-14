@@ -21,7 +21,7 @@ open class Util {
     open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?) -> Goal {
         let newGoal = Goal(context: PersistenceService.context)
         newGoal.id = UUID()
-        newGoal.itemGoalBridges = nil
+        newGoal.goalItemBridges = nil
         newGoal.amountSpent = 0.0
         newGoal.goalAmount = goalAmount
         newGoal.startDate = startDate
@@ -150,7 +150,7 @@ open class Util {
     }
     
     open class func findItemInGoal(_ goal: Goal, item: Item) -> GoalItemBridge? {
-        if let bridges: [GoalItemBridge] = goal.itemGoalBridges?.allObjects as? [GoalItemBridge] {
+        if let bridges: [GoalItemBridge] = goal.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
                 if bridge.item.id == item.id {
                     return bridge
@@ -172,7 +172,7 @@ open class Util {
             bridge.itemQuantity = quantity
             
             goal.amountSpent += item.price * Double(quantity)
-            goal.addToItemGoalBridges(bridge)
+            goal.addToGoalItemBridges(bridge)
         }
         PersistenceService.saveContext()
     }
