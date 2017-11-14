@@ -7,16 +7,23 @@
         <attribute name="goalDescription" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="goals" inverseEntity="Item" syncable="YES"/>
+        <relationship name="itemGoalBridges" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GoalItemBridge" inverseName="goal" inverseEntity="GoalItemBridge" syncable="YES"/>
+    </entity>
+    <entity name="GoalItemBridge" representedClassName="GoalItemBridge" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="itemQuantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="itemGoalBridges" inverseEntity="Goal" syncable="YES"/>
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="itemGoalBridges" inverseEntity="Item" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="price" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="goals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="items" inverseEntity="Goal" syncable="YES"/>
+        <relationship name="itemGoalBridges" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GoalItemBridge" inverseName="item" inverseEntity="GoalItemBridge" syncable="YES"/>
     </entity>
     <elements>
         <element name="Goal" positionX="-101" positionY="72" width="128" height="150"/>
         <element name="Item" positionX="-117" positionY="-99" width="128" height="105"/>
+        <element name="GoalItemBridge" positionX="-99" positionY="45" width="128" height="105"/>
     </elements>
 </model>

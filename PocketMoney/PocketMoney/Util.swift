@@ -21,7 +21,7 @@ open class Util {
     open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?) -> Goal {
         let newGoal = Goal(context: PersistenceService.context)
         newGoal.id = UUID()
-        newGoal.items = nil
+        newGoal.itemGoalBridges = nil
         newGoal.amountSpent = 0.0
         newGoal.goalAmount = goalAmount
         newGoal.startDate = startDate
@@ -77,7 +77,22 @@ open class Util {
         }
     }
     
-    open class func loadGoal() -> Goal? {
+    open class func loadAllGoals() -> [Goal] {
+        let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
+        
+        do {
+            let goals = try PersistenceService.context.fetch(fetchRequest)
+            if goals.isEmpty {
+                return []
+            } else {
+                return goals
+            }
+        } catch {
+            return []
+        }
+    }
+    
+    open class func loadGoal(uuid: UUID) -> Goal? {
         let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
         
         do {
@@ -85,12 +100,31 @@ open class Util {
             if goals.isEmpty {
                 return nil
             } else {
-                // TODO - Return specified goal
-                return goals[0]
+                for goal in goals {
+                    if goal.id == uuid {
+                        return goal
+                    }
+                }
+                return nil
             }
         } catch {
             // TODO
             return nil
+        }
+    }
+    
+    open class func loadAllItems() -> [Item] {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        do {
+            let items = try PersistenceService.context.fetch(fetchRequest)
+            if items.isEmpty {
+                return []
+            } else {
+                return items
+            }
+        } catch {
+            return []
         }
     }
     
@@ -115,10 +149,30 @@ open class Util {
         }
     }
     
-    open class func addItemsToGoal(_ goal: Goal, items: [Item]) {
-        for item in items {
-            goal.addToItems(item)
-            goal.amountSpent += item.price
+    open class func findItemInGoal(_ goal: Goal, item: Item) -> GoalItemBridge? {
+        if let bridges: [GoalItemBridge] = goal.itemGoalBridges?.allObjects as? [GoalItemBridge] {
+            for bridge in bridges {
+                if bridge.item.id == item.id {
+                    return bridge
+                }
+            }
+        }
+        return nil
+    }
+    
+    open class func addItemToGoal(_ goal: Goal, item: Item, quantity: Int16) {
+        if let bridge = findItemInGoal(goal, item: item) {
+            bridge.itemQuantity += quantity
+            goal.amountSpent += item.price * Double(quantity)
+        } else {
+            let bridge = GoalItemBridge(context: PersistenceService.context)
+            bridge.id = UUID()
+            bridge.goal = goal
+            bridge.item = item
+            bridge.itemQuantity = quantity
+            
+            goal.amountSpent += item.price * Double(quantity)
+            goal.addToItemGoalBridges(bridge)
         }
         PersistenceService.saveContext()
     }

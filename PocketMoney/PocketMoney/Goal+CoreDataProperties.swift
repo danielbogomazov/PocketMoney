@@ -23,23 +23,23 @@ extension Goal {
     @NSManaged public var goalDescription: String
     @NSManaged public var id: UUID
     @NSManaged public var startDate: Date
-    @NSManaged public var items: NSSet?
+    @NSManaged public var itemGoalBridges: NSSet?
 
 }
 
-// MARK: Generated accessors for items
+// MARK: Generated accessors for itemGoalBridges
 extension Goal {
 
-    @objc(addItemsObject:)
-    @NSManaged public func addToItems(_ value: Item)
+    @objc(addItemGoalBridgesObject:)
+    @NSManaged public func addToItemGoalBridges(_ value: GoalItemBridge)
 
-    @objc(removeItemsObject:)
-    @NSManaged public func removeFromItems(_ value: Item)
+    @objc(removeItemGoalBridgesObject:)
+    @NSManaged public func removeFromItemGoalBridges(_ value: GoalItemBridge)
 
-    @objc(addItems:)
-    @NSManaged public func addToItems(_ values: NSSet)
+    @objc(addItemGoalBridges:)
+    @NSManaged public func addToItemGoalBridges(_ values: NSSet)
 
-    @objc(removeItems:)
-    @NSManaged public func removeFromItems(_ values: NSSet)
+    @objc(removeItemGoalBridges:)
+    @NSManaged public func removeFromItemGoalBridges(_ values: NSSet)
 
 }

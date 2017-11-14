@@ -29,7 +29,8 @@ class StatisticsController: UIViewController {
         Util.deleteItems()
         Util.deleteGoals()
         
-//        goal = Util.loadGoal()
+//        goal = Util.loadAllGoals()[0]
+//        items = Util.loadAllItems()
         
         if goal != nil {
             print("GOAL -- LOADED")
@@ -40,19 +41,21 @@ class StatisticsController: UIViewController {
             print(goal!)
         }
         
-        if goal!.items?.count == 0 {
+        if goal!.itemGoalBridges?.count == 0 {
             print("NEW ITEMS")
             items.append(Util.createItem(name: "Item One", price: 10.00))
             items.append(Util.createItem(name: "Item Two", price: 1.0))
             items.append(Util.createItem(name: "Item Three", price: 31.22))
             items.append(Util.createItem(name: "Items Four", price: 12.21))
-            items.append(Util.loadItem(uuid: items[1].id)!)
-            Util.addItemsToGoal(goal!, items: items)
+            
+            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[0].id)!, quantity: 2)
+            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
+            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[2].id)!, quantity: 1)
+            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[3].id)!, quantity: 1)
+            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
         } else {
             print ("ITEMS -- LOADED")
-            for item in goal!.items! {
-                items.append(Util.loadItem(uuid: (item as! Item).id)!)
-            }
+            print(items)
         }
         
         populateItemArray()
@@ -93,11 +96,13 @@ class StatisticsController: UIViewController {
     }
     
     func populateItemArray() {
-        for (_, item) in goal!.items!.enumerated() {
-            print(item)
-            itemArray.append(item as! Item)
+        if let bridges: [GoalItemBridge] = goal?.itemGoalBridges?.allObjects as? [GoalItemBridge] {
+            for bridge in bridges {
+                print(bridge.item)
+                itemArray.append(bridge.item)
+            }
         }
-        itemsTableView.reloadData() 
+        itemsTableView.reloadData()
     }
     
 }
@@ -105,7 +110,7 @@ class StatisticsController: UIViewController {
 extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return goal?.items != nil ? goal!.items!.count : 0
+        return goal?.itemGoalBridges != nil ? goal!.itemGoalBridges!.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
