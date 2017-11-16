@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class StatisticsController: UIViewController {
+class StatisticsController: UIViewController, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet weak var progressScrollView: UIScrollView!
@@ -129,6 +129,10 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
 extension StatisticsController: DetailsViewDelegate {
     func updateProgressView() {
         progressView.initProgressView()
+    }
+    
+    func presentPopoverView(popoverController: UIViewController) {
+        present(popoverController, animated: true, completion: nil)
     }
 }
 

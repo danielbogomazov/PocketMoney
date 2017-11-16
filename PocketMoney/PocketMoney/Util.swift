@@ -14,7 +14,10 @@ open class Util {
     
     struct Constant {
         static let NO_END_DATE = "No End Date"
-
+        
+        static let DEFUALT_MIN_DATE = Util.stringToDate("01-01-1900")
+        static let DEFAULT_MAX_DATE = Util.stringToDate("12-31-2100")
+        
         static let TINT_COLOR = UIColor(red: 84/255, green: 84/255, blue: 84/255, alpha: 1.0)
     }
     

@@ -11,9 +11,10 @@ import CoreData
 
 protocol DetailsViewDelegate {
     func updateProgressView()
+    func presentPopoverView(popoverController: UIViewController)
 }
 
-class DetailsView: UIView {
+class DetailsView: UIView, UIPopoverPresentationControllerDelegate {
     
     var delegate: DetailsViewDelegate? = nil {
         didSet {
@@ -21,7 +22,9 @@ class DetailsView: UIView {
         }
     }
     
-    var calendar: CalendarView!
+    var pickerPopoverContent: UIViewController?
+    var startDateCalendar: CalendarView?
+    var endDateCalendar: CalendarView?
     
     var goal: Goal!
     
@@ -175,6 +178,64 @@ extension DetailsView: UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == startDateTextField || textField == endDateTextField {
+            if pickerPopoverContent == nil {
+                pickerPopoverContent = UIViewController()
+            }
+            
+            pickerPopoverContent!.view.subviews.forEach({ $0.removeFromSuperview() })
+            pickerPopoverContent!.modalPresentationStyle = UIModalPresentationStyle.popover
+            
+            pickerPopoverContent!.preferredContentSize = CGSize(width: frame.width / 1.5, height: frame.height / 1.5)
+            
+            if let popover = pickerPopoverContent!.popoverPresentationController {
+                popover.sourceView = textField
+                popover.delegate = self
+                popover.sourceRect = CGRect(x: textField.frame.width/2,y: textField.frame.height,width: 0,height: 0)
+                popover.permittedArrowDirections = UIPopoverArrowDirection.any
+            }
+            
+            var minimumDate: Date = Util.Constant.DEFUALT_MIN_DATE
+            var maximumDate: Date = Util.Constant.DEFAULT_MAX_DATE
+            
+            if textField == startDateTextField {
+                if let calendar = startDateCalendar {
+                    pickerPopoverContent!.view.addSubview(calendar.view)
+                } else {
+                    if goal!.endDate != nil {
+                        maximumDate = goal!.endDate!
+                    } else {
+                        maximumDate = Date()
+                    }
+                    
+                    startDateCalendar = CalendarView(frame: pickerPopoverContent!.view.frame, minimumDate: minimumDate, maximumDate: maximumDate)
+                    startDateCalendar!.delegate = self
+                    
+                    startDateTextField.text = Util.dateToString(startDateCalendar!.selectedDate())
+                    
+                    pickerPopoverContent!.view.addSubview(startDateCalendar!.view)
+                }
+            } else if textField == endDateTextField {
+                if let calendar = endDateCalendar {
+                    pickerPopoverContent!.view.addSubview(calendar.view)
+                } else {
+                    minimumDate = goal!.startDate
+                    
+                    endDateCalendar = CalendarView(frame: pickerPopoverContent!.view.frame, minimumDate: minimumDate, maximumDate: maximumDate)
+                    endDateCalendar!.delegate = self
+                    
+                    endDateTextField.text = Util.dateToString(endDateCalendar!.selectedDate())
+                }
+                
+                pickerPopoverContent!.view.addSubview(endDateCalendar!.view)
+            }
+            
+            delegate!.presentPopoverView(popoverController: pickerPopoverContent!)
+        }
+        return true
+    }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         // Numeric only
@@ -219,5 +280,7 @@ extension DetailsView: UITextFieldDelegate {
 }
 
 extension DetailsView: CalendarDelegate {
-    
+    func didSelect(date: Date) {
+        endDateTextField.text = Util.dateToString(date)
+    }
 }
