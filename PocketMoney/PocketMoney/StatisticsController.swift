@@ -128,7 +128,7 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
 
 extension StatisticsController: DetailsViewDelegate {
     func updateProgressView() {
-//        progressView.initProgressView()
+        progressView.initProgressView()
     }
 }
 
