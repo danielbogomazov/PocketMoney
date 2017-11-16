@@ -176,7 +176,7 @@ open class Util {
         }
         PersistenceService.saveContext()
     }
-    
+
     // MARK:- Date functions
     
     open class func stringToDate(_ date: String) -> Date {

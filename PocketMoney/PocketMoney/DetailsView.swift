@@ -187,9 +187,6 @@ extension DetailsView: UITextFieldDelegate {
         
         return true
     }
-//    currentGoal!.goalDescription = currentGoal!.goalDescription
-//    currentGoal!.goalAmount = Double(goalAmountTextField.text!)!
-//    currentGoal!.endDate = Util.stringToDate(endDateTextField.text!)
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField == goalDescriptionTextField {
@@ -208,6 +205,7 @@ extension DetailsView: UITextFieldDelegate {
         } else if textField == endDateTextField {
             goal.endDate = Util.stringToDate(endDateTextField.text!)
         }
+        PersistenceService.saveContext()
         return true
     }
 }

@@ -26,11 +26,11 @@ class StatisticsController: UIViewController {
     override func viewDidLoad() {
         
         // MARK:- TEMPORARY - DELETE THIS AFTER TESTING
-        Util.deleteItems()
-        Util.deleteGoals()
+//        Util.deleteItems()
+//        Util.deleteGoals()
         
-//        goal = Util.loadAllGoals()[0]
-//        items = Util.loadAllItems()
+        goal = Util.loadAllGoals()[0]
+        items = Util.loadAllItems()
         
         if goal != nil {
             print("GOAL -- LOADED")
