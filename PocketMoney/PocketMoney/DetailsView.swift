@@ -20,6 +20,9 @@ class DetailsView: UIView {
             initDetailsView()
         }
     }
+    
+    var calendar: CalendarView!
+    
     var goal: Goal!
     
     var goalAmountLabel: UILabel!
@@ -213,4 +216,8 @@ extension DetailsView: UITextFieldDelegate {
         PersistenceService.saveContext()
         return true
     }
+}
+
+extension DetailsView: CalendarDelegate {
+    
 }
