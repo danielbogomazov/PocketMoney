@@ -150,7 +150,7 @@ class DetailsView: UIView {
         if let endDate = goal.endDate {
             endDateTextField.text = Util.dateToString(endDate)
         } else {
-            endDateTextField.text = "No End Date"
+            endDateTextField.text = Util.Constant.NO_END_DATE
         }
         endDateTextField.isUserInteractionEnabled = true
         endDateTextField.delegate = self
@@ -206,7 +206,9 @@ extension DetailsView: UITextFieldDelegate {
             delegate?.updateProgressView()
             
         } else if textField == endDateTextField {
-            goal.endDate = Util.stringToDate(endDateTextField.text!)
+            if endDateTextField.text != Util.Constant.NO_END_DATE {
+                goal.endDate = Util.stringToDate(endDateTextField.text!)
+            }
         }
         PersistenceService.saveContext()
         return true
