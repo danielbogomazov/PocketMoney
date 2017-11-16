@@ -178,6 +178,9 @@ extension DetailsView: UITextFieldDelegate {
         return true
     }
     
+    // TODO :- Put this into the statistics controller instead of calling it through a delegate function
+    // Also move the rest of these textfields to the statistics controller
+    // Check Progressview too
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == startDateTextField || textField == endDateTextField {
             if pickerPopoverContent == nil {
