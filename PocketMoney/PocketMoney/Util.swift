@@ -18,6 +18,16 @@ open class Util {
     
     // MARK:- Core Data functions
     
+    open class func defaultGoalName() -> String {
+        let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
+        do {
+            let goals = try PersistenceService.context.fetch(fetchRequest)
+            return "Goal \(goals.count)"
+        } catch {
+            return "Goal 1"
+        }
+    }
+    
     open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date?, goalDescription: String?) -> Goal {
         let newGoal = Goal(context: PersistenceService.context)
         newGoal.id = UUID()
@@ -30,13 +40,7 @@ open class Util {
         if goalDescription != nil {
             newGoal.goalDescription = goalDescription!
         } else {
-            let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
-            do {
-                let goals = try PersistenceService.context.fetch(fetchRequest)
-                newGoal.goalDescription = "Goal \(goals.count)"
-            } catch {
-                newGoal.goalDescription = "Goal 1"
-            }
+            newGoal.goalDescription = defaultGoalName()
         }
         
         PersistenceService.saveContext()

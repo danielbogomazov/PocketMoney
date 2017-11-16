@@ -107,7 +107,7 @@ class DetailsView: UIView {
         goalDescriptionTextField.textAlignment = .center
         goalDescriptionTextField.font = UIFont.boldSystemFont(ofSize: 20)
         goalDescriptionTextField.textColor = Util.Constant.TINT_COLOR
-        goalDescriptionTextField.text = "Current Goal"
+        goalDescriptionTextField.text = goal.goalDescription
         goalDescriptionTextField.isUserInteractionEnabled = true
         goalDescriptionTextField.delegate = self
         goalDescriptionTextField.addBorder()
@@ -190,6 +190,9 @@ extension DetailsView: UITextFieldDelegate {
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField == goalDescriptionTextField {
+            if goalDescriptionTextField.text!.isEmpty {
+                goalDescriptionTextField.text = Util.defaultGoalName()
+            }
             goal.goalDescription = goalDescriptionTextField.text!
         } else if textField == goalAmountTextField {
             if textField.text!.isEmpty {
