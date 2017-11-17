@@ -10,8 +10,7 @@ import UIKit
 import CoreData
 
 protocol DetailsViewDelegate {
-    func updateProgressView()
-    func presentPopoverView(popoverController: UIViewController)
+
 }
 
 class DetailsView: UIView, UIPopoverPresentationControllerDelegate {
@@ -21,11 +20,7 @@ class DetailsView: UIView, UIPopoverPresentationControllerDelegate {
             initDetailsView()
         }
     }
-    
-    var pickerPopoverContent: UIViewController?
-    var startDateCalendar: CalendarView?
-    var endDateCalendar: CalendarView?
-    
+        
     var goal: Goal!
     
     var goalAmountLabel: UILabel!
@@ -115,7 +110,7 @@ class DetailsView: UIView, UIPopoverPresentationControllerDelegate {
         goalDescriptionTextField.textColor = Util.Constant.TINT_COLOR
         goalDescriptionTextField.text = goal.goalDescription
         goalDescriptionTextField.isUserInteractionEnabled = true
-        goalDescriptionTextField.delegate = self
+        goalDescriptionTextField.delegate = delegate as! UITextFieldDelegate
         goalDescriptionTextField.addBorder()
         goalDescriptionTextField.addLeftMargin()
 
@@ -125,7 +120,7 @@ class DetailsView: UIView, UIPopoverPresentationControllerDelegate {
         goalAmountTextField.textColor = Util.Constant.TINT_COLOR
         goalAmountTextField.text = Util.doubleToDecimalString(goal.goalAmount)
         goalAmountTextField.isUserInteractionEnabled = true
-        goalAmountTextField.delegate = self
+        goalAmountTextField.delegate = delegate as! UITextFieldDelegate
         goalAmountTextField.addBorder()
         goalAmountTextField.addLeftMargin()
 
@@ -135,7 +130,7 @@ class DetailsView: UIView, UIPopoverPresentationControllerDelegate {
         amountSpentTextField.textColor = Util.Constant.TINT_COLOR
         amountSpentTextField.text = "\(goal.amountSpent)"
         amountSpentTextField.isUserInteractionEnabled = false
-        amountSpentTextField.delegate = self
+        amountSpentTextField.delegate = delegate as! UITextFieldDelegate
         amountSpentTextField.addBorder()
         amountSpentTextField.addLeftMargin()
 
@@ -145,7 +140,7 @@ class DetailsView: UIView, UIPopoverPresentationControllerDelegate {
         startDateTextField.textColor = Util.Constant.TINT_COLOR
         startDateTextField.text = Util.dateToString(goal.startDate)
         startDateTextField.isUserInteractionEnabled = false
-        startDateTextField.delegate = self
+        startDateTextField.delegate = delegate as! UITextFieldDelegate
         startDateTextField.addBorder()
         startDateTextField.addLeftMargin()
 
@@ -159,7 +154,7 @@ class DetailsView: UIView, UIPopoverPresentationControllerDelegate {
             endDateTextField.text = Util.Constant.NO_END_DATE
         }
         endDateTextField.isUserInteractionEnabled = true
-        endDateTextField.delegate = self
+        endDateTextField.delegate = delegate as! UITextFieldDelegate
         endDateTextField.addBorder()
         endDateTextField.addLeftMargin()
 
@@ -175,67 +170,6 @@ extension DetailsView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.endEditing(true)
-        return true
-    }
-    
-    // TODO :- Put this into the statistics controller instead of calling it through a delegate function
-    // Also move the rest of these textfields to the statistics controller
-    // Check Progressview too
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == startDateTextField || textField == endDateTextField {
-            if pickerPopoverContent == nil {
-                pickerPopoverContent = UIViewController()
-            }
-            
-            pickerPopoverContent!.view.subviews.forEach({ $0.removeFromSuperview() })
-            pickerPopoverContent!.modalPresentationStyle = UIModalPresentationStyle.popover
-            
-            pickerPopoverContent!.preferredContentSize = CGSize(width: frame.width / 1.5, height: frame.height / 1.5)
-            
-            if let popover = pickerPopoverContent!.popoverPresentationController {
-                popover.sourceView = textField
-                popover.delegate = self
-                popover.sourceRect = CGRect(x: textField.frame.width/2,y: textField.frame.height,width: 0,height: 0)
-                popover.permittedArrowDirections = UIPopoverArrowDirection.any
-            }
-            
-            var minimumDate: Date = Util.Constant.DEFUALT_MIN_DATE
-            var maximumDate: Date = Util.Constant.DEFAULT_MAX_DATE
-            
-            if textField == startDateTextField {
-                if let calendar = startDateCalendar {
-                    pickerPopoverContent!.view.addSubview(calendar.view)
-                } else {
-                    if goal!.endDate != nil {
-                        maximumDate = goal!.endDate!
-                    } else {
-                        maximumDate = Date()
-                    }
-                    
-                    startDateCalendar = CalendarView(frame: pickerPopoverContent!.view.frame, minimumDate: minimumDate, maximumDate: maximumDate)
-                    startDateCalendar!.delegate = self
-                    
-                    startDateTextField.text = Util.dateToString(startDateCalendar!.selectedDate())
-                    
-                    pickerPopoverContent!.view.addSubview(startDateCalendar!.view)
-                }
-            } else if textField == endDateTextField {
-                if let calendar = endDateCalendar {
-                    pickerPopoverContent!.view.addSubview(calendar.view)
-                } else {
-                    minimumDate = goal!.startDate
-                    
-                    endDateCalendar = CalendarView(frame: pickerPopoverContent!.view.frame, minimumDate: minimumDate, maximumDate: maximumDate)
-                    endDateCalendar!.delegate = self
-                    
-                    endDateTextField.text = Util.dateToString(endDateCalendar!.selectedDate())
-                }
-                
-                pickerPopoverContent!.view.addSubview(endDateCalendar!.view)
-            }
-            
-            delegate!.presentPopoverView(popoverController: pickerPopoverContent!)
-        }
         return true
     }
 
@@ -255,35 +189,5 @@ extension DetailsView: UITextFieldDelegate {
         return true
     }
 
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField == goalDescriptionTextField {
-            if goalDescriptionTextField.text!.isEmpty {
-                goalDescriptionTextField.text = Util.defaultGoalName()
-            }
-            goal.goalDescription = goalDescriptionTextField.text!
-        } else if textField == goalAmountTextField {
-            if textField.text!.isEmpty {
-                textField.text = Util.doubleToDecimalString(0.0)
-            } else {
-                let value = textField.text! as NSString
-                textField.text = Util.doubleToDecimalString(value.doubleValue)
-            }
-            
-            goal.goalAmount = Double(textField.text!)!
-            delegate?.updateProgressView()
-            
-        } else if textField == endDateTextField {
-            if endDateTextField.text != Util.Constant.NO_END_DATE {
-                goal.endDate = Util.stringToDate(endDateTextField.text!)
-            }
-        }
-        PersistenceService.saveContext()
-        return true
-    }
 }
 
-extension DetailsView: CalendarDelegate {
-    func didSelect(date: Date) {
-        endDateTextField.text = Util.dateToString(date)
-    }
-}

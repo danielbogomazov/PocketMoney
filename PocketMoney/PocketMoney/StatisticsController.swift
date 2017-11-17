@@ -9,16 +9,21 @@
 import UIKit
 import CoreData
 
-class StatisticsController: UIViewController, UIPopoverPresentationControllerDelegate {
+class StatisticsController: UIViewController, UIPopoverPresentationControllerDelegate, ProgressViewDelegate, DetailsViewDelegate {
+    
     
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet weak var progressScrollView: UIScrollView!
-    var pickerPopoverContent: UIViewController?
+
     var itemArray: [Item] = []
     var viewArray: [UIView] = []
     
     var progressView: ProgressView!
     var detailsView: DetailsView!
+    
+    var pickerPopoverContent: UIViewController?
+    var startDateCalendar: CalendarView?
+    var endDateCalendar: CalendarView?
     
     var goal: Goal?
     var items: [Item] = []
@@ -107,6 +112,99 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     
 }
 
+extension StatisticsController: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == detailsView.startDateTextField || textField == detailsView.endDateTextField {
+            
+            let popoverWidth: CGFloat = view.frame.width
+            let popoverHeight: CGFloat = 280
+            
+            if pickerPopoverContent == nil {
+                pickerPopoverContent = UIViewController()
+            }
+            
+            pickerPopoverContent!.view.subviews.forEach({ $0.removeFromSuperview() })
+            pickerPopoverContent!.modalPresentationStyle = UIModalPresentationStyle.popover
+            
+            pickerPopoverContent!.preferredContentSize = CGSize(width: popoverWidth, height: popoverHeight)
+            
+            if let popover = pickerPopoverContent!.popoverPresentationController {
+                popover.sourceView = textField
+                popover.delegate = self
+                popover.sourceRect = CGRect(x: textField.frame.width / 2, y: 0, width: 0, height: 0)
+                popover.permittedArrowDirections = .any
+            }
+            
+            var minimumDate: Date = Util.Constant.DEFUALT_MIN_DATE
+            var maximumDate: Date = Util.Constant.DEFAULT_MAX_DATE
+            
+            if textField == detailsView.startDateTextField {
+                if let calendar = startDateCalendar {
+                    pickerPopoverContent!.view.addSubview(calendar.view)
+                } else {
+                    if goal!.endDate != nil {
+                        maximumDate = goal!.endDate!
+                    } else {
+                        maximumDate = Date()
+                    }
+                    let frame = CGRect(x: 0, y: 0, width: popoverWidth, height: popoverHeight)
+                    startDateCalendar = CalendarView(frame: frame, minimumDate: minimumDate, maximumDate: maximumDate)
+                    startDateCalendar!.delegate = self
+                    
+                    detailsView.startDateTextField.text = Util.dateToString(startDateCalendar!.selectedDate())
+                    
+                    pickerPopoverContent!.view.addSubview(startDateCalendar!.view)
+                }
+            } else if textField == detailsView.endDateTextField {
+                if let calendar = endDateCalendar {
+                    pickerPopoverContent!.view.addSubview(calendar.view)
+                } else {
+                    minimumDate = goal!.startDate
+                    
+                    let frame = CGRect(x: 0, y: 0, width: popoverWidth, height: popoverHeight)
+                    endDateCalendar = CalendarView(frame: frame, minimumDate: minimumDate, maximumDate: maximumDate)
+                    endDateCalendar!.delegate = self
+                    
+                    detailsView.endDateTextField.text = Util.dateToString(endDateCalendar!.selectedDate())
+                }
+                
+                pickerPopoverContent!.view.addSubview(endDateCalendar!.view)
+            }
+            
+            present(pickerPopoverContent!, animated: true)
+        }
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField == detailsView.goalDescriptionTextField {
+            if detailsView.goalDescriptionTextField.text!.isEmpty {
+                detailsView.goalDescriptionTextField.text = Util.defaultGoalName()
+            }
+            goal!.goalDescription = detailsView.goalDescriptionTextField.text!
+        } else if textField == detailsView.goalAmountTextField {
+            if textField.text!.isEmpty {
+                textField.text = Util.doubleToDecimalString(0.0)
+            } else {
+                let value = textField.text! as NSString
+                textField.text = Util.doubleToDecimalString(value.doubleValue)
+            }
+            
+            detailsView.goal.goalAmount = Double(textField.text!)!
+            progressView.initProgressView()
+            progressView.initProgressView()
+            
+        } else if textField == detailsView.endDateTextField {
+            if detailsView.endDateTextField.text != Util.Constant.NO_END_DATE {
+                goal!.endDate = Util.stringToDate(detailsView.endDateTextField.text!)
+            }
+        }
+        PersistenceService.saveContext()
+        return true
+    }
+}
+
 extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -124,18 +222,11 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
 
         return cell
     }
+    
 }
 
-extension StatisticsController: DetailsViewDelegate {
-    func updateProgressView() {
-        progressView.initProgressView()
+extension StatisticsController: CalendarDelegate {
+    func didSelect(date: Date) {
+        detailsView.endDateTextField.text = Util.dateToString(date)
     }
-    
-    func presentPopoverView(popoverController: UIViewController) {
-        present(popoverController, animated: true, completion: nil)
-    }
-}
-
-extension StatisticsController: ProgressViewDelegate {
-    
 }

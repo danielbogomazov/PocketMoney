@@ -256,7 +256,7 @@ class CalendarView: UIView, FSCalendarDataSource {
             return false
         }
         
-        self.dateFormatter.dateFormat = "MM-dd-yyyy"
+        self.dateFormatter.dateFormat = "yyyy-MM-dd"
         let newDate: Date! = self.dateFormatter.date(from: "\(self.yearTextField.text!)-\(pageMonth)-01")
         
         /* Check if the newDate is within maximumDate/minimumDate
