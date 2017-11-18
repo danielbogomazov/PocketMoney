@@ -117,7 +117,7 @@ extension StatisticsController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == detailsView.startDateTextField || textField == detailsView.endDateTextField {
             
-            let popoverWidth: CGFloat = view.frame.width
+            let popoverWidth: CGFloat = view.frame.width - 36
             let popoverHeight: CGFloat = 280
             
             if pickerPopoverContent == nil {
@@ -171,8 +171,9 @@ extension StatisticsController: UITextFieldDelegate {
                 
                 pickerPopoverContent!.view.addSubview(endDateCalendar!.view)
             }
-            
+
             present(pickerPopoverContent!, animated: true)
+            return false
         }
         return true
     }
