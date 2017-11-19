@@ -114,6 +114,27 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
 
 extension StatisticsController: UITextFieldDelegate {
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        // Numeric only
+        if textField == detailsView.goalAmountTextField {
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            
+            if Util.checkIfDecimal(textField.text!, newString: newString) {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        return true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == detailsView.startDateTextField || textField == detailsView.endDateTextField {
             
