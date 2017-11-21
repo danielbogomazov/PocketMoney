@@ -31,11 +31,11 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     override func viewDidLoad() {
         
         // MARK:- TEMPORARY - DELETE THIS AFTER TESTING
-//        Util.deleteItems()
-//        Util.deleteGoals()
+        Util.deleteItems()
+        Util.deleteGoals()
         
-        goal = Util.loadAllGoals()[0]
-        items = Util.loadAllItems()
+//        goal = Util.loadAllGoals()[0]
+//        items = Util.loadAllItems()
         
         if goal != nil {
             print("GOAL -- LOADED")
@@ -116,9 +116,10 @@ extension StatisticsController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        
         // Numeric only
         if textField == detailsView.goalAmountTextField {
-            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             
             if Util.checkIfDecimal(textField.text!, newString: newString) {
                 return true
@@ -180,13 +181,14 @@ extension StatisticsController: UITextFieldDelegate {
             } else if textField == detailsView.endDateTextField {
                 if let calendar = endDateCalendar {
                     pickerPopoverContent!.view.addSubview(calendar.view)
+                    detailsView.endDateTextField.text = Util.dateToString(endDateCalendar!.selectedDate())
                 } else {
                     minimumDate = goal!.startDate
                     
                     let frame = CGRect(x: 0, y: 0, width: popoverWidth, height: popoverHeight)
                     endDateCalendar = CalendarView(frame: frame, minimumDate: minimumDate, maximumDate: maximumDate)
                     endDateCalendar!.delegate = self
-                    
+
                     if let endDate = goal!.endDate {
                         endDateCalendar!.selectDate(date: endDate)
                     }
