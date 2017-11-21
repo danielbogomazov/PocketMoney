@@ -250,5 +250,7 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
 extension StatisticsController: CalendarDelegate {
     func didSelect(date: Date) {
         detailsView.endDateTextField.text = Util.dateToString(date)
+        goal!.endDate = date
+        PersistenceService.saveContext()
     }
 }
