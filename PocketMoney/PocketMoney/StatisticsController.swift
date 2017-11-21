@@ -187,6 +187,10 @@ extension StatisticsController: UITextFieldDelegate {
                     endDateCalendar = CalendarView(frame: frame, minimumDate: minimumDate, maximumDate: maximumDate)
                     endDateCalendar!.delegate = self
                     
+                    if let endDate = goal!.endDate {
+                        endDateCalendar!.selectDate(date: endDate)
+                    }
+                    
                     detailsView.endDateTextField.text = Util.dateToString(endDateCalendar!.selectedDate())
                 }
                 
