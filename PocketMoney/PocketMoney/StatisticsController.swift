@@ -42,7 +42,7 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
             print("GOAL -- LOADED")
             print(goal!)
         } else {
-            goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: nil, goalDescription: nil)
+            goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), goalDescription: nil)
             print("NEW GOAL")
             print(goal!)
         }
@@ -166,11 +166,7 @@ extension StatisticsController: UITextFieldDelegate {
                 if let calendar = startDateCalendar {
                     pickerPopoverContent!.view.addSubview(calendar.view)
                 } else {
-                    if goal!.endDate != nil {
-                        maximumDate = goal!.endDate!
-                    } else {
-                        maximumDate = Date()
-                    }
+                    maximumDate = goal!.endDate
                     let frame = CGRect(x: 0, y: 0, width: popoverWidth, height: popoverHeight)
                     startDateCalendar = CalendarView(frame: frame, minimumDate: minimumDate, maximumDate: maximumDate)
                     startDateCalendar!.delegate = self
@@ -190,9 +186,7 @@ extension StatisticsController: UITextFieldDelegate {
                     endDateCalendar = CalendarView(frame: frame, minimumDate: minimumDate, maximumDate: maximumDate)
                     endDateCalendar!.delegate = self
 
-                    if let endDate = goal!.endDate {
-                        endDateCalendar!.selectDate(date: endDate)
-                    }
+                    endDateCalendar!.selectDate(date: goal!.endDate)
                     
                     detailsView.endDateTextField.text = Util.dateToString(endDateCalendar!.selectedDate())
                 }
@@ -201,7 +195,7 @@ extension StatisticsController: UITextFieldDelegate {
             }
 
             present(pickerPopoverContent!, animated: true)
-            return true
+            return false
         }
         return true
     }
@@ -225,9 +219,7 @@ extension StatisticsController: UITextFieldDelegate {
             progressView.initProgressView()
             
         } else if textField == detailsView.endDateTextField {
-            if detailsView.endDateTextField.text != Util.Constant.NO_END_DATE {
-                goal!.endDate = Util.stringToDate(detailsView.endDateTextField.text!)
-            }
+            goal!.endDate = Util.stringToDate(detailsView.endDateTextField.text!)
         }
         PersistenceService.saveContext()
         return true
