@@ -31,11 +31,12 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     override func viewDidLoad() {
         
         // MARK:- TEMPORARY - DELETE THIS AFTER TESTING
+        
         Util.deleteItems()
         Util.deleteGoals()
         
-//        goal = Util.loadAllGoals()[0]
-//        items = Util.loadAllItems()
+        goal = Util.loadAllItems() != [] ? Util.loadAllGoals()[0] : nil
+        items = Util.loadAllItems()
         
         if goal != nil {
             print("GOAL -- LOADED")
@@ -200,7 +201,7 @@ extension StatisticsController: UITextFieldDelegate {
             }
 
             present(pickerPopoverContent!, animated: true)
-            return false
+            return true
         }
         return true
     }

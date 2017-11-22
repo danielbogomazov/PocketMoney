@@ -165,8 +165,3 @@ class DetailsView: UIView {
         addSubview(endDateTextField)
     }
 }
-
-extension DetailsView: UITextFieldDelegate {
-    
-}
-
