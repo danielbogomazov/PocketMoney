@@ -91,10 +91,6 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
         super.viewDidLoad()
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -111,6 +107,19 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
         itemsTableView.reloadData()
     }
     
+    @IBAction func addItemButtonClicked(_ sender: UIButton) {
+        let popoverController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddItemController")
+        popoverController.modalPresentationStyle = .popover
+        popoverController.view.backgroundColor = UIColor.white
+        popoverController.popoverPresentationController?.permittedArrowDirections = .up
+        popoverController.popoverPresentationController?.delegate = self
+        popoverController.popoverPresentationController?.sourceView = sender as UIView
+        popoverController.popoverPresentationController?.sourceRect = sender.bounds
+        
+        popoverController.preferredContentSize = CGSize(width: 300, height: 160)
+        
+        present(popoverController, animated: true, completion: nil)
+    }
 }
 
 extension StatisticsController: UITextFieldDelegate {

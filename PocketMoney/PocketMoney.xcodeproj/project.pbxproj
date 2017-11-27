@@ -25,6 +25,7 @@
 		65C8B8041F8992E700AB1D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B8021F8992E700AB1D2F /* LaunchScreen.storyboard */; };
 		65D281F71F92EDD800A7FCED /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D281F61F92EDD800A7FCED /* Util.swift */; };
 		65E364CF1FBD51FA00CECE5F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E364CE1FBD51FA00CECE5F /* CalendarView.swift */; };
+		65EC11681FCB7C41004C408C /* AddItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC11671FCB7C40004C408C /* AddItemController.swift */; };
 		65EDB0241F8D9E7C00BC33DC /* StatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */; };
 		65F76ECA1FA3EF7D00B65440 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F76EC91FA3EF7D00B65440 /* DetailsView.swift */; };
 		A499D0E71F968CB6001AD5CB /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A499D0E61F968CB6001AD5CB /* ProgressView.swift */; };
@@ -51,6 +52,7 @@
 		65D281F61F92EDD800A7FCED /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		65E364CE1FBD51FA00CECE5F /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		65E364D01FBD532500CECE5F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		65EC11671FCB7C40004C408C /* AddItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemController.swift; sourceTree = "<group>"; };
 		65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
 		65F76EC91FA3EF7D00B65440 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		89058DC69220C9D7BBD13310 /* Pods-PocketMoney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PocketMoney.release.xcconfig"; path = "Pods/Target Support Files/Pods-PocketMoney/Pods-PocketMoney.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,8 +112,8 @@
 				65EDB0191F8D9D5900BC33DC /* Core Data */,
 				65C8B7F61F8992E700AB1D2F /* AppDelegate.swift */,
 				65C8B7FA1F8992E700AB1D2F /* Main.storyboard */,
-				65C8B8001F8992E700AB1D2F /* Assets.xcassets */,
 				65C8B8021F8992E700AB1D2F /* LaunchScreen.storyboard */,
+				65C8B8001F8992E700AB1D2F /* Assets.xcassets */,
 				65C8B8051F8992E700AB1D2F /* Info.plist */,
 				65E364D01FBD532500CECE5F /* Bridging-Header.h */,
 			);
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */,
+				65EC11671FCB7C40004C408C /* AddItemController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				6503CBB21FBAA53900256819 /* GoalItemBridge+CoreDataClass.swift in Sources */,
 				6503CBB31FBAA53900256819 /* GoalItemBridge+CoreDataProperties.swift in Sources */,
 				6503CBAF1FBAA53900256819 /* Goal+CoreDataProperties.swift in Sources */,
+				65EC11681FCB7C41004C408C /* AddItemController.swift in Sources */,
 				65514E481F8AF81500F46342 /* PersistenceService.swift in Sources */,
 				65C8B7FF1F8992E700AB1D2F /* PocketMoney.xcdatamodeld in Sources */,
 				6503CBB11FBAA53900256819 /* Item+CoreDataProperties.swift in Sources */,
