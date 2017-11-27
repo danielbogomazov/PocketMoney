@@ -94,7 +94,6 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func populateItemArray() {
@@ -108,15 +107,15 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     }
     
     @IBAction func addItemButtonClicked(_ sender: UIButton) {
-        let popoverController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddItemController")
+        let popoverController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddItemController") as! AddItemController
         popoverController.modalPresentationStyle = .popover
         popoverController.view.backgroundColor = UIColor.white
-        popoverController.popoverPresentationController?.permittedArrowDirections = .up
-        popoverController.popoverPresentationController?.delegate = self
-        popoverController.popoverPresentationController?.sourceView = sender as UIView
-        popoverController.popoverPresentationController?.sourceRect = sender.bounds
-        
-        popoverController.preferredContentSize = CGSize(width: 300, height: 160)
+        popoverController.popoverPresentationController!.permittedArrowDirections = .up
+        popoverController.popoverPresentationController!.delegate = self
+        popoverController.popoverPresentationController!.sourceView = sender as UIView
+        popoverController.popoverPresentationController!.sourceRect = sender.bounds
+        popoverController.preferredContentSize = CGSize(width: 300, height: 150)
+        popoverController.sourceController = self
         
         present(popoverController, animated: true, completion: nil)
     }
@@ -224,7 +223,6 @@ extension StatisticsController: UITextFieldDelegate {
             }
             
             detailsView.goal.goalAmount = Double(textField.text!)!
-            progressView.initProgressView()
             progressView.initProgressView()
             
         } else if textField == detailsView.endDateTextField {

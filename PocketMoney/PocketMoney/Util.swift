@@ -214,6 +214,20 @@ open class Util {
         return false
     }
     
+    open class func checkIfInteger(_ string: String, newString: String) -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "^\\d*?$", options: [])
+            
+            let result = regex.firstMatch(in: newString, options: [], range: NSRange(location: 0, length: newString.count))
+            return (result != nil)
+            
+        } catch let error as NSError {
+            print(error)
+        }
+        
+        return false
+    }
+    
     open class func doubleToDecimalString(_ double: Double) -> String {
         return String(format: "%.2f", double)
     }

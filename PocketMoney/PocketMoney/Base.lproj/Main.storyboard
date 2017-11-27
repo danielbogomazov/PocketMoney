@@ -200,6 +200,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WZG-Db-tMN" id="iAi-85-8G3"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Price ($)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="awN-df-icg">
                                 <rect key="frame" x="16" y="46" width="268" height="30"/>
@@ -209,6 +212,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WZG-Db-tMN" id="vj5-ke-5vf"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Quantity" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XsU-s8-pXW">
                                 <rect key="frame" x="16" y="84" width="268" height="30"/>
@@ -218,6 +224,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WZG-Db-tMN" id="kX2-pj-o4k"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbU-Jm-Bzv">
                                 <rect key="frame" x="133" y="122" width="34" height="30"/>
@@ -227,6 +236,9 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.32941418890000002" green="0.32940736409999999" blue="0.32941198350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="SaveButtonPressed:" destination="WZG-Db-tMN" eventType="touchUpInside" id="aS7-I8-jG5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -245,6 +257,12 @@
                         <viewLayoutGuide key="safeArea" id="spq-8D-omW"/>
                     </view>
                     <size key="freeformSize" width="300" height="160"/>
+                    <connections>
+                        <outlet property="itemNameTextField" destination="cDV-8I-CDR" id="rSB-3k-N33"/>
+                        <outlet property="itemPriceTextField" destination="awN-df-icg" id="hOU-vV-KHn"/>
+                        <outlet property="itemQuantityTextField" destination="XsU-s8-pXW" id="D4E-us-U3c"/>
+                        <outlet property="saveButton" destination="xbU-Jm-Bzv" id="Add-rb-Mbn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5c-YP-Zg7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
