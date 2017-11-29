@@ -77,7 +77,6 @@ class ProgressView: UIView {
         circleLayer = CAShapeLayer()
         circleLayer.path = path.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
-        circleLayer.strokeColor = Util.Constant.TINT_COLOR.cgColor
         circleLayer.lineWidth = lineWidth
         
         layer.addSublayer(circleLayer)
@@ -86,8 +85,15 @@ class ProgressView: UIView {
         
         percentageLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height / 2 - 20, width: frame.size.width, height: 40))
         percentageLabel.textAlignment = .center
-        percentageLabel.textColor = Util.Constant.TINT_COLOR
         percentageLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
+        
+        if Int(goal.amountSpent / goal.goalAmount * 100) >= 100 {
+            circleLayer.strokeColor = UIColor.red.cgColor
+            percentageLabel.textColor = UIColor.red
+        } else {
+            circleLayer.strokeColor = Util.Constant.TINT_COLOR.cgColor
+            percentageLabel.textColor = Util.Constant.TINT_COLOR
+        }
         
         addSubview(percentageLabel)
         
