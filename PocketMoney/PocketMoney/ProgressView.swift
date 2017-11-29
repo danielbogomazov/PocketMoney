@@ -81,8 +81,6 @@ class ProgressView: UIView {
         
         layer.addSublayer(circleLayer)
         
-        animateProgressView()
-        
         percentageLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height / 2 - 20, width: frame.size.width, height: 40))
         percentageLabel.textAlignment = .center
         percentageLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
@@ -93,12 +91,14 @@ class ProgressView: UIView {
         } else {
             circleLayer.strokeColor = Util.Constant.TINT_COLOR.cgColor
             percentageLabel.textColor = Util.Constant.TINT_COLOR
+            animateProgressView()
         }
         
         addSubview(percentageLabel)
         
         timeInterval = seconds / (goal.amountSpent / goal.goalAmount * 100)
         percentageLabel.text = "\(percentage)%"
+        
         
         runTimer()
     }
@@ -127,7 +127,7 @@ class ProgressView: UIView {
     func runTimer() {
         if goal.goalAmount <= 0.0 {
             percentageLabel.text = ""
-        } else if goal.amountSpent / goal.goalAmount * 100 >= 750 {
+        } else if goal.amountSpent / goal.goalAmount * 100 >= 100 {
             percentageLabel.text = "\(Int(goal.amountSpent / goal.goalAmount * 100))%"
         } else {
             timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(ProgressView.updateTimer)), userInfo: nil, repeats: true)
