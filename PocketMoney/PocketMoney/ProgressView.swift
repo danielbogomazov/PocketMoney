@@ -24,6 +24,10 @@ class ProgressView: UIView {
     
     var circleLayer: CAShapeLayer!
     let animationDuration: TimeInterval = 2
+    var lineWidth: CGFloat = 12.0
+    var arcCenter: CGPoint!
+    var radius: CGFloat!
+    var startAngle: CGFloat = CGFloat(270).degreesToRadians
     
     var percentageLabel: UILabel = UILabel()
     var percentage: Int = 0
@@ -55,10 +59,8 @@ class ProgressView: UIView {
         seconds = 2
         timeInterval = 0
         
-        
-        let lineWidth: CGFloat = 12.0
-        let arcCenter = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-        let radius: CGFloat = (frame.size.height - lineWidth) / 2
+        arcCenter = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        radius = (frame.size.height - lineWidth) / 2
         
         // Inner circle
         var path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: CGFloat(0).degreesToRadians, endAngle: CGFloat(360).degreesToRadians, clockwise: true)
@@ -72,29 +74,24 @@ class ProgressView: UIView {
         layer.addSublayer(innerCircleLayer)
 
         // Animated circle
-        path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: CGFloat(270).degreesToRadians, endAngle: endAngle(), clockwise: true)
+        path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle(), clockwise: true)
 
         circleLayer = CAShapeLayer()
         circleLayer.path = path.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
         circleLayer.lineWidth = lineWidth
-        
+        circleLayer.strokeColor = Util.Constant.TINT_COLOR.cgColor
+
         layer.addSublayer(circleLayer)
         
         percentageLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height / 2 - 20, width: frame.size.width, height: 40))
         percentageLabel.textAlignment = .center
         percentageLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
-        
-        if Int(goal.amountSpent / goal.goalAmount * 100) >= 100 {
-            circleLayer.strokeColor = UIColor.red.cgColor
-            percentageLabel.textColor = UIColor.red
-        } else {
-            circleLayer.strokeColor = Util.Constant.TINT_COLOR.cgColor
-            percentageLabel.textColor = Util.Constant.TINT_COLOR
-            animateProgressView()
-        }
-        
+        percentageLabel.textColor = Util.Constant.TINT_COLOR
+
         addSubview(percentageLabel)
+
+        animateProgressView(layer: circleLayer)
         
         timeInterval = seconds / (goal.amountSpent / goal.goalAmount * 100)
         percentageLabel.text = "\(percentage)%"
@@ -103,25 +100,39 @@ class ProgressView: UIView {
         runTimer()
     }
     
-    func animateProgressView() {
+    func updateProgressView() {
+        let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle(), clockwise: true)
+        
+        let updateLayer = CAShapeLayer()
+        updateLayer.path = path.cgPath
+        updateLayer.fillColor = UIColor.clear.cgColor
+        updateLayer.lineWidth = lineWidth
+        updateLayer.strokeColor = Util.Constant.TINT_COLOR.cgColor
+        animateProgressView(layer: updateLayer)
+        
+        layer.addSublayer(updateLayer)
+    }
+    
+    func animateProgressView(layer: CAShapeLayer) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = animationDuration
         animation.fromValue = 0
         animation.toValue = 1
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        circleLayer.add(animation, forKey: "animateCircle")
+        layer.add(animation, forKey: "animateCircle")
     }
         
     func endAngle() -> CGFloat {
         let percentage = goal.amountSpent / goal.goalAmount
         if percentage >= 1 {
-            return CGFloat(630).degreesToRadians
+            startAngle = CGFloat(630).degreesToRadians
         } else if percentage < 0 {
-            return CGFloat(270).degreesToRadians
+            startAngle = CGFloat(270).degreesToRadians
         } else {
             let percentage = 360 * percentage
-            return CGFloat(percentage + 270).degreesToRadians
+            startAngle = CGFloat(percentage + 270).degreesToRadians
         }
+        return startAngle
     }
     
     func runTimer() {
