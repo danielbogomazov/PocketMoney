@@ -36,6 +36,7 @@ class AddItemController: UIViewController {
         sourceController.progressView.updateProgressView()
         sourceController.populateItemArray()
         PersistenceService.saveContext()
+        dismiss(animated: true, completion: nil)
     }
 }
 

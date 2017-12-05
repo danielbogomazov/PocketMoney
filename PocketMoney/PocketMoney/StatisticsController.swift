@@ -11,7 +11,6 @@ import CoreData
 
 class StatisticsController: UIViewController, UIPopoverPresentationControllerDelegate, ProgressViewDelegate, DetailsViewDelegate {
     
-    
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet weak var progressScrollView: UIScrollView!
 
