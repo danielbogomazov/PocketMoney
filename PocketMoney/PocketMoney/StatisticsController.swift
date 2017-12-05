@@ -49,10 +49,10 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
         
         if goal!.goalItemBridges?.count == 0 {
             print("NEW ITEMS")
-            items.append(Util.createItem(name: "Item One", price: 10.00))
-            items.append(Util.createItem(name: "Item Two", price: 1.0))
-            items.append(Util.createItem(name: "Item Three", price: 31.22))
-            items.append(Util.createItem(name: "Items Four", price: 12.21))
+            items.append(Util.createItem(name: "1", price: 10.00))
+            items.append(Util.createItem(name: "2", price: 1.0))
+            items.append(Util.createItem(name: "3", price: 31.22))
+            items.append(Util.createItem(name: "4", price: 12.21))
             
             Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[0].id)!, quantity: 2)
             Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)

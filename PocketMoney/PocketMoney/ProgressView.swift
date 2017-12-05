@@ -96,7 +96,6 @@ class ProgressView: UIView {
         timeInterval = seconds / (goal.amountSpent / goal.goalAmount * 100)
         percentageLabel.text = "\(percentage)%"
         
-        
         runTimer()
     }
     
@@ -111,6 +110,14 @@ class ProgressView: UIView {
         animateProgressView(layer: updateLayer)
         
         layer.addSublayer(updateLayer)
+        
+        timer.invalidate()
+        seconds = 2
+
+        timeInterval = seconds / (goal.amountSpent - Double(percentage))
+        
+        runTimer()
+
     }
     
     func animateProgressView(layer: CAShapeLayer) {
