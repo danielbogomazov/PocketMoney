@@ -145,7 +145,7 @@ class ProgressView: UIView {
     func runTimer() {
         if goal.goalAmount <= 0.0 {
             percentageLabel.text = ""
-        } else if goal.amountSpent / goal.goalAmount * 100 >= 100 {
+        } else if goal.amountSpent / goal.goalAmount * 100 >= 101 {
             percentageLabel.text = "\(Int(goal.amountSpent / goal.goalAmount * 100))%"
         } else {
             timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: (#selector(ProgressView.updateTimer)), userInfo: nil, repeats: true)
