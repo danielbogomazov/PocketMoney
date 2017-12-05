@@ -99,8 +99,10 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     func populateItemArray() {
         if let bridges: [GoalItemBridge] = goal?.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
-                print(bridge.item)
-                itemArray.append(bridge.item)
+                print(bridge.item.name)
+                if !itemArray.contains(bridge.item) {
+                    itemArray.append(bridge.item)
+                }
             }
         }
         itemsTableView.reloadData()
