@@ -95,6 +95,10 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
         super.didReceiveMemoryWarning()
     }
     
+    func sortItemArray() {
+        
+    }
+    
     func populateItemArray() {
         if let bridges: [GoalItemBridge] = goal?.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
@@ -246,7 +250,7 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = itemArray[indexPath.row].name
         cell.textLabel?.textColor = Util.Constant.TINT_COLOR
         
-        cell.detailTextLabel?.text = "$ \(itemArray[indexPath.row].price) each"
+        cell.detailTextLabel?.text = "$ \(Util.doubleToDecimalString(itemArray[indexPath.row].price)) each"
         cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
 
         return cell
