@@ -14,7 +14,7 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet weak var progressScrollView: UIScrollView!
 
-    var itemArray: [Item] = []
+    var itemArray: [GoalItemBridge] = []
     var viewArray: [UIView] = []
     
     var progressView: ProgressView!
@@ -103,8 +103,8 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
         if let bridges: [GoalItemBridge] = goal?.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
                 print(bridge.item.name)
-                if !itemArray.contains(bridge.item) {
-                    itemArray.append(bridge.item)
+                if !itemArray.contains(bridge) {
+                    itemArray.append(bridge)
                 }
             }
         }
@@ -247,10 +247,10 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
         
-        cell.textLabel?.text = itemArray[indexPath.row].name
+        cell.textLabel?.text = itemArray[indexPath.row].item.name
         cell.textLabel?.textColor = Util.Constant.TINT_COLOR
         
-        cell.detailTextLabel?.text = "$ \(Util.doubleToDecimalString(itemArray[indexPath.row].price)) each"
+        cell.detailTextLabel?.text = "$ \(Util.doubleToDecimalString(itemArray[indexPath.row].item.price)) each"
         cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
 
         return cell
