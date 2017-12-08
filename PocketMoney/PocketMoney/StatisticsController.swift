@@ -247,10 +247,17 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
         
-        cell.textLabel?.text = itemArray[indexPath.row].item.name
         cell.textLabel?.textColor = Util.Constant.TINT_COLOR
         
-        cell.detailTextLabel?.text = "$ \(Util.doubleToDecimalString(itemArray[indexPath.row].item.price)) each"
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Util.Constant.TINT_COLOR.withAlphaComponent(0.6)]
+        let str = NSMutableAttributedString(string: "\(itemArray[indexPath.row].itemQuantity)" + "x  ", attributes: attributes)
+        str.append(NSAttributedString(string: itemArray[indexPath.row].item.name))
+        
+        cell.textLabel?.attributedText = str
+        
+        let totalPrice = Util.doubleToDecimalString(Double(itemArray[indexPath.row].itemQuantity) * itemArray[indexPath.row].item.price)
+        
+        cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(itemArray[indexPath.row].item.price)) each ($\(totalPrice) total)"
         cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
 
         return cell
