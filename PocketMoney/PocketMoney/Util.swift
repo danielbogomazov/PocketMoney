@@ -101,6 +101,19 @@ open class Util {
         }
     }
     
+    open class func loadAllOngoingGoals() -> [Goal] {
+        let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "isOngoing == %@", true as CVarArg)
+        
+        do {
+            let goals = try PersistenceService.context.fetch(fetchRequest)
+            return goals
+        } catch {
+            // TODO
+            return []
+        }
+    }
+    
     open class func loadGoal(uuid: UUID) -> Goal? {
         let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", uuid as CVarArg)

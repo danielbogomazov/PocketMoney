@@ -24,6 +24,7 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     var startDateCalendar: CalendarView?
     var endDateCalendar: CalendarView?
     
+    var ongoingGoals: [Goal] = []
     var goal: Goal?
     var items: [Item] = []
     
@@ -31,41 +32,81 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
         
         // MARK:- TEMPORARY - DELETE THIS AFTER TESTING
         
-        Util.deleteItems()
+//        Util.deleteItems()
+//        Util.deleteGoals()
+        
+//        goal = Util.loadAllItems() != [] ? Util.loadAllGoals()[0] : nil
+//        items = Util.loadAllItems()
+        
+//        if goal != nil {
+//            print("GOAL -- LOADED")
+//        } else {
+//            goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil)
+//            print("NEW GOAL")
+//        }
+//
+//        if goal!.goalItemBridges?.count == 0 {
+//            print("NEW ITEMS")
+//            items.append(Util.createItem(name: "1", price: 10.00))
+//            items.append(Util.createItem(name: "2", price: 1.0))
+//            items.append(Util.createItem(name: "3", price: 31.22))
+//            items.append(Util.createItem(name: "4", price: 12.21))
+//
+//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[0].id)!, quantity: 2)
+//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
+//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[2].id)!, quantity: 1)
+//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[3].id)!, quantity: 1)
+//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
+//        } else {
+//            print ("ITEMS -- LOADED")
+//        }
+        
+
+        super.viewDidLoad()
+        
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         Util.deleteGoals()
         
-        goal = Util.loadAllItems() != [] ? Util.loadAllGoals()[0] : nil
-        items = Util.loadAllItems()
-        
-        if goal != nil {
-            print("GOAL -- LOADED")
+        ongoingGoals = Util.loadAllOngoingGoals()
+        if ongoingGoals.count == 0 {
+            let alert = UIAlertController(title: "Add New Goal?", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Later", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                let newGoal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil)
+                self.ongoingGoals.append(newGoal)
+                self.goal = newGoal
+                
+                self.items.append(Util.createItem(name: "Coffee", price: 1.0))
+                self.items.append(Util.createItem(name: "Lamp", price: 32.25))
+                self.items.append(Util.createItem(name: "Gas", price: 45.0))
+                
+                Util.addItemToGoal(self.goal!, item: Util.loadItem(uuid: self.items[0].id)!, quantity: 4)
+                Util.addItemToGoal(self.goal!, item: Util.loadItem(uuid: self.items[1].id)!, quantity: 1)
+                Util.addItemToGoal(self.goal!, item: Util.loadItem(uuid: self.items[2].id)!, quantity: 1)
+                
+                
+                self.initStatisticsController()
+            }))
+            present(alert, animated: true, completion: nil)
         } else {
-            goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil)
-            print("NEW GOAL")
+            goal = ongoingGoals[0]
+            initStatisticsController()
         }
-        
-        if goal!.goalItemBridges?.count == 0 {
-            print("NEW ITEMS")
-            items.append(Util.createItem(name: "1", price: 10.00))
-            items.append(Util.createItem(name: "2", price: 1.0))
-            items.append(Util.createItem(name: "3", price: 31.22))
-            items.append(Util.createItem(name: "4", price: 12.21))
-            
-            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[0].id)!, quantity: 2)
-            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
-            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[2].id)!, quantity: 1)
-            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[3].id)!, quantity: 1)
-            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
-        } else {
-            print ("ITEMS -- LOADED")
-        }
-        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func initStatisticsController() {
         populateItemArray()
         
         hideKeyboardOnTap()
         
         progressScrollView.frame.size.width = view.frame.width
-
+        
         progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: progressScrollView.frame.width, height: progressScrollView.frame.height))
         progressView.delegate = self
         
@@ -83,13 +124,8 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
             progressScrollView.contentSize.width = progressScrollView.frame.width * CGFloat(i + 1)
             progressScrollView.addSubview(currentView)
         }
-
-        super.viewDidLoad()
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        
     }
     
     func sortItemArray() {
