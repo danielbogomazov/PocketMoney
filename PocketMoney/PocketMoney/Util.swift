@@ -27,11 +27,12 @@ open class Util {
             let goals = try PersistenceService.context.fetch(fetchRequest)
             return "Goal \(goals.count)"
         } catch {
-            return "Goal 1"
+            print("Error fetching goals")
+            return "New Goal"
         }
     }
     
-    open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date, goalDescription: String?) -> Goal {
+    open class func createGoal(goalAmount: Double, startDate: Date, endDate: Date, isOngoing: Bool, goalDescription: String?) -> Goal {
         let newGoal = Goal(context: PersistenceService.context)
         newGoal.id = UUID()
         newGoal.goalItemBridges = nil
@@ -39,6 +40,7 @@ open class Util {
         newGoal.goalAmount = goalAmount
         newGoal.startDate = startDate
         newGoal.endDate = endDate
+        newGoal.isOngoing = isOngoing
         
         if goalDescription != nil {
             newGoal.goalDescription = goalDescription!
@@ -101,19 +103,11 @@ open class Util {
     
     open class func loadGoal(uuid: UUID) -> Goal? {
         let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", uuid as CVarArg)
         
         do {
-            let goals = try PersistenceService.context.fetch(fetchRequest)
-            if goals.isEmpty {
-                return nil
-            } else {
-                for goal in goals {
-                    if goal.id == uuid {
-                        return goal
-                    }
-                }
-                return nil
-            }
+            let goal = try PersistenceService.context.fetch(fetchRequest)
+            return goal.count > 0 ? goal[0] : nil
         } catch {
             // TODO
             return nil
@@ -137,19 +131,10 @@ open class Util {
     
     open class func loadItem(uuid: UUID) -> Item? {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        
+        fetchRequest.predicate = NSPredicate(format: "id == %@", uuid as CVarArg)
         do {
-            let items = try PersistenceService.context.fetch(fetchRequest)
-            if items.isEmpty {
-                return nil
-            } else {
-                for item in items {
-                    if item.id == uuid {
-                        return item
-                    }
-                }
-                return nil
-            }
+            let item = try PersistenceService.context.fetch(fetchRequest)
+            return item.count > 0 ? item[0] : nil
         } catch {
             // TODO
             return nil

@@ -39,11 +39,9 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
         
         if goal != nil {
             print("GOAL -- LOADED")
-            print(goal!)
         } else {
-            goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), goalDescription: nil)
+            goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil)
             print("NEW GOAL")
-            print(goal!)
         }
         
         if goal!.goalItemBridges?.count == 0 {
@@ -60,7 +58,6 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
             Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
         } else {
             print ("ITEMS -- LOADED")
-            print(items)
         }
         
         populateItemArray()
@@ -102,7 +99,6 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     func populateItemArray() {
         if let bridges: [GoalItemBridge] = goal?.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
-                print(bridge.item.name)
                 if !itemArray.contains(bridge) {
                     itemArray.append(bridge)
                 }
