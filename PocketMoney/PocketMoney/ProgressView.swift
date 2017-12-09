@@ -37,12 +37,10 @@ class ProgressView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        initProgressView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        initProgressView()
     }
     
     func initProgressView() {
@@ -74,6 +72,7 @@ class ProgressView: UIView {
         layer.addSublayer(innerCircleLayer)
 
         // Animated circle
+        startAngle = CGFloat(270).degreesToRadians
         path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle(), clockwise: true)
 
         circleLayer = CAShapeLayer()

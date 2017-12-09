@@ -67,9 +67,9 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        Util.deleteGoals()
-        
+
         ongoingGoals = Util.loadAllOngoingGoals()
+        
         if ongoingGoals.count == 0 {
             let alert = UIAlertController(title: "Add New Goal?", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Later", style: .cancel, handler: nil))
@@ -124,8 +124,6 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
             progressScrollView.contentSize.width = progressScrollView.frame.width * CGFloat(i + 1)
             progressScrollView.addSubview(currentView)
         }
-        
-        
     }
     
     func sortItemArray() {
