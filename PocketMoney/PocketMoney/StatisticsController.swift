@@ -105,7 +105,7 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
                 }
             }
         }
-        bridgeArray.sort(by: { $0.item.name < $1.item.name })
+        bridgeArray.sort(by: { $0.item.name.lowercased() < $1.item.name.lowercased() })
         itemsTableView.reloadData()
     }
     
