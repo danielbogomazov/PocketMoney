@@ -29,7 +29,7 @@ class AddItemController: UIViewController {
     }
     
     @IBAction func SaveButtonPressed(_ sender: UIButton) {
-        let newItem = Util.createItem(name: itemNameTextField.text!, price: Double(itemPriceTextField.text!)!)
+        let newItem = Util.createItem(name: itemNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines), price: Double(itemPriceTextField.text!)!)
         sourceController.items.append(newItem)
         Util.addItemToGoal(sourceController.goal!, item: newItem, quantity: Int16(itemQuantityTextField.text!)!)
         sourceController.detailsView.amountSpentTextField.text = "\(sourceController.goal!.amountSpent)"
