@@ -13,9 +13,6 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet weak var progressScrollView: UIScrollView!
-
-    var itemArray: [GoalItemBridge] = []
-    var viewArray: [UIView] = []
     
     var progressView: ProgressView!
     var detailsView: DetailsView!
@@ -24,46 +21,20 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     var startDateCalendar: CalendarView?
     var endDateCalendar: CalendarView?
     
+    // db variables
     var ongoingGoals: [Goal] = []
-    var goal: Goal?
     var items: [Item] = []
+
+    // Local-use variables
+    var goal: Goal?
+    var bridgeArray: [GoalItemBridge] = []
+    var viewArray: [UIView] = []
     
     override func viewDidLoad() {
         
-        // MARK:- TEMPORARY - DELETE THIS AFTER TESTING
-        
-//        Util.deleteItems()
-//        Util.deleteGoals()
-        
-//        goal = Util.loadAllItems() != [] ? Util.loadAllGoals()[0] : nil
-//        items = Util.loadAllItems()
-        
-//        if goal != nil {
-//            print("GOAL -- LOADED")
-//        } else {
-//            goal = Util.createGoal(goalAmount: 100.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil)
-//            print("NEW GOAL")
-//        }
-//
-//        if goal!.goalItemBridges?.count == 0 {
-//            print("NEW ITEMS")
-//            items.append(Util.createItem(name: "1", price: 10.00))
-//            items.append(Util.createItem(name: "2", price: 1.0))
-//            items.append(Util.createItem(name: "3", price: 31.22))
-//            items.append(Util.createItem(name: "4", price: 12.21))
-//
-//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[0].id)!, quantity: 2)
-//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
-//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[2].id)!, quantity: 1)
-//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[3].id)!, quantity: 1)
-//            Util.addItemToGoal(goal!, item: Util.loadItem(uuid: items[1].id)!, quantity: 1)
-//        } else {
-//            print ("ITEMS -- LOADED")
-//        }
-        
+        Util.deleteGoals()
 
         super.viewDidLoad()
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -101,7 +72,7 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     }
     
     func initStatisticsController() {
-        populateItemArray()
+        populateBridgeArray()
         
         hideKeyboardOnTap()
         
@@ -126,18 +97,15 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
         }
     }
     
-    func sortItemArray() {
-        
-    }
-    
-    func populateItemArray() {
+    func populateBridgeArray() {
         if let bridges: [GoalItemBridge] = goal?.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
-                if !itemArray.contains(bridge) {
-                    itemArray.append(bridge)
+                if !bridgeArray.contains(bridge) {
+                    bridgeArray.append(bridge)
                 }
             }
         }
+        bridgeArray.sort(by: { $0.item.name < $1.item.name })
         itemsTableView.reloadData()
     }
     
@@ -280,19 +248,18 @@ extension StatisticsController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.textColor = Util.Constant.TINT_COLOR
         
         let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Util.Constant.TINT_COLOR.withAlphaComponent(0.6)]
-        let str = NSMutableAttributedString(string: "\(itemArray[indexPath.row].itemQuantity)" + "x  ", attributes: attributes)
-        str.append(NSAttributedString(string: itemArray[indexPath.row].item.name))
+        let str = NSMutableAttributedString(string: "\(bridgeArray[indexPath.row].itemQuantity)" + "x  ", attributes: attributes)
+        str.append(NSAttributedString(string: bridgeArray[indexPath.row].item.name))
         
         cell.textLabel?.attributedText = str
         
-        let totalPrice = Util.doubleToDecimalString(Double(itemArray[indexPath.row].itemQuantity) * itemArray[indexPath.row].item.price)
+        let totalPrice = Util.doubleToDecimalString(Double(bridgeArray[indexPath.row].itemQuantity) * bridgeArray[indexPath.row].item.price)
         
-        cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(itemArray[indexPath.row].item.price)) each ($\(totalPrice) total)"
+        cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(bridgeArray[indexPath.row].item.price)) each ($\(totalPrice) total)"
         cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
 
         return cell
     }
-    
 }
 
 extension StatisticsController: CalendarDelegate {

@@ -34,7 +34,7 @@ class AddItemController: UIViewController {
         Util.addItemToGoal(sourceController.goal!, item: newItem, quantity: Int16(itemQuantityTextField.text!)!)
         sourceController.detailsView.amountSpentTextField.text = "\(sourceController.goal!.amountSpent)"
         sourceController.progressView.updateProgressView()
-        sourceController.populateItemArray()
+        sourceController.populateBridgeArray()
         PersistenceService.saveContext()
         dismiss(animated: true, completion: nil)
     }
