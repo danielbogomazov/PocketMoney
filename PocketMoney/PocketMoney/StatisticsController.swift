@@ -38,7 +38,7 @@ class StatisticsController: UIViewController, UIPopoverPresentationControllerDel
     }
 
     override func viewDidAppear(_ animated: Bool) {
-view.backgroundColor = Util.Color.BLACK
+
         ongoingGoals = Util.loadAllOngoingGoals()
         
         if ongoingGoals.count == 0 {

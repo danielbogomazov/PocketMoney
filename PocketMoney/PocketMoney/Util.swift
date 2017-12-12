@@ -19,11 +19,8 @@ open class Util {
     }
     
     struct Color {
-        static let RED = UIColor(red: 140/255, green: 43/255, blue: 69/255, alpha: 1)
-        static let BLACK = UIColor(red: 46/255, green: 52/255, blue: 64/255, alpha: 1)
-        static let GRAY = UIColor(red: 155/255, green: 171/255, blue: 191/255, alpha: 1)
-        static let PEACH = UIColor(red: 242/255, green: 196/255, blue: 179/255, alpha: 1)
-        static let SAND = UIColor(red: 242/255, green: 224/255, blue: 220/255, alpha: 1)
+        static let GREEN = UIColor(red: 76/255, green: 175/255, blue: 80/255, alpha: 1)
+        static let CYAN = UIColor(red: 0/255, green: 188/255, blue: 212/255, alpha: 1)
     }
     
     // MARK:- Core Data functions
