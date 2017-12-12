@@ -19,7 +19,6 @@ class GoalsController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -40,9 +39,39 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.textColor = Util.Color.SAND
+            headerTitle.backgroundView?.backgroundColor = Util.Color.RED
+        }
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GoalCell") as! GoalCell
+        cell.titleLabel.text = "AAAA"
+        cell.titleLabel.textColor = Util.Color.SAND
+        cell.infoLabel.text = "AAA"
+        cell.infoLabel.textColor = Util.Color.PEACH
+        return cell
+    }
+
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell: GoalCell = tableView.cellForRow(at: indexPath)! as! GoalCell
+        selectedCell.contentView.backgroundColor = Util.Color.GRAY
+        selectedCell.titleLabel.textColor = Util.Color.BLACK
+        selectedCell.infoLabel.textColor = Util.Color.BLACK
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let selectedCell: GoalCell = tableView.cellForRow(at: indexPath)! as! GoalCell
+        selectedCell.contentView.backgroundColor = Util.Color.BLACK
+        selectedCell.titleLabel.textColor = Util.Color.SAND
+        selectedCell.infoLabel.textColor = Util.Color.PEACH
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -54,26 +83,9 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let headerTitle = view as? UITableViewHeaderFooterView {
-            headerTitle.textLabel?.textColor = Util.Color.SAND
-            headerTitle.backgroundView?.backgroundColor = Util.Color.RED
-        }
-    }
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GoalCell") as! GoalCell
-        cell.titleLabel.text = "AAAA"
-        cell.titleLabel.textColor = Util.Color.SAND
-        cell.infoLabel.text = "AAA"
-        cell.infoLabel.textColor = Util.Color.PEACH
-        return cell
-    }
     
 }
 
