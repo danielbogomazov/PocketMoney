@@ -11,12 +11,19 @@ import Foundation
 import CoreData
 
 open class Util {
-    
+
     struct Constant {
+        static let TINT_COLOR = UIColor.black
         static let DEFUALT_MIN_DATE = stringToDate("01-01-1900")
         static let DEFAULT_MAX_DATE = stringToDate("12-31-2100")
-        
-        static let TINT_COLOR = UIColor(red: 84/255, green: 84/255, blue: 84/255, alpha: 1.0)
+    }
+    
+    struct Color {
+        static let RED = UIColor(red: 140/255, green: 43/255, blue: 69/255, alpha: 1)
+        static let BLACK = UIColor(red: 46/255, green: 52/255, blue: 64/255, alpha: 1)
+        static let GRAY = UIColor(red: 155/255, green: 171/255, blue: 191/255, alpha: 1)
+        static let PEACH = UIColor(red: 242/255, green: 196/255, blue: 179/255, alpha: 1)
+        static let SAND = UIColor(red: 242/255, green: 224/255, blue: 220/255, alpha: 1)
     }
     
     // MARK:- Core Data functions

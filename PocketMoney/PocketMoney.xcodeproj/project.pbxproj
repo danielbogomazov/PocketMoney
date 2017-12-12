@@ -25,6 +25,7 @@
 		65C8B8041F8992E700AB1D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B8021F8992E700AB1D2F /* LaunchScreen.storyboard */; };
 		65D281F71F92EDD800A7FCED /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D281F61F92EDD800A7FCED /* Util.swift */; };
 		65E364CF1FBD51FA00CECE5F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E364CE1FBD51FA00CECE5F /* CalendarView.swift */; };
+		65EA6E0B1FDF7DD400D5F8F1 /* GoalsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA6E0A1FDF7DD400D5F8F1 /* GoalsController.swift */; };
 		65EC11681FCB7C41004C408C /* AddItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC11671FCB7C40004C408C /* AddItemController.swift */; };
 		65EDB0241F8D9E7C00BC33DC /* StatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */; };
 		65F76ECA1FA3EF7D00B65440 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F76EC91FA3EF7D00B65440 /* DetailsView.swift */; };
@@ -52,6 +53,7 @@
 		65D281F61F92EDD800A7FCED /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		65E364CE1FBD51FA00CECE5F /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		65E364D01FBD532500CECE5F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		65EA6E0A1FDF7DD400D5F8F1 /* GoalsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsController.swift; sourceTree = "<group>"; };
 		65EC11671FCB7C40004C408C /* AddItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemController.swift; sourceTree = "<group>"; };
 		65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
 		65F76EC91FA3EF7D00B65440 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				65EDB0231F8D9E7C00BC33DC /* StatisticsController.swift */,
 				65EC11671FCB7C40004C408C /* AddItemController.swift */,
+				65EA6E0A1FDF7DD400D5F8F1 /* GoalsController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				A499D0E71F968CB6001AD5CB /* ProgressView.swift in Sources */,
 				659992141FA9791100E15715 /* UIViewControllerExtension.swift in Sources */,
 				65D281F71F92EDD800A7FCED /* Util.swift in Sources */,
+				65EA6E0B1FDF7DD400D5F8F1 /* GoalsController.swift in Sources */,
 				65C8B7F71F8992E700AB1D2F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,7 +476,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = GQ4V848MKD;
+				DEVELOPMENT_TEAM = 2XBPW4DKBC;
 				INFOPLIST_FILE = PocketMoney/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -491,7 +495,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = GQ4V848MKD;
+				DEVELOPMENT_TEAM = 2XBPW4DKBC;
 				INFOPLIST_FILE = PocketMoney/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
