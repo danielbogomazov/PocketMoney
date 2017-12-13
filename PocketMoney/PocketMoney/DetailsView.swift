@@ -14,12 +14,6 @@ protocol DetailsViewDelegate {
 }
 
 class DetailsView: UIView {
-    
-    var delegate: DetailsViewDelegate? = nil {
-        didSet {
-            initDetailsView()
-        }
-    }
         
     var goal: Goal!
     
@@ -49,13 +43,9 @@ class DetailsView: UIView {
         super.init(coder: aDecoder)
     }
     
-    func initDetailsView() {
+    func initDetailsView(for goal: Goal) {
         
-        goal = (delegate as! StatisticsController).goal
-        
-        if goal == nil {
-            return
-        }
+        self.goal = goal
 
         setupLabels()
         setupTextFields()
@@ -108,7 +98,7 @@ class DetailsView: UIView {
         goalDescriptionTextField.textColor = Util.Constant.TINT_COLOR
         goalDescriptionTextField.text = goal.goalDescription
         goalDescriptionTextField.isUserInteractionEnabled = true
-        goalDescriptionTextField.delegate = (delegate as! UITextFieldDelegate)
+//        goalDescriptionTextField.delegate = (delegate as! UITextFieldDelegate)
         goalDescriptionTextField.addBorder()
         goalDescriptionTextField.addLeftMargin()
 
@@ -118,7 +108,7 @@ class DetailsView: UIView {
         goalAmountTextField.textColor = Util.Constant.TINT_COLOR
         goalAmountTextField.text = Util.doubleToDecimalString(goal.goalAmount)
         goalAmountTextField.isUserInteractionEnabled = true
-        goalAmountTextField.delegate = (delegate as! UITextFieldDelegate)
+//        goalAmountTextField.delegate = (delegate as! UITextFieldDelegate)
         goalAmountTextField.addBorder()
         goalAmountTextField.addLeftMargin()
 
@@ -128,7 +118,7 @@ class DetailsView: UIView {
         amountSpentTextField.textColor = Util.Constant.TINT_COLOR
         amountSpentTextField.text = "\(goal.amountSpent)"
         amountSpentTextField.isUserInteractionEnabled = false
-        amountSpentTextField.delegate = (delegate as! UITextFieldDelegate)
+//        amountSpentTextField.delegate = (delegate as! UITextFieldDelegate)
         amountSpentTextField.addBorder()
         amountSpentTextField.addLeftMargin()
 
@@ -138,7 +128,7 @@ class DetailsView: UIView {
         startDateTextField.textColor = Util.Constant.TINT_COLOR
         startDateTextField.text = Util.dateToString(goal.startDate)
         startDateTextField.isUserInteractionEnabled = false
-        startDateTextField.delegate = (delegate as! UITextFieldDelegate)
+//        startDateTextField.delegate = (delegate as! UITextFieldDelegate)
         startDateTextField.addBorder()
         startDateTextField.addLeftMargin()
 
@@ -148,7 +138,7 @@ class DetailsView: UIView {
         endDateTextField.textColor = Util.Constant.TINT_COLOR
         endDateTextField.text = Util.dateToString(goal.endDate)
         endDateTextField.isUserInteractionEnabled = true
-        endDateTextField.delegate = (delegate as! UITextFieldDelegate)
+//        endDateTextField.delegate = (delegate as! UITextFieldDelegate)
         endDateTextField.addBorder()
         endDateTextField.addLeftMargin()
 

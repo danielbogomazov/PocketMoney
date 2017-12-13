@@ -125,9 +125,9 @@
 		65D281F31F92E97900A7FCED /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A499D0E61F968CB6001AD5CB /* ProgressView.swift */,
 				65F76EC91FA3EF7D00B65440 /* DetailsView.swift */,
 				65E364CE1FBD51FA00CECE5F /* CalendarView.swift */,
+				A499D0E61F968CB6001AD5CB /* ProgressView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

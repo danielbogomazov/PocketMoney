@@ -37,6 +37,11 @@ class GoalsController: UIViewController {
             currentGoals.append(Util.createGoal(goalAmount: 200.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "et dolore"))
             currentGoals.append(Util.createGoal(goalAmount: 89.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
             currentGoals.append(Util.createGoal(goalAmount: 1000.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "consectetur adipiscing elit"))
+            
+            Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 1)
+            Util.addItemToGoal(currentGoals[2], item: Util.createItem(name: "Lamp", price: 222.0), quantity: 1)
+            Util.addItemToGoal(currentGoals[4], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 5)
+
         }
     }
 
@@ -60,6 +65,9 @@ class GoalsController: UIViewController {
 extension GoalsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,46 +84,48 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
             headerTitle.textLabel?.textColor = UIColor.white
-            headerTitle.backgroundView?.backgroundColor = Util.Color.GREEN
+            headerTitle.backgroundView?.backgroundColor = Util.Color.VIOLET
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GoalCell") as! GoalCell
-        let currGoal = currentGoals[indexPath.row]
+        let goal = currentGoals[indexPath.row]
+
+        var color: UIColor!
         
-        cell.titleLabel.text = currGoal.goalDescription
-        cell.titleLabel.textColor = Util.Color.CYAN
-        
-        cell.infoLabel.text = "$\(Util.doubleToDecimalString(currGoal.amountSpent)) spent of $\(Util.doubleToDecimalString(currGoal.goalAmount))"
-        cell.infoLabel.textColor = Util.Color.CYAN
-        cell.iconImageView.layer.cornerRadius = cell.iconImageView.frame.width / 2
-        
-        cell.iconImageView.layer.borderWidth = 1.0
-        cell.iconImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
-        
-        switch indexPath.row % 5 {
+        switch indexPath.row % 4 {
         case 0:
-            cell.iconImageView.image = #imageLiteral(resourceName: "icon1")
+             color = Util.Color.PINK
         case 1:
-            cell.iconImageView.image = #imageLiteral(resourceName: "icon2")
+            color = Util.Color.YELLOW
         case 2:
-            cell.iconImageView.image = #imageLiteral(resourceName: "icon3")
+            color = Util.Color.BLUE
         case 3:
-            cell.iconImageView.image = #imageLiteral(resourceName: "icon4")
-        case 4:
-            cell.iconImageView.image = #imageLiteral(resourceName: "icon5")
+            color = Util.Color.RED
         default:
-            fatalError("ERROR - Change switch in cellForRowAt to represent the correct number of icons available")
+            fatalError("Change switch to reflect number of color choices")
         }
+        
+        cell.colorView.backgroundColor = color
+        
+        cell.progressView.initProgressView(for: goal, color: color)
+
+        cell.titleLabel.text = goal.goalDescription
+        cell.titleLabel.textColor = Util.Color.RED
+        
+        cell.infoLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) / $\(Util.doubleToDecimalString(goal.goalAmount))"
+        cell.infoLabel.textColor = UIColor.lightGray
+        
+        
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Current Goals"
+            return "CURRENT"
         } else if section == 1 {
-            return "Archive"
+            return "ARCHIVE"
         }
         return nil
     }
@@ -128,7 +138,9 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
 
 class GoalCell: UITableViewCell {
     
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var progressView: ProgressView!
+    @IBOutlet weak var expiryLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     

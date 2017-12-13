@@ -12,9 +12,9 @@ extension UITextField {
     
     func addBorder() {
         if isUserInteractionEnabled {
-            layer.borderColor = Util.Color.GREEN.cgColor
+            layer.borderColor = Util.Color.RED.cgColor
         } else {
-            layer.borderColor = Util.Color.GREEN.withAlphaComponent(0.1).cgColor
+            layer.borderColor = Util.Color.RED.withAlphaComponent(0.1).cgColor
         }
         layer.borderWidth = 1.0
         layer.cornerRadius = 5.0
