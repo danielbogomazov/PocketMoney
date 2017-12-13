@@ -54,9 +54,30 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GoalCell") as! GoalCell
         cell.titleLabel.text = "AAAA"
-        cell.titleLabel.textColor = Util.Color.GREEN
+        cell.titleLabel.textColor = Util.Color.CYAN
+        
         cell.infoLabel.text = "AAA"
         cell.infoLabel.textColor = Util.Color.CYAN
+        cell.iconImageView.layer.cornerRadius = cell.iconImageView.frame.width / 2
+        
+        cell.iconImageView.layer.borderWidth = 1.0
+        cell.iconImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        
+        switch indexPath.row % 5 {
+        case 0:
+            cell.iconImageView.image = #imageLiteral(resourceName: "icon1")
+        case 1:
+            cell.iconImageView.image = #imageLiteral(resourceName: "icon2")
+        case 2:
+            cell.iconImageView.image = #imageLiteral(resourceName: "icon3")
+        case 3:
+            cell.iconImageView.image = #imageLiteral(resourceName: "icon4")
+        case 4:
+            cell.iconImageView.image = #imageLiteral(resourceName: "icon5")
+        default:
+            fatalError("ERROR - Change switch in cellForRowAt to represent the correct number of icons available")
+        }
+        
         return cell
     }
     
