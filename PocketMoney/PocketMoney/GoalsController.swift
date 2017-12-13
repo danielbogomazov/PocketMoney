@@ -9,12 +9,35 @@
 import UIKit
 
 class GoalsController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    var currentGoals: [Goal] = []
+    var hisrory: [Goal] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        Util.deleteGoals()
+        currentGoals = Util.loadAllOngoingGoals()
+        
+        //MARK:- PRODUCTION CODE -- REMOVE AFTER TESTING
+        if currentGoals.isEmpty {
+            currentGoals.append(Util.createGoal(goalAmount: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "Lorem ipsum dolor sit amet"))
+            currentGoals.append(Util.createGoal(goalAmount: 15.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
+            currentGoals.append(Util.createGoal(goalAmount: 133.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "sed do eiusmod"))
+            currentGoals.append(Util.createGoal(goalAmount: 12.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "tempor incididunt ut labore"))
+            currentGoals.append(Util.createGoal(goalAmount: 200.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "et dolore"))
+            currentGoals.append(Util.createGoal(goalAmount: 89.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
+            currentGoals.append(Util.createGoal(goalAmount: 1000.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "consectetur adipiscing elit"))
+            currentGoals.append(Util.createGoal(goalAmount: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "Lorem ipsum dolor sit amet"))
+            currentGoals.append(Util.createGoal(goalAmount: 15.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
+            currentGoals.append(Util.createGoal(goalAmount: 133.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "sed do eiusmod"))
+            currentGoals.append(Util.createGoal(goalAmount: 12.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "tempor incididunt ut labore"))
+            currentGoals.append(Util.createGoal(goalAmount: 200.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "et dolore"))
+            currentGoals.append(Util.createGoal(goalAmount: 89.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
+            currentGoals.append(Util.createGoal(goalAmount: 1000.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "consectetur adipiscing elit"))
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +66,12 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        if section == 0 {
+            return currentGoals.count
+        } else if section == 1 {
+            return hisrory.count
+        }
+        return 0
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
@@ -53,10 +81,12 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GoalCell") as! GoalCell
-        cell.titleLabel.text = "AAAA"
+        let currGoal = currentGoals[indexPath.row]
+        
+        cell.titleLabel.text = currGoal.goalDescription
         cell.titleLabel.textColor = Util.Color.CYAN
         
-        cell.infoLabel.text = "AAA"
+        cell.infoLabel.text = "$\(Util.doubleToDecimalString(currGoal.amountSpent)) spent of $\(Util.doubleToDecimalString(currGoal.goalAmount))"
         cell.infoLabel.textColor = Util.Color.CYAN
         cell.iconImageView.layer.cornerRadius = cell.iconImageView.frame.width / 2
         
