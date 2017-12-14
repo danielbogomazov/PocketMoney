@@ -151,7 +151,33 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQZ-M3-psH">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Goal Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O3r-u6-cnG">
+                                        <rect key="frame" x="8" y="16" width="359" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="02t-Hq-dHx"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="zoB-fT-teJ" id="cPc-Ba-uJU"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrH-hR-MI6">
+                                        <rect key="frame" x="8" y="64" width="42" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="O3r-u6-cnG" secondAttribute="trailing" constant="8" id="O07-3o-LwQ"/>
+                                    <constraint firstItem="O3r-u6-cnG" firstAttribute="leading" secondItem="qQZ-M3-psH" secondAttribute="leading" constant="8" id="oyA-O7-sH2"/>
+                                    <constraint firstItem="O3r-u6-cnG" firstAttribute="top" secondItem="qQZ-M3-psH" secondAttribute="top" constant="16" id="x4G-El-WV8"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <constraints>
@@ -162,6 +188,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RYQ-jC-8id"/>
                     </view>
+                    <connections>
+                        <outlet property="titleTextField" destination="O3r-u6-cnG" id="rUY-4R-vyX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWY-1F-jMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

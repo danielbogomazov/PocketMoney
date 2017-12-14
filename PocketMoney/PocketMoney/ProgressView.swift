@@ -70,7 +70,7 @@ class ProgressView: UIView {
         percentageLabel.textAlignment = .center
         percentageLabel.font = UIFont.boldSystemFont(ofSize: 8.0)
         percentageLabel.textColor = UIColor.black
-        percentageLabel.text = "\(Util.doubleToDecimalString(goal.amountSpent / goal.goalAmount * 100))%"
+        percentageLabel.text = "\(Util.doubleToDecimalString(goal.amountSpent / goal.budget * 100))%"
 
         addSubview(percentageLabel)
 
@@ -89,7 +89,7 @@ class ProgressView: UIView {
     }
 
     func endAngle() -> CGFloat {
-        let percentage = goal.amountSpent / goal.goalAmount
+        let percentage = goal.amountSpent / goal.budget
         if percentage >= 1 {
             startAngle = CGFloat(630).degreesToRadians
         } else if percentage < 0 {

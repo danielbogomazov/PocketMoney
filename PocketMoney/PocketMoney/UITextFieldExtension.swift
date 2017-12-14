@@ -10,20 +10,18 @@ import UIKit
 
 extension UITextField {
     
-    func addBorder() {
-        if isUserInteractionEnabled {
-            layer.borderColor = Util.Color.RED.cgColor
-        } else {
-            layer.borderColor = Util.Color.RED.withAlphaComponent(0.1).cgColor
-        }
-        layer.borderWidth = 1.0
-        layer.cornerRadius = 5.0
+    func addUnderline() {
+        let underline = CALayer()
+        underline.frame = CGRect(x: 0, y: self.frame.height - 1 , width: self.frame.width, height: 1)
+        underline.backgroundColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        
+        borderStyle = .none
+        layer.addSublayer(underline)
     }
-
+    
     func addLeftMargin() {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: frame.height))
         leftView = paddingView
         leftViewMode = .always
     }
-    
 }
