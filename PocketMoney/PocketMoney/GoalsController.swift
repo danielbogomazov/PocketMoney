@@ -19,8 +19,9 @@ class GoalsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Util.Color.VIOLET
         tableView.backgroundColor = Util.Color.VIOLET
+        navigationController!.navigationBar.isTranslucent = false
+        navigationController!.navigationBar.barTintColor = Util.Color.VIOLET
         
         Util.deleteGoals()
         currentGoals = Util.loadAllOngoingGoals()
