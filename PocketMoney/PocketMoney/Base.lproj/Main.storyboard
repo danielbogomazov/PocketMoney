@@ -125,16 +125,47 @@
                     <navigationItem key="navigationItem" title="PocketMoney" id="KsS-Pi-4T2">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="apd-CL-a4g">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addGoalButtonPressed:" destination="J9k-s4-cNV" id="IZm-O6-lgt"/>
+                                <segue destination="zoB-fT-teJ" kind="show" id="CKd-gx-JAj"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addGoalButton" destination="apd-CL-a4g" id="kyK-VW-xu5"/>
                         <outlet property="tableView" destination="jLa-gD-Sl7" id="h7c-Qa-OAF"/>
+                        <segue destination="zoB-fT-teJ" kind="show" id="Rds-ml-TDH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YsW-tm-Ht2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1188" y="730.78817733990149"/>
+        </scene>
+        <!--New Goal-->
+        <scene sceneID="fUW-Wt-R3o">
+            <objects>
+                <viewController title="New Goal" id="zoB-fT-teJ" customClass="AddGoalController" customModule="PocketMoney" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ScY-q4-Pkv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQZ-M3-psH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="qQZ-M3-psH" firstAttribute="top" secondItem="RYQ-jC-8id" secondAttribute="top" id="9Vb-m3-IRC"/>
+                            <constraint firstItem="qQZ-M3-psH" firstAttribute="trailing" secondItem="RYQ-jC-8id" secondAttribute="trailing" id="bst-et-ngx"/>
+                            <constraint firstItem="qQZ-M3-psH" firstAttribute="leading" secondItem="RYQ-jC-8id" secondAttribute="leading" id="e5W-8O-KF1"/>
+                            <constraint firstAttribute="bottom" secondItem="qQZ-M3-psH" secondAttribute="bottom" id="uhF-fa-SZS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RYQ-jC-8id"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UWY-1F-jMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2183.1999999999998" y="734.48275862068965"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PhI-xM-73k">
@@ -434,4 +465,7 @@
             <point key="canvasLocation" x="729" y="-687"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="CKd-gx-JAj"/>
+    </inferredMetricsTieBreakers>
 </document>

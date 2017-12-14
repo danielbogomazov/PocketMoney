@@ -11,7 +11,6 @@ import UIKit
 class GoalsController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var addGoalButton: UIBarButtonItem!
     
     var currentGoals: [Goal] = []
@@ -47,32 +46,24 @@ class GoalsController: UIViewController {
             Util.addItemToGoal(currentGoals[2], item: Util.createItem(name: "Lamp", price: 222.0), quantity: 1)
             Util.addItemToGoal(currentGoals[4], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 5)
         }
-
-        
-        
-//
-//        addButton.setBackgroundImage(imageFromColor(UIColor.redColor()), forState: .Selected)
-//        addButton.setTitle("Remove from Favorites", forState: .Selected)
-//
-//        addButton.setBackgroundImage(imageFromColor(UIColor(red: 50.0/255.0, green: 84.0/255.0, blue: 112.0/255.0, alpha: 1.0)), forState: .Normal)
-//        addButton.setTitle("Add to favorites", forState: .Normal)
-
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func addGoalButtonPressed(_ sender: UIBarButtonItem) {
+        
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let _ = segue.destination as? AddGoalController {
+            let backItem = UIBarButtonItem()
+            backItem.title = "Goals"
+            navigationItem.backBarButtonItem = backItem
+            navigationItem.backBarButtonItem!.tintColor = UIColor.white
+        }
+    }
 
 }
 
