@@ -6,7 +6,7 @@
 //  Copyright © 2017 Daniel Bogomazov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension CGFloat {
     var degreesToRadians: CGFloat { return self * .pi / 180 }

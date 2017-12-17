@@ -6,6 +6,5 @@ target 'PocketMoney' do
   use_frameworks!
 
   # Pods for PocketMoney
-  pod 'FSCalendar'
 
 end

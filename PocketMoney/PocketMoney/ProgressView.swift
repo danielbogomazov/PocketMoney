@@ -62,7 +62,7 @@ class ProgressView: UIView {
         circleLayer.path = path.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
         circleLayer.lineWidth = 3.0
-        circleLayer.strokeColor = color.withAlphaComponent(0.8).cgColor
+        circleLayer.strokeColor = color.cgColor
 
         layer.addSublayer(circleLayer)
 
