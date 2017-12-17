@@ -15,7 +15,6 @@ class AddGoalController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Util.Color.VIOLET
         hideKeyboardOnTap()
 
         titleTextField.addUnderline()
@@ -29,23 +28,19 @@ class AddGoalController: UIViewController {
 
 extension AddGoalController: UITextFieldDelegate {
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.layer.sublayers![0].backgroundColor = Util.Color.GREEN.cgColor
+        return true
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text!.isEmpty {
+            textField.layer.sublayers![0].backgroundColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        }
+        view.endEditing(true)
+        return true
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
     }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-
-        if textField == titleTextField {
-            if newString.isEmpty {
-                titleTextField.layer.sublayers![0].backgroundColor = UIColor.black.withAlphaComponent(0.1).cgColor
-            } else {
-                titleTextField.layer.sublayers![0].backgroundColor = UIColor.black.withAlphaComponent(0.8).cgColor
-            }
-        }
-        
-        return true
-    }
-    
 }
