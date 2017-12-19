@@ -19,8 +19,9 @@ class GoalsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = Util.Color.GREEN
-        addGoalButton.tintColor = Util.Color.GREEN
+        tableView.backgroundColor = Util.Color.VIOLET
+        navigationController!.navigationBar.isTranslucent = false
+        navigationController!.navigationBar.barTintColor = Util.Color.VIOLET
         
         Util.deleteGoals()
         currentGoals = Util.loadAllOngoingGoals()
@@ -42,9 +43,8 @@ class GoalsController: UIViewController {
             currentGoals.append(Util.createGoal(budget: 89.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
             currentGoals.append(Util.createGoal(budget: 1000.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "consectetur adipiscing elit"))
             
-            Util.addItemToGoal(currentGoals[1], item: Util.createItem(name: "Lamp", price: 1.0), quantity: 1)
+            Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 1)
             Util.addItemToGoal(currentGoals[2], item: Util.createItem(name: "Lamp", price: 222.0), quantity: 1)
-            Util.addItemToGoal(currentGoals[3], item: Util.createItem(name: "Lanp", price: 6.0), quantity: 1 )
             Util.addItemToGoal(currentGoals[4], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 5)
         }
     }
@@ -59,8 +59,10 @@ class GoalsController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let _ = segue.destination as? AddGoalController {
-            navigationItem.backBarButtonItem = UIBarButtonItem()
-            navigationItem.backBarButtonItem!.tintColor = Util.Color.GREEN
+            let backItem = UIBarButtonItem()
+            backItem.title = "Goals"
+            navigationItem.backBarButtonItem = backItem
+            navigationItem.backBarButtonItem!.tintColor = UIColor.white
         }
     }
 
@@ -96,20 +98,29 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
             headerTitle.textLabel?.textColor = UIColor.white
-            headerTitle.backgroundView?.backgroundColor = Util.Color.GREEN
+            headerTitle.backgroundView?.backgroundColor = Util.Color.VIOLET
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GoalCell") as! GoalCell
         let goal = currentGoals[indexPath.row]
+
+        var color: UIColor!
         
-        var color = goal.amountSpent / goal.budget < 0.95 ? Util.Color.GREEN : UIColor.red
+        switch indexPath.row % 4 {
+        case 0:
+             color = Util.Color.PINK
+        case 1:
+            color = Util.Color.YELLOW
+        case 2:
+            color = Util.Color.BLUE
+        case 3:
+            color = Util.Color.RED
+        default:
+            fatalError("Change switch to reflect number of color choices")
+        }
         
         cell.colorView.backgroundColor = color
-        
-        if color != UIColor.red {
-            color = Util.Color.PINK
-        }
         
         cell.progressView.initProgressView(for: goal, color: color)
 

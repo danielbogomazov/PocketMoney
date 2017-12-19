@@ -16,9 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        // Set the navigation bar title color
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : Util.Color.GREEN]
-        
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().backgroundColor = Util.Color.VIOLET
+
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//        UINavigationBar.appearance().shadowImage = UIImage()
+//        UINavigationBar.appearance().backgroundColor = Util.Color.VIOLET
+//        UINavigationBar.appearance().isTranslucent = true
         return true
     }
 

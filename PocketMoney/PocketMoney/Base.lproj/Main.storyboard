@@ -124,7 +124,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="PocketMoney" id="KsS-Pi-4T2">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="apd-CL-a4g">
-                            <color key="tintColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addGoalButtonPressed:" destination="J9k-s4-cNV" id="IZm-O6-lgt"/>
                                 <segue destination="zoB-fT-teJ" kind="show" id="CKd-gx-JAj"/>
@@ -132,7 +132,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addGoalButton" destination="apd-CL-a4g" id="eAa-hY-LDV"/>
+                        <outlet property="addGoalButton" destination="apd-CL-a4g" id="kyK-VW-xu5"/>
                         <outlet property="tableView" destination="jLa-gD-Sl7" id="h7c-Qa-OAF"/>
                         <segue destination="zoB-fT-teJ" kind="show" id="Rds-ml-TDH"/>
                     </connections>
@@ -205,7 +205,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                            <color key="textColor" red="0.29803921568627451" green="0.68627450980392157" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
