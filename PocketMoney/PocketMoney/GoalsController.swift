@@ -60,7 +60,6 @@ class GoalsController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let _ = segue.destination as? AddGoalController {
             let backItem = UIBarButtonItem()
-            backItem.title = "Goals"
             navigationItem.backBarButtonItem = backItem
             navigationItem.backBarButtonItem!.tintColor = UIColor.white
         }
