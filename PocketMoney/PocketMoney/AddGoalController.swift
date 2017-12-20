@@ -10,15 +10,28 @@ import UIKit
 
 class AddGoalController: UIViewController {
 
+    @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
+
+    @IBOutlet weak var budgetView: UIView!
+    @IBOutlet weak var budgetLabel: UILabel!
     @IBOutlet weak var budgetTextField: UITextField!
-    
-    @IBOutlet weak var goalDescriptionTextView: UITextView!
-    
     @IBOutlet weak var currencyButton: UIButton!
+
+    @IBOutlet weak var expiryView: UIView!
+    @IBOutlet weak var expiryLabel: UILabel!
+    @IBOutlet weak var expiryDatePicker: UIDatePicker!
+    
+    @IBOutlet weak var descriptionView: UIView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
     @IBOutlet weak var addGoalButton: UIButton!
     
-    @IBOutlet weak var budgetLabel: UILabel!
+    
+    var minimumDate: Date!
+    var maximumDate: Date!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +39,26 @@ class AddGoalController: UIViewController {
         view.backgroundColor = Util.Color.VIOLET
         hideKeyboardOnTap()
 
-        titleTextField.addUnderline()
-        budgetTextField.addUnderline()
-        currencyButton.addUnderline()
-        budgetLabel.addUnderline()
+        minimumDate = Util.addToDate(Date(), days: 1, months: 0, years: 0)
+        maximumDate = Util.addToDate(Date(), days: 0, months: 0, years: 100)
+        
+        expiryDatePicker.minimumDate = minimumDate
+        expiryDatePicker.maximumDate = maximumDate
+        
+        expiryDatePicker.setDate(minimumDate, animated: false)
+        
+        titleView.addUnderline(color: UIColor.darkGray)
+        budgetView.addUnderline(color: UIColor.darkGray)
+        expiryView.addUnderline(color: Util.Color.BLUE)
+        descriptionView.addUnderline(color: UIColor.darkGray)
+        expiryLabel.textColor = Util.Color.BLUE
+        
+
+        
         
         budgetTextField.text = "0.00"
         budgetTextField.keyboardType = .decimalPad
-        budgetTextField.addLeftMargin()
-        
-        currencyButton.setTitleColor(Util.Color.BLUE, for: .normal)
+
         
     }
 
@@ -50,28 +73,35 @@ class AddGoalController: UIViewController {
 
 extension AddGoalController: UITextFieldDelegate {
 
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == budgetTextField {
-            currencyButton.layer.sublayers![0].backgroundColor = Util.Color.VIOLET.withAlphaComponent(0.8).cgColor
-            budgetLabel.layer.sublayers![0].backgroundColor = Util.Color.VIOLET.withAlphaComponent(0.8).cgColor
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == titleTextField {
+            titleLabel.textColor = Util.Color.BLUE
+            titleView.changeUnderline(to: Util.Color.BLUE)
+        } else if textField == budgetTextField {
+            currencyButton.setTitleColor(Util.Color.BLUE, for: .normal)
+            budgetLabel.textColor = Util.Color.BLUE
+            budgetView.changeUnderline(to: Util.Color.BLUE)
         }
-        
-        textField.layer.sublayers![0].backgroundColor = Util.Color.VIOLET.withAlphaComponent(0.8).cgColor
-            
-        return true
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == budgetTextField {
-            textField.text = Util.doubleToDecimalString(Double(textField.text!)!)
-            if textField.text == "0.00" {
-                textField.layer.sublayers![0].backgroundColor = Util.Color.VIOLET.withAlphaComponent(0.1).cgColor
-                currencyButton.layer.sublayers![0].backgroundColor = Util.Color.VIOLET.withAlphaComponent(0.1).cgColor
-                budgetLabel.layer.sublayers![0].backgroundColor = Util.Color.VIOLET.withAlphaComponent(0.1).cgColor
+        if textField == titleTextField && titleTextField.text!.isEmpty {
+            titleLabel.textColor = UIColor.darkGray
+            titleView.changeUnderline(to: UIColor.darkGray)
+        } else if textField == budgetTextField {
+            if budgetTextField.text!.isEmpty {
+                budgetTextField.text = "0.00"
+            } else {
+                budgetTextField.text = Util.doubleToDecimalString(Double(budgetTextField.text!)!)
             }
-        } else if textField.text!.isEmpty {
-            textField.layer.sublayers![0].backgroundColor = Util.Color.VIOLET.withAlphaComponent(0.1).cgColor
+            if budgetTextField.text == "0.00" {
+                currencyButton.setTitleColor(UIColor.darkGray, for: .normal)
+                budgetLabel.textColor = UIColor.darkGray
+                budgetView.changeUnderline(to: UIColor.darkGray)
+            }
         }
     }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
@@ -80,5 +110,18 @@ extension AddGoalController: UITextFieldDelegate {
 
 extension AddGoalController: UITextViewDelegate {
 
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == descriptionTextView {
+            descriptionLabel.textColor = Util.Color.BLUE
+            descriptionView.changeUnderline(to: Util.Color.BLUE)
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView == descriptionTextView && descriptionTextView.text.isEmpty {
+            descriptionLabel.textColor = UIColor.darkGray
+            descriptionView.changeUnderline(to: UIColor.darkGray)
+        }
+    }
     
 }

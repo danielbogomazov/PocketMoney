@@ -203,6 +203,14 @@ open class Util {
         return formatter.string(from: date)
     }
     
+    open class func addToDate(_ date: Date, days: Int, months: Int, years: Int) -> Date {
+        var dateComponent = DateComponents()
+        dateComponent.day = days
+        dateComponent.month = months
+        dateComponent.year = years
+        return Calendar.current.date(byAdding: dateComponent, to: date)!
+    }
+    
     // MARK:- String functions
     
     open class func checkIfDecimal(_ string: String, newString: String) -> Bool {

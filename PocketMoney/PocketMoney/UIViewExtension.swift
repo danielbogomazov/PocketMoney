@@ -8,15 +8,19 @@
 
 import UIKit
 
-extension UITextField {
+extension UIView {
     
-    func addUnderline() {
+    func addUnderline(color: UIColor) {
         let underline = CALayer()
         underline.frame = CGRect(x: 0, y: self.frame.height - 1 , width: self.frame.width, height: 1)
-        underline.backgroundColor = Util.Color.VIOLET.withAlphaComponent(0.1).cgColor
-        
-        borderStyle = .none
+        underline.backgroundColor = color.cgColor
         layer.addSublayer(underline)
+    }
+    
+    func changeUnderline(to color: UIColor) {
+        let underlineLayerIndex = layer.sublayers!.count
+        layer.sublayers![underlineLayerIndex - 1].backgroundColor = color.cgColor
+
     }
     
 }
