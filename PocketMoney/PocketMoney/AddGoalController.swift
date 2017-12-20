@@ -13,10 +13,12 @@ class AddGoalController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var budgetTextField: UITextField!
     
+    @IBOutlet weak var goalDescriptionTextView: UITextView!
+    
     @IBOutlet weak var currencyButton: UIButton!
+    @IBOutlet weak var addGoalButton: UIButton!
     
     @IBOutlet weak var budgetLabel: UILabel!
-    @IBOutlet weak var expiryLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,4 +76,9 @@ extension AddGoalController: UITextFieldDelegate {
         view.endEditing(true)
         return true
     }
+}
+
+extension AddGoalController: UITextViewDelegate {
+
+    
 }
