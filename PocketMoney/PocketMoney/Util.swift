@@ -39,21 +39,17 @@ open class Util {
         }
     }
     
-    open class func createGoal(budget: Double, startDate: Date, endDate: Date, isOngoing: Bool, goalDescription: String?) -> Goal {
+    open class func createGoal(title: String, budget: Double, startDate: Date, endDate: Date, isOngoing: Bool, goalDescription: String) -> Goal {
         let newGoal = Goal(context: PersistenceService.context)
         newGoal.id = UUID()
         newGoal.goalItemBridges = nil
+        newGoal.title = title
         newGoal.amountSpent = 0.0
         newGoal.budget = budget
         newGoal.startDate = startDate
         newGoal.endDate = endDate
         newGoal.isOngoing = isOngoing
-        
-        if goalDescription != nil {
-            newGoal.goalDescription = goalDescription!
-        } else {
-            newGoal.goalDescription = defaultGoalName()
-        }
+        newGoal.goalDescription = goalDescription
         
         PersistenceService.saveContext()
         

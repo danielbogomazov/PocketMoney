@@ -21,6 +21,7 @@ extension Goal {
     @NSManaged public var endDate: Date
     @NSManaged public var budget: Double
     @NSManaged public var goalDescription: String
+    @NSManaged public var title: String
     @NSManaged public var id: UUID
     @NSManaged public var startDate: Date
     @NSManaged public var isOngoing: Bool

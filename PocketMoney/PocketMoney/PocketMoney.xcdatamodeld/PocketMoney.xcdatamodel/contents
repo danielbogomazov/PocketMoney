@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17B1003" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Goal" representedClassName="Goal" syncable="YES">
         <attribute name="amountSpent" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="budget" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -8,6 +8,7 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isOngoing" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="goalItemBridges" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GoalItemBridge" inverseName="goal" inverseEntity="GoalItemBridge" syncable="YES"/>
     </entity>
     <entity name="GoalItemBridge" representedClassName="GoalItemBridge" syncable="YES">
@@ -23,7 +24,7 @@
         <relationship name="goalItemBridges" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GoalItemBridge" inverseName="item" inverseEntity="GoalItemBridge" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Goal" positionX="-101" positionY="72" width="128" height="165"/>
+        <element name="Goal" positionX="-101" positionY="72" width="128" height="180"/>
         <element name="GoalItemBridge" positionX="-99" positionY="45" width="128" height="105"/>
         <element name="Item" positionX="-117" positionY="-99" width="128" height="105"/>
     </elements>
