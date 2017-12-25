@@ -68,8 +68,8 @@ class AddGoalController: UIViewController {
         // TODO:- Provide a drop down list with accepted currencies
     }
     
-    func validate(title: String, budget: Double) {
-        if title.isEmpty || budget == 0.0 {
+    func validate(title: String, budget: String) {
+        if title.isEmpty || budget == "0.00" {
             addGoalButton.isEnabled = false
             addGoalButton.backgroundColor = Util.Color.RED.withAlphaComponent(0.3)
         } else {
@@ -115,10 +115,14 @@ extension AddGoalController: UITextFieldDelegate {
         
         if textField == titleTextField {
             let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-            validate(title: newString, budget: Double(budgetTextField.text!)!)
+            validate(title: newString, budget: Util.doubleToDecimalString(Double(budgetTextField.text!)!))
         } else if textField == budgetTextField {
-            let newDouble = Double((textField.text! as NSString).replacingCharacters(in: range, with: string))!
-            validate(title: titleTextField.text!, budget: newDouble)
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            if newString.isEmpty {
+                validate(title: titleTextField.text!, budget: "0.00")
+            } else {
+                validate(title: titleTextField.text!, budget: Util.doubleToDecimalString(Double(newString)!))
+            }
         }
         
         return true
