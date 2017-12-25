@@ -29,7 +29,6 @@ class AddGoalController: UIViewController {
     
     @IBOutlet weak var addGoalButton: UIButton!
     
-    
     var minimumDate: Date!
     var maximumDate: Date!
     
@@ -52,13 +51,12 @@ class AddGoalController: UIViewController {
         expiryView.addUnderline(color: Util.Color.BLUE)
         descriptionView.addUnderline(color: UIColor.darkGray)
         expiryLabel.textColor = Util.Color.BLUE
-        
 
-        
-        
         budgetTextField.text = "0.00"
         budgetTextField.keyboardType = .decimalPad
-
+        
+        addGoalButton.isEnabled = false
+        addGoalButton.backgroundColor = Util.Color.RED.withAlphaComponent(0.3)
         
     }
 
@@ -69,6 +67,17 @@ class AddGoalController: UIViewController {
     @IBAction func currencyButtonPressed(_ sender: UIButton) {
         // TODO:- Provide a drop down list with accepted currencies
     }
+    
+    func validate(title: String, budget: Double) {
+        if title.isEmpty || budget == 0.0 {
+            addGoalButton.isEnabled = false
+            addGoalButton.backgroundColor = Util.Color.RED.withAlphaComponent(0.3)
+        } else {
+            addGoalButton.isEnabled = true
+            addGoalButton.backgroundColor = Util.Color.RED
+        }
+    }
+    
 }
 
 extension AddGoalController: UITextFieldDelegate {
@@ -100,6 +109,19 @@ extension AddGoalController: UITextFieldDelegate {
                 budgetView.changeUnderline(to: UIColor.darkGray)
             }
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == titleTextField {
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            validate(title: newString, budget: Double(budgetTextField.text!)!)
+        } else if textField == budgetTextField {
+            let newDouble = Double((textField.text! as NSString).replacingCharacters(in: range, with: string))!
+            validate(title: titleTextField.text!, budget: newDouble)
+        }
+        
+        return true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
