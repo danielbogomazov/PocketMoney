@@ -28,27 +28,18 @@ class GoalsController: UIViewController {
         
         //MARK:- PRODUCTION CODE -- REMOVE AFTER TESTING
         if currentGoals.isEmpty {
-            currentGoals.append(Util.createGoal(budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "Lorem ipsum dolor sit amet"))
-            currentGoals.append(Util.createGoal(budget: 15.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
-            currentGoals.append(Util.createGoal(budget: 133.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "sed do eiusmod"))
-            currentGoals.append(Util.createGoal(budget: 12.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "tempor incididunt ut labore"))
-            currentGoals.append(Util.createGoal(budget: 200.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "et dolore"))
-            currentGoals.append(Util.createGoal(budget: 89.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
-            currentGoals.append(Util.createGoal(budget: 1000.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "consectetur adipiscing elit"))
-            currentGoals.append(Util.createGoal(budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "Lorem ipsum dolor sit amet"))
-            currentGoals.append(Util.createGoal(budget: 15.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
-            currentGoals.append(Util.createGoal(budget: 133.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "sed do eiusmod"))
-            currentGoals.append(Util.createGoal(budget: 12.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "tempor incididunt ut labore"))
-            currentGoals.append(Util.createGoal(budget: 200.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "et dolore"))
-            currentGoals.append(Util.createGoal(budget: 89.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: nil))
-            currentGoals.append(Util.createGoal(budget: 1000.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "consectetur adipiscing elit"))
-            
+            currentGoals.append(Util.createGoal(title: "GOAL ONE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "AAAA"))
+            currentGoals.append(Util.createGoal(title: "GOAL TWO", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "BBBB"))
+            currentGoals.append(Util.createGoal(title: "GOAL THREE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "CCC"))
+            currentGoals.append(Util.createGoal(title: "GOAL FOUR", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "DDD"))
+            currentGoals.append(Util.createGoal(title: "GOAL FIVE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "EEE"))
+
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 1)
             Util.addItemToGoal(currentGoals[2], item: Util.createItem(name: "Lamp", price: 222.0), quantity: 1)
             Util.addItemToGoal(currentGoals[4], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 5)
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -58,11 +49,17 @@ class GoalsController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let _ = segue.destination as? AddGoalController {
+        if let addGoalController = segue.destination as? AddGoalController {
             let backItem = UIBarButtonItem()
             navigationItem.backBarButtonItem = backItem
             navigationItem.backBarButtonItem!.tintColor = UIColor.white
+            addGoalController.goalsController = self
         }
+    }
+    
+    func reloadGoals() {
+        currentGoals = Util.loadAllOngoingGoals()
+        tableView.reloadData()
     }
 
 }
@@ -123,13 +120,11 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         
         cell.progressView.initProgressView(for: goal, color: color)
 
-        cell.titleLabel.text = goal.goalDescription
+        cell.titleLabel.text = goal.title
         cell.titleLabel.textColor = UIColor.black.withAlphaComponent(0.7)
         
         cell.infoLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) / $\(Util.doubleToDecimalString(goal.budget))"
         cell.infoLabel.textColor = UIColor.black.withAlphaComponent(0.4)
-        
-        
         
         return cell
     }
