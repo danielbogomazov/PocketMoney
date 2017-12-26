@@ -106,7 +106,9 @@ open class Util {
     
     open class func loadAllOngoingGoals() -> [Goal] {
         let fetchRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "endDate", ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "isOngoing == %@", true as CVarArg)
+        
         
         do {
             let goals = try PersistenceService.context.fetch(fetchRequest)
@@ -196,6 +198,12 @@ open class Util {
     open class func dateToString(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
+        return formatter.string(from: date)
+    }
+    
+    open class func dateToReadableString(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy"
         return formatter.string(from: date)
     }
     
