@@ -123,6 +123,9 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         cell.titleLabel.text = goal.title
         cell.titleLabel.textColor = UIColor.black.withAlphaComponent(0.7)
         
+        cell.expiryLabel.text = "Expires \(Util.dateToReadableString(goal.endDate))"
+        cell.expiryLabel.textColor = UIColor.black.withAlphaComponent(0.7)
+        
         cell.infoLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) / $\(Util.doubleToDecimalString(goal.budget))"
         cell.infoLabel.textColor = UIColor.black.withAlphaComponent(0.4)
         
