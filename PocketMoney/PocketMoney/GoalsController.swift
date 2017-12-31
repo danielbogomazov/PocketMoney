@@ -28,8 +28,8 @@ class GoalsController: UIViewController {
         
         //MARK:- PRODUCTION CODE -- REMOVE AFTER TESTING
         if currentGoals.isEmpty {
-            currentGoals.append(Util.createGoal(title: "GOAL ONE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "AAAA"))
-            currentGoals.append(Util.createGoal(title: "GOAL TWO", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "BBBB"))
+            currentGoals.append(Util.createGoal(title: "GOAL ONE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true, goalDescription: "AAAA"))
+            currentGoals.append(Util.createGoal(title: "GOAL TWO", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("01-01-2018"), isOngoing: true, goalDescription: "BBBB"))
             currentGoals.append(Util.createGoal(title: "GOAL THREE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "CCC"))
             currentGoals.append(Util.createGoal(title: "GOAL FOUR", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "DDD"))
             currentGoals.append(Util.createGoal(title: "GOAL FIVE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "EEE"))
@@ -54,6 +54,14 @@ class GoalsController: UIViewController {
             navigationItem.backBarButtonItem = backItem
             navigationItem.backBarButtonItem!.tintColor = UIColor.white
             addGoalController.goalsController = self
+        } else if let viewGoalController = segue.destination as? ViewGoalController {
+            let backItem = UIBarButtonItem()
+            navigationItem.backBarButtonItem = backItem
+            navigationItem.backBarButtonItem!.tintColor = UIColor.white
+            viewGoalController.title = (sender as! GoalCell).titleLabel.text
+            let row = tableView.indexPath(for: (sender as! GoalCell))!.row
+            viewGoalController.goal = currentGoals[row]
+            viewGoalController.goalsController = self
         }
     }
     
@@ -130,6 +138,10 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         cell.infoLabel.textColor = UIColor.black.withAlphaComponent(0.4)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
 }

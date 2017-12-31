@@ -105,6 +105,7 @@
                                             <outlet property="infoLabel" destination="vYy-UM-RAM" id="6Kf-vc-SkU"/>
                                             <outlet property="progressView" destination="BVh-iS-SwG" id="Mfr-pH-qd1"/>
                                             <outlet property="titleLabel" destination="WIn-X1-SIB" id="huh-27-xGx"/>
+                                            <segue destination="dEu-vh-Ruh" kind="show" id="8d8-lN-oW3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -140,6 +141,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YsW-tm-Ht2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1188" y="730.78817733990149"/>
+        </scene>
+        <!--View Goal Controller-->
+        <scene sceneID="dSN-bp-TMA">
+            <objects>
+                <viewController id="dEu-vh-Ruh" customClass="ViewGoalController" customModule="PocketMoney" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AAA-OF-sue">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expiry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-pR-EYK">
+                                <rect key="frame" x="16" y="8.0000000000000018" width="343" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gGD-pR-EYK" firstAttribute="top" secondItem="8A6-Cn-1iM" secondAttribute="top" constant="8" id="63Z-ie-TkH"/>
+                            <constraint firstItem="gGD-pR-EYK" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="g6m-8K-62P"/>
+                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="gGD-pR-EYK" secondAttribute="trailing" constant="16" id="l8N-yF-rwY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8A6-Cn-1iM"/>
+                    </view>
+                    <connections>
+                        <outlet property="expiryDate" destination="gGD-pR-EYK" id="gM5-eq-8XK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yUQ-hq-6N6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2056.8000000000002" y="1142.3645320197045"/>
         </scene>
         <!--New Goal-->
         <scene sceneID="fUW-Wt-R3o">
@@ -364,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWY-1F-jMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2183.1999999999998" y="734.48275862068965"/>
+            <point key="canvasLocation" x="2062" y="405"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PhI-xM-73k">

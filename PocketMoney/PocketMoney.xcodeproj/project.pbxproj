@@ -14,6 +14,7 @@
 		6503CBB11FBAA53900256819 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503CBAB1FBAA53900256819 /* Item+CoreDataProperties.swift */; };
 		6503CBB21FBAA53900256819 /* GoalItemBridge+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503CBAC1FBAA53900256819 /* GoalItemBridge+CoreDataClass.swift */; };
 		6503CBB31FBAA53900256819 /* GoalItemBridge+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503CBAD1FBAA53900256819 /* GoalItemBridge+CoreDataProperties.swift */; };
+		651F0D961FF851BE00FDE4C4 /* ViewGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651F0D951FF851BE00FDE4C4 /* ViewGoalController.swift */; };
 		652867151FC3D36100CDC3EA /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652867141FC3D36100CDC3EA /* CGFloatExtension.swift */; };
 		65514E481F8AF81500F46342 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65514E471F8AF81500F46342 /* PersistenceService.swift */; };
 		657F8F961FE2028E00CD6031 /* AddGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F8F951FE2028E00CD6031 /* AddGoalController.swift */; };
@@ -39,6 +40,7 @@
 		6503CBAB1FBAA53900256819 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6503CBAC1FBAA53900256819 /* GoalItemBridge+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalItemBridge+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6503CBAD1FBAA53900256819 /* GoalItemBridge+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalItemBridge+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		651F0D951FF851BE00FDE4C4 /* ViewGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGoalController.swift; sourceTree = "<group>"; };
 		652867141FC3D36100CDC3EA /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		65514E471F8AF81500F46342 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		657F8F951FE2028E00CD6031 /* AddGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				65EC11671FCB7C40004C408C /* AddItemController.swift */,
 				65EA6E0A1FDF7DD400D5F8F1 /* GoalsController.swift */,
 				657F8F951FE2028E00CD6031 /* AddGoalController.swift */,
+				651F0D951FF851BE00FDE4C4 /* ViewGoalController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				657F8F961FE2028E00CD6031 /* AddGoalController.swift in Sources */,
 				6503CBB21FBAA53900256819 /* GoalItemBridge+CoreDataClass.swift in Sources */,
 				6503CBB31FBAA53900256819 /* GoalItemBridge+CoreDataProperties.swift in Sources */,
+				651F0D961FF851BE00FDE4C4 /* ViewGoalController.swift in Sources */,
 				6503CBAF1FBAA53900256819 /* Goal+CoreDataProperties.swift in Sources */,
 				65EC11681FCB7C41004C408C /* AddItemController.swift in Sources */,
 				65514E481F8AF81500F46342 /* PersistenceService.swift in Sources */,
