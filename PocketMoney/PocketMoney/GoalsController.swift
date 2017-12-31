@@ -28,10 +28,10 @@ class GoalsController: UIViewController {
         
         //MARK:- PRODUCTION CODE -- REMOVE AFTER TESTING
         if currentGoals.isEmpty {
-            currentGoals.append(Util.createGoal(title: "GOAL ONE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true, goalDescription: "AAAA"))
-            currentGoals.append(Util.createGoal(title: "GOAL TWO", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("01-01-2018"), isOngoing: true, goalDescription: "BBBB"))
-            currentGoals.append(Util.createGoal(title: "GOAL THREE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "CCC"))
-            currentGoals.append(Util.createGoal(title: "GOAL FOUR", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "DDD"))
+            currentGoals.append(Util.createGoal(title: "GOAL ONE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true, goalDescription: ""))
+            currentGoals.append(Util.createGoal(title: "GOAL TWO", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("01-01-2018"), isOngoing: true, goalDescription: "This is a description of this goal. It is multiple lines long."))
+            currentGoals.append(Util.createGoal(title: "GOAL THREE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "This is a description of this goal. It is multiple lines long. This is a description of this goal. It is multiple lines long. This is a description of this goal. It is multiple lines long. This is a description of this goal. It is multiple lines long. "))
+            currentGoals.append(Util.createGoal(title: "GOAL FOUR", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "This is a description."))
             currentGoals.append(Util.createGoal(title: "GOAL FIVE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "EEE"))
 
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 1)
