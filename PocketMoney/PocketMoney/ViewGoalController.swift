@@ -18,12 +18,15 @@ class ViewGoalController: UIViewController {
     @IBOutlet weak var itemTableViewHeightConstraint: NSLayoutConstraint!
     
     var goal: Goal!
+    var bridges: [GoalItemBridge] = []
 
     var goalsController: GoalsController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
+
         expiryDateLabel.textColor = Util.Color.RED
         let daysUntilExpiration = Int(goal.endDate.timeIntervalSince(goal.startDate))/60/60/24 + 1
         if daysUntilExpiration < 0 {
@@ -56,14 +59,30 @@ class ViewGoalController: UIViewController {
 
 extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return bridges.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = itemTableView.dequeueReusableCell(withIdentifier: "ItemCell") as! ItemCell
+        let bridge = bridges[indexPath.row]
+        let item = bridges[indexPath.row].item
+        cell.quantityLabel.text = "\(bridge.itemQuantity)x"
+        cell.itemNameLabel.text = item.name
+        cell.priceLabel.text = "$\(Util.doubleToDecimalString(item.price)) / unit"
+        cell.totalLabel.text = "$\(Util.doubleToDecimalString(item.price * Double(bridge.itemQuantity))) total"
+        
+        return cell
     }
     
 }
+
 extension ViewGoalController: UITextViewDelegate {
     
+}
+
+class ItemCell: UITableViewCell {
+    @IBOutlet weak var quantityLabel: UILabel!
+    @IBOutlet weak var itemNameLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
 }
