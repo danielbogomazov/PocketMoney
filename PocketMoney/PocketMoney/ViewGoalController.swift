@@ -10,7 +10,8 @@ import UIKit
 
 class ViewGoalController: UIViewController {
 
-    @IBOutlet weak var expiryDate: UILabel!
+    @IBOutlet weak var expiryDateLabel: UILabel!
+    @IBOutlet weak var moneySpentLabel: UILabel!
     
     var goalsController: GoalsController!
     
@@ -19,17 +20,19 @@ class ViewGoalController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        expiryDate.textColor = Util.Color.RED
+        expiryDateLabel.textColor = Util.Color.RED
         let daysUntilExpiration = Int(goal.endDate.timeIntervalSince(goal.startDate))/60/60/24 + 1
         if daysUntilExpiration < 0 {
-            expiryDate.text = "expired \(daysUntilExpiration * -1) "
-            daysUntilExpiration == -1 ? expiryDate.text?.append("day ago") : expiryDate.text?.append("days ago")
+            expiryDateLabel.text = "Expired \(daysUntilExpiration * -1) "
+            daysUntilExpiration == -1 ? expiryDateLabel.text?.append("day ago") : expiryDateLabel.text?.append("days ago")
         } else if daysUntilExpiration > 0 {
-            expiryDate.text = "expires in \(daysUntilExpiration) "
-            daysUntilExpiration == 1 ? expiryDate.text?.append("day") : expiryDate.text?.append("days")
+            expiryDateLabel.text = "Expires in \(daysUntilExpiration) "
+            daysUntilExpiration == 1 ? expiryDateLabel.text?.append("day") : expiryDateLabel.text?.append("days")
         } else {
-            expiryDate.text = "expires today"
+            expiryDateLabel.text = "Expires today"
         }
+        
+        moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
         
     }
 

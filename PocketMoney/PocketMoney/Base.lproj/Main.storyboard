@@ -150,8 +150,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expiry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-pR-EYK">
-                                <rect key="frame" x="16" y="8.0000000000000018" width="343" height="21.666666666666671"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="money spend" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0y7-HY-uh8">
+                                <rect key="frame" x="16" y="123" width="343" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zkb-3k-ERe">
+                                <rect key="frame" x="16" y="177.66666666666669" width="343" height="370.00000000000006"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="370" id="aKa-MC-END"/>
+                                </constraints>
+                            </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="P3q-X8-chf">
+                                <rect key="frame" x="16" y="567.66666666666663" width="343" height="102.33333333333337"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="expiry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-pR-EYK">
+                                <rect key="frame" x="16" y="58" width="343" height="21.666666666666671"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -159,14 +181,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="gGD-pR-EYK" firstAttribute="top" secondItem="8A6-Cn-1iM" secondAttribute="top" constant="8" id="63Z-ie-TkH"/>
-                            <constraint firstItem="gGD-pR-EYK" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="g6m-8K-62P"/>
-                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="gGD-pR-EYK" secondAttribute="trailing" constant="16" id="l8N-yF-rwY"/>
+                            <constraint firstItem="zkb-3k-ERe" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="1gH-2s-fDP"/>
+                            <constraint firstItem="P3q-X8-chf" firstAttribute="top" secondItem="zkb-3k-ERe" secondAttribute="bottom" constant="20" id="FzM-Gi-Ngg"/>
+                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="bottom" secondItem="P3q-X8-chf" secondAttribute="bottom" constant="20" id="I9V-Xw-yNH"/>
+                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="zkb-3k-ERe" secondAttribute="trailing" constant="16" id="KBs-DJ-uOc"/>
+                            <constraint firstItem="P3q-X8-chf" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="MSJ-eo-Fn9"/>
+                            <constraint firstItem="zkb-3k-ERe" firstAttribute="centerY" secondItem="AAA-OF-sue" secondAttribute="centerY" id="Mqo-9y-YCh"/>
+                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="P3q-X8-chf" secondAttribute="trailing" constant="16" id="OVf-gv-73f"/>
+                            <constraint firstItem="zkb-3k-ERe" firstAttribute="centerX" secondItem="AAA-OF-sue" secondAttribute="centerX" id="c2n-uA-06U"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8A6-Cn-1iM"/>
                     </view>
                     <connections>
-                        <outlet property="expiryDate" destination="gGD-pR-EYK" id="gM5-eq-8XK"/>
+                        <outlet property="expiryDateLabel" destination="gGD-pR-EYK" id="idO-Cn-A8A"/>
+                        <outlet property="moneySpentLabel" destination="0y7-HY-uh8" id="ZPB-z1-EJ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUQ-hq-6N6" userLabel="First Responder" sceneMemberID="firstResponder"/>
