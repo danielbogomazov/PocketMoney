@@ -63,14 +63,20 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = itemTableView.dequeueReusableCell(withIdentifier: "ItemCell") as! ItemCell
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         let bridge = bridges[indexPath.row]
         let item = bridges[indexPath.row].item
-        cell.quantityLabel.text = "\(bridge.itemQuantity)x"
-        cell.itemNameLabel.text = item.name
-        cell.priceLabel.text = "$\(Util.doubleToDecimalString(item.price)) / unit"
-        cell.totalLabel.text = "$\(Util.doubleToDecimalString(item.price * Double(bridge.itemQuantity))) total"
         
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Util.Color.VIOLET.withAlphaComponent(0.6)]
+        let str = NSMutableAttributedString(string: "\(bridge.itemQuantity)x ", attributes: attributes)
+        str.append(NSAttributedString(string: item.name))
+        cell.textLabel?.attributedText = str
+        
+        cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(item.price))/unit ($\(Util.doubleToDecimalString(item.price * Double(bridge.itemQuantity))) total)"
+        cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 10)
+
         return cell
     }
     
@@ -78,11 +84,4 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
 
 extension ViewGoalController: UITextViewDelegate {
     
-}
-
-class ItemCell: UITableViewCell {
-    @IBOutlet weak var quantityLabel: UILabel!
-    @IBOutlet weak var itemNameLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var totalLabel: UILabel!
 }
