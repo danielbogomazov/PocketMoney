@@ -39,6 +39,7 @@ class ViewGoalController: UIViewController {
             expiryDateLabel.text = "Expires today"
         }
         
+        moneySpentLabel.textColor = Util.Color.VIOLET
         moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
         
         if goal.goalDescription.isEmpty {
@@ -46,6 +47,7 @@ class ViewGoalController: UIViewController {
             itemTableViewHeightConstraint.constant += descriptionTextView.frame.height + 20
         } else {
             descriptionTextView.text = goal.goalDescription
+            descriptionTextView.textColor = Util.Color.VIOLET
         }
         
     }
@@ -68,11 +70,13 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
         let item = bridges[indexPath.row].item
         
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        cell.textLabel?.textColor = Util.Color.VIOLET
         let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Util.Color.VIOLET.withAlphaComponent(0.6)]
         let str = NSMutableAttributedString(string: "\(bridge.itemQuantity)x ", attributes: attributes)
         str.append(NSAttributedString(string: item.name))
         cell.textLabel?.attributedText = str
         
+        cell.detailTextLabel?.textColor = Util.Color.VIOLET
         cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(item.price))/unit ($\(Util.doubleToDecimalString(item.price * Double(bridge.itemQuantity))) total)"
         cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 10)

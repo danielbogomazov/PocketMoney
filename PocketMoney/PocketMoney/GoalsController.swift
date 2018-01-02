@@ -135,13 +135,13 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         cell.progressView.initProgressView(for: goal, color: color)
 
         cell.titleLabel.text = goal.title
-        cell.titleLabel.textColor = UIColor.black.withAlphaComponent(0.7)
+        cell.titleLabel.textColor = Util.Color.VIOLET
         
         cell.expiryLabel.text = "Expires \(Util.dateToReadableString(goal.endDate))"
-        cell.expiryLabel.textColor = UIColor.black.withAlphaComponent(0.7)
+        cell.expiryLabel.textColor = Util.Color.VIOLET
         
         cell.infoLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) / $\(Util.doubleToDecimalString(goal.budget))"
-        cell.infoLabel.textColor = UIColor.black.withAlphaComponent(0.4)
+        cell.infoLabel.textColor = Util.Color.VIOLET.withAlphaComponent(0.4)
         
         return cell
     }

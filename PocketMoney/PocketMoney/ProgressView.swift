@@ -69,7 +69,7 @@ class ProgressView: UIView {
         percentageLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height / 2 - 20, width: frame.size.width, height: 40))
         percentageLabel.textAlignment = .center
         percentageLabel.font = UIFont.boldSystemFont(ofSize: 8.0)
-        percentageLabel.textColor = UIColor.black
+        percentageLabel.textColor = Util.Color.VIOLET
         percentageLabel.text = "\(Util.doubleToDecimalString(goal.amountSpent / goal.budget * 100))%"
 
         addSubview(percentageLabel)
