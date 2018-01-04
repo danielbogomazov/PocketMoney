@@ -16,6 +16,9 @@ class GoalsController: UIViewController {
     var currentGoals: [Goal] = []
     var hisrory: [Goal] = []
     
+    var selectedIndex = -1
+    var expandedIndexes: [Int] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,9 +33,9 @@ class GoalsController: UIViewController {
         if currentGoals.isEmpty {
             currentGoals.append(Util.createGoal(title: "Books", budget: 200.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true, goalDescription: "Buying books - mostly from ASoIaF"))
             currentGoals.append(Util.createGoal(title: "GOAL TWO", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("01-01-2018"), isOngoing: true, goalDescription: "This is a description of this goal. It is multiple lines long."))
-            currentGoals.append(Util.createGoal(title: "GOAL THREE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "This is a description of this goal. It is multiple lines long. This is a description of this goal. It is multiple lines long. This is a description of this goal. It is multiple lines long. This is a description of this goal. It is multiple lines long. "))
-            currentGoals.append(Util.createGoal(title: "GOAL FOUR", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "This is a description."))
-            currentGoals.append(Util.createGoal(title: "GOAL FIVE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "EEE"))
+            currentGoals.append(Util.createGoal(title: "GOAL THREE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "This is a description of this goal. It is multiple lines long.This is a description of this goal. It is multiple lines long."))
+            currentGoals.append(Util.createGoal(title: "GOAL FOUR", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: ""))
+            currentGoals.append(Util.createGoal(title: "GOAL FIVE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: ""))
 
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Game of Thrones", price: 11.99), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Clash of Kings", price: 12.99), quantity: 1)
@@ -81,7 +84,11 @@ class GoalsController: UIViewController {
 extension GoalsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        if expandedIndexes.contains(indexPath.row) {
+            return 150
+        } else {
+            return 100
+        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
@@ -143,10 +150,29 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         cell.infoLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) / $\(Util.doubleToDecimalString(goal.budget))"
         cell.infoLabel.textColor = Util.Color.VIOLET.withAlphaComponent(0.4)
         
+        if !goal.goalDescription.isEmpty {
+            cell.accessoryType = .detailButton
+            cell.descriptionTextView.text = goal.goalDescription
+            cell.descriptionTextView.textColor = Util.Color.VIOLET.withAlphaComponent(0.5)
+        } else {
+            cell.accessoryType = .none
+        }
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        print(currentGoals[indexPath.row].goalDescription)
+        if expandedIndexes.contains(indexPath.row) {
+            selectedIndex = -1
+            let index = expandedIndexes.index(of: indexPath.row)
+            expandedIndexes.remove(at: index!)
+            tableView.reloadRows(at: [indexPath], with: .bottom)
+        } else {
+            selectedIndex = indexPath.row
+            expandedIndexes.append(indexPath.row)
+            tableView.reloadRows(at: [indexPath], with: .top)
+        }
         
     }
     
@@ -155,6 +181,7 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
 class GoalCell: UITableViewCell {
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var progressView: ProgressView!
+    @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var expiryLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
