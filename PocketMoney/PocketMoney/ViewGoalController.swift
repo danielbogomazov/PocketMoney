@@ -13,9 +13,6 @@ class ViewGoalController: UIViewController {
     @IBOutlet weak var expiryDateLabel: UILabel!
     @IBOutlet weak var moneySpentLabel: UILabel!
     @IBOutlet weak var itemTableView: UITableView!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    
-    @IBOutlet weak var itemTableViewHeightConstraint: NSLayoutConstraint!
     
     var goal: Goal!
     var bridges: [GoalItemBridge] = []
@@ -41,14 +38,6 @@ class ViewGoalController: UIViewController {
         
         moneySpentLabel.textColor = Util.Color.VIOLET
         moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
-        
-        if goal.goalDescription.isEmpty {
-            descriptionTextView.isHidden = true
-            itemTableViewHeightConstraint.constant += descriptionTextView.frame.height + 20
-        } else {
-            descriptionTextView.text = goal.goalDescription
-            descriptionTextView.textColor = Util.Color.VIOLET
-        }
         
     }
     

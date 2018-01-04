@@ -160,26 +160,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zkb-3k-ERe">
-                                <rect key="frame" x="16" y="171.66666666666669" width="343" height="375.00000000000006"/>
+                                <rect key="frame" x="16" y="171.66666666666671" width="343" height="458.33333333333326"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="375" id="zdb-eg-mJy"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="dEu-vh-Ruh" id="e3Q-sj-eRn"/>
                                     <outlet property="delegate" destination="dEu-vh-Ruh" id="DcI-nO-7Ma"/>
                                 </connections>
                             </tableView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="P3q-X8-chf">
-                                <rect key="frame" x="16" y="566.66666666666663" width="343" height="103.33333333333337"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="dEu-vh-Ruh" id="MNc-Zn-Tem"/>
-                                </connections>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="money spend" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0y7-HY-uh8">
                                 <rect key="frame" x="16" y="89.666666666666657" width="343" height="22"/>
                                 <constraints>
@@ -193,26 +180,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gGD-pR-EYK" firstAttribute="top" secondItem="8A6-Cn-1iM" secondAttribute="top" constant="60" id="3sg-Yt-L26"/>
-                            <constraint firstItem="P3q-X8-chf" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="AV5-0l-o9P"/>
-                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="P3q-X8-chf" secondAttribute="trailing" constant="16" id="BP9-PI-xzq"/>
-                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="bottom" secondItem="P3q-X8-chf" secondAttribute="bottom" constant="20" id="PAh-CO-Kdd"/>
+                            <constraint firstItem="zkb-3k-ERe" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="Cha-uN-9l9"/>
+                            <constraint firstItem="zkb-3k-ERe" firstAttribute="top" secondItem="0y7-HY-uh8" secondAttribute="bottom" constant="60" id="Fcd-Hc-J6M"/>
                             <constraint firstItem="gGD-pR-EYK" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="Rhm-6a-ImD"/>
-                            <constraint firstItem="zkb-3k-ERe" firstAttribute="top" secondItem="0y7-HY-uh8" secondAttribute="bottom" constant="60" id="Se5-eO-MCz"/>
                             <constraint firstItem="0y7-HY-uh8" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="dsh-4K-uyU"/>
-                            <constraint firstItem="zkb-3k-ERe" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="e3W-Ju-XcX"/>
                             <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="gGD-pR-EYK" secondAttribute="trailing" constant="16" id="f2C-u7-hgH"/>
-                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="zkb-3k-ERe" secondAttribute="trailing" constant="16" id="gvX-rW-SK9"/>
+                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="zkb-3k-ERe" secondAttribute="trailing" constant="16" id="ijL-vV-dfW"/>
+                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="bottom" secondItem="zkb-3k-ERe" secondAttribute="bottom" constant="60" id="m6E-NE-Jtx"/>
                             <constraint firstItem="0y7-HY-uh8" firstAttribute="top" secondItem="gGD-pR-EYK" secondAttribute="bottom" constant="8" id="nRR-Q3-hIb"/>
                             <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="0y7-HY-uh8" secondAttribute="trailing" constant="16" id="spd-4z-3cy"/>
-                            <constraint firstItem="P3q-X8-chf" firstAttribute="top" secondItem="zkb-3k-ERe" secondAttribute="bottom" constant="20" id="uIN-kO-SGa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8A6-Cn-1iM"/>
                     </view>
                     <connections>
-                        <outlet property="descriptionTextView" destination="P3q-X8-chf" id="Nbg-Nz-zpM"/>
                         <outlet property="expiryDateLabel" destination="gGD-pR-EYK" id="idO-Cn-A8A"/>
                         <outlet property="itemTableView" destination="zkb-3k-ERe" id="jI9-Jn-GMB"/>
-                        <outlet property="itemTableViewHeightConstraint" destination="zdb-eg-mJy" id="p27-GN-SO9"/>
                         <outlet property="moneySpentLabel" destination="0y7-HY-uh8" id="ZPB-z1-EJ9"/>
                     </connections>
                 </viewController>
