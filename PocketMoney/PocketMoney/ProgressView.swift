@@ -23,9 +23,6 @@ class ProgressView: UIView {
     var radius: CGFloat!
     var startAngle: CGFloat = CGFloat(270).degreesToRadians
 
-//    var percentageLabel: UILabel = UILabel()
-//    var percentage: Int = 0
-
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -52,7 +49,7 @@ class ProgressView: UIView {
         innerCircleLayer.path = path.cgPath
         innerCircleLayer.fillColor = UIColor.clear.cgColor
         innerCircleLayer.strokeColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 0.5).cgColor
-        innerCircleLayer.lineWidth = 1.0
+        innerCircleLayer.lineWidth = 3.0
 
         layer.addSublayer(innerCircleLayer)
 
@@ -63,19 +60,10 @@ class ProgressView: UIView {
         circleLayer = CAShapeLayer()
         circleLayer.path = path.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
-        circleLayer.lineWidth = 3.0
+        circleLayer.lineWidth = 5.0
         circleLayer.strokeColor = color.cgColor
 
         layer.addSublayer(circleLayer)
-//
-//        percentageLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height / 2 - 20, width: frame.size.width, height: 40))
-//        percentageLabel.textAlignment = .center
-//        percentageLabel.font = UIFont.boldSystemFont(ofSize: 8.0)
-//        percentageLabel.textColor = Util.Color.VIOLET
-//        percentageLabel.text = "\(Util.doubleToDecimalString(goal.amountSpent / goal.budget * 100))%"
-//
-//        addSubview(percentageLabel)
-
     }
 
     func updateProgressView() {
