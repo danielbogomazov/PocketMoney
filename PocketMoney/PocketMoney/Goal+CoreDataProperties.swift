@@ -20,7 +20,6 @@ extension Goal {
     @NSManaged public var amountSpent: Double
     @NSManaged public var endDate: Date
     @NSManaged public var budget: Double
-    @NSManaged public var goalDescription: String
     @NSManaged public var title: String
     @NSManaged public var id: UUID
     @NSManaged public var startDate: Date

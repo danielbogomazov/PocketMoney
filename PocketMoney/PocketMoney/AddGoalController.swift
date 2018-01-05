@@ -71,7 +71,7 @@ class AddGoalController: UIViewController {
     }
     
     @IBAction func addGoalButtonPressed(_ sender: UIButton) {
-        let _ = Util.createGoal(title: titleTextField.text!, budget: Double(budgetTextField.text!)!, startDate: Date(), endDate: expiryDatePicker.date, isOngoing: true, goalDescription: descriptionTextView.text)
+        let _ = Util.createGoal(title: titleTextField.text!, budget: Double(budgetTextField.text!)!, startDate: Date(), endDate: expiryDatePicker.date, isOngoing: true)
         goalsController.reloadGoals()
         navigationController?.popViewController(animated: true)
     }

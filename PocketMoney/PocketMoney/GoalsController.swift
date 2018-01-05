@@ -28,11 +28,7 @@ class GoalsController: UIViewController {
         
         //MARK:- PRODUCTION CODE -- REMOVE AFTER TESTING
         if currentGoals.isEmpty {
-            currentGoals.append(Util.createGoal(title: "Books", budget: 200.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true, goalDescription: "Buying books - mostly from ASoIaF"))
-            currentGoals.append(Util.createGoal(title: "GOAL TWO", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("01-01-2018"), isOngoing: true, goalDescription: "This is a description of this goal. It is multiple lines long."))
-            currentGoals.append(Util.createGoal(title: "GOAL THREE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: "This is a description of this goal. It is multiple lines long.This is a description of this goal. It is multiple lines long."))
-            currentGoals.append(Util.createGoal(title: "GOAL FOUR", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: ""))
-            currentGoals.append(Util.createGoal(title: "GOAL FIVE", budget: 1.0, startDate: Date(), endDate: Util.stringToDate("12-31-2017"), isOngoing: true, goalDescription: ""))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 200.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
 
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Game of Thrones", price: 11.99), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Clash of Kings", price: 12.99), quantity: 1)
@@ -41,8 +37,6 @@ class GoalsController: UIViewController {
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Dance with Dragons", price: 15.99), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "The Winds of Winter", price: 13.00), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Dream of Spring", price: 19.99), quantity: 1)
-            Util.addItemToGoal(currentGoals[2], item: Util.createItem(name: "Lamp", price: 222.0), quantity: 1)
-            Util.addItemToGoal(currentGoals[4], item: Util.createItem(name: "Lamp", price: 32.25), quantity: 5)
         }
     }
     
@@ -149,7 +143,6 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         let attributes = [NSAttributedStringKey.foregroundColor: Util.Color.VIOLET.withAlphaComponent(0.4)]
         let str: NSMutableAttributedString = NSMutableAttributedString(string: "$\(Util.doubleToDecimalString(goal.amountSpent)) SPENT ")
         str.append(NSMutableAttributedString(string: "($\(Util.doubleToDecimalString(goal.budget)) BUDGET)", attributes: attributes))
-
         cell.spentLabel.attributedText = str
         
         return cell

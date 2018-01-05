@@ -96,7 +96,6 @@ class DetailsView: UIView {
         goalDescriptionTextField.textAlignment = .center
         goalDescriptionTextField.font = UIFont.boldSystemFont(ofSize: 20)
         goalDescriptionTextField.textColor = Util.Constant.TINT_COLOR
-        goalDescriptionTextField.text = goal.goalDescription
         goalDescriptionTextField.isUserInteractionEnabled = true
 //        goalDescriptionTextField.delegate = (delegate as! UITextFieldDelegate)
 //        goalDescriptionTextField.addBorder()
