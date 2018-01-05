@@ -29,6 +29,14 @@ class GoalsController: UIViewController {
         //MARK:- PRODUCTION CODE -- REMOVE AFTER TESTING
         if currentGoals.isEmpty {
             currentGoals.append(Util.createGoal(title: "Books", budget: 200.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+
 
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Game of Thrones", price: 11.99), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Clash of Kings", price: 12.99), quantity: 1)
@@ -37,6 +45,14 @@ class GoalsController: UIViewController {
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Dance with Dragons", price: 15.99), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "The Winds of Winter", price: 13.00), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Dream of Spring", price: 19.99), quantity: 1)
+            
+            Util.addItemToGoal(currentGoals[1], item: Util.createItem(name: "25%", price: 15.0), quantity: 1)
+            Util.addItemToGoal(currentGoals[2], item: Util.createItem(name: "50%", price: 35.0), quantity: 1)
+            Util.addItemToGoal(currentGoals[3], item: Util.createItem(name: "75%", price: 60.0), quantity: 1)
+            Util.addItemToGoal(currentGoals[4], item: Util.createItem(name: "100%", price: 80.0), quantity: 1)
+            Util.addItemToGoal(currentGoals[5], item: Util.createItem(name: "100%", price: 100.0), quantity: 1)
+            Util.addItemToGoal(currentGoals[6], item: Util.createItem(name: "200%", price: 200.0), quantity: 1)
+
         }
     }
     
@@ -111,19 +127,18 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
 
         var color: UIColor!
         
-        switch indexPath.row % 4 {
-        case 0:
-             color = Util.Color.PINK
-        case 1:
-            color = Util.Color.YELLOW
-        case 2:
-            color = Util.Color.BLUE
-        case 3:
-            color = Util.Color.RED
-        default:
-            fatalError("Change switch to reflect number of color choices")
-        }
+        let percentage = Int(goal.amountSpent / goal.budget * 100)
         
+        if percentage <= 0 {
+            color = Util.Color.PINK
+        } else if percentage < 33 {
+            color = Util.Color.BLUE
+        } else if percentage < 66 {
+            color = Util.Color.YELLOW
+        } else {
+            color = Util.Color.RED
+        }
+
         cell.colorView.backgroundColor = color
         cell.percentageLabel.textColor = Util.Color.VIOLET
         cell.titleLabel.textColor = Util.Color.VIOLET
@@ -132,8 +147,8 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
 
         cell.progressView.initProgressView(for: goal, color: color)
         
-        cell.percentageLabel.text = String(format: "%.0f", (goal.amountSpent / goal.budget * 100)) + "%"
-
+        cell.percentageLabel.text = "\(percentage)%"
+            
         cell.titleLabel.text = goal.title
         
         cell.expiryLabel.text = "Expires \(Util.dateToReadableString(goal.endDate))"
