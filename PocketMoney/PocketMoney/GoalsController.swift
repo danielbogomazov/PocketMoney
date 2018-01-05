@@ -16,9 +16,6 @@ class GoalsController: UIViewController {
     var currentGoals: [Goal] = []
     var hisrory: [Goal] = []
     
-    var selectedIndex = -1
-    var expandedIndexes: [Int] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,11 +81,7 @@ class GoalsController: UIViewController {
 extension GoalsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if expandedIndexes.contains(indexPath.row) {
-            return 150
-        } else {
-            return 100
-        }
+        return 90
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
@@ -138,51 +131,36 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.colorView.backgroundColor = color
-        
+        cell.percentageLabel.textColor = Util.Color.VIOLET
+        cell.titleLabel.textColor = Util.Color.VIOLET
+        cell.expiryLabel.textColor = Util.Color.VIOLET
+        cell.spentLabel.textColor = Util.Color.VIOLET
+
         cell.progressView.initProgressView(for: goal, color: color)
+        
+        cell.percentageLabel.text = String(format: "%.0f", (goal.amountSpent / goal.budget * 100)) + "%"
 
         cell.titleLabel.text = goal.title
-        cell.titleLabel.textColor = Util.Color.VIOLET
         
         cell.expiryLabel.text = "Expires \(Util.dateToReadableString(goal.endDate))"
-        cell.expiryLabel.textColor = Util.Color.VIOLET
+                
+        cell.spentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) SPENT ($\(Util.doubleToDecimalString(goal.budget)) BUDGET)"
         
-        cell.infoLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) / $\(Util.doubleToDecimalString(goal.budget))"
-        cell.infoLabel.textColor = Util.Color.VIOLET.withAlphaComponent(0.4)
-        
-        if !goal.goalDescription.isEmpty {
-            cell.accessoryType = .detailButton
-            cell.descriptionTextView.text = goal.goalDescription
-            cell.descriptionTextView.textColor = Util.Color.VIOLET.withAlphaComponent(0.5)
-        } else {
-            cell.accessoryType = .none
-        }
+        let attributes = [NSAttributedStringKey.foregroundColor: Util.Color.VIOLET.withAlphaComponent(0.4)]
+        let str: NSMutableAttributedString = NSMutableAttributedString(string: "$\(Util.doubleToDecimalString(goal.amountSpent)) SPENT ")
+        str.append(NSMutableAttributedString(string: "($\(Util.doubleToDecimalString(goal.budget)) BUDGET)", attributes: attributes))
+
+        cell.spentLabel.attributedText = str
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        print(currentGoals[indexPath.row].goalDescription)
-        if expandedIndexes.contains(indexPath.row) {
-            selectedIndex = -1
-            let index = expandedIndexes.index(of: indexPath.row)
-            expandedIndexes.remove(at: index!)
-            tableView.reloadRows(at: [indexPath], with: .bottom)
-        } else {
-            selectedIndex = indexPath.row
-            expandedIndexes.append(indexPath.row)
-            tableView.reloadRows(at: [indexPath], with: .top)
-        }
-        
-    }
-    
 }
 
 class GoalCell: UITableViewCell {
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var progressView: ProgressView!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var expiryLabel: UILabel!
+    @IBOutlet weak var percentageLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var expiryLabel: UILabel!
+    @IBOutlet weak var spentLabel: UILabel!
 }
