@@ -60,7 +60,7 @@ class GoalsController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func addGoalButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction func addGoalTapped(_ sender: UIBarButtonItem) {
         
     }
     

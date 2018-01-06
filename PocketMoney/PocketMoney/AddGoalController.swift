@@ -66,11 +66,11 @@ class AddGoalController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func currencyButtonPressed(_ sender: UIButton) {
+    @IBAction func currencyTapped(_ sender: UIButton) {
         // TODO:- Provide a drop down list with accepted currencies
     }
     
-    @IBAction func addGoalButtonPressed(_ sender: UIButton) {
+    @IBAction func addGoalTapped(_ sender: UIButton) {
         let _ = Util.createGoal(title: titleTextField.text!, budget: Double(budgetTextField.text!)!, startDate: Date(), endDate: expiryDatePicker.date, isOngoing: true)
         goalsController.reloadGoals()
         navigationController?.popViewController(animated: true)
