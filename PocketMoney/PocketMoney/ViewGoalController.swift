@@ -22,6 +22,9 @@ class ViewGoalController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        
         bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
 
         expiryDateLabel.textColor = Util.Color.RED
@@ -39,6 +42,19 @@ class ViewGoalController: UIViewController {
         moneySpentLabel.textColor = Util.Color.VIOLET
         moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
         
+    }
+    
+    @objc func addTapped() {
+        performSegue(withIdentifier: "AddItemController", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addItemController = segue.destination as? AddItemController {
+            let backItem = UIBarButtonItem()
+            navigationItem.backBarButtonItem = backItem
+            navigationItem.backBarButtonItem!.tintColor = UIColor.white
+            addItemController.viewGoalController = self
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,7 +81,6 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
         str.append(NSAttributedString(string: item.name))
         cell.textLabel?.attributedText = str
         
-        cell.detailTextLabel?.textColor = Util.Color.VIOLET
         cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(item.price))/unit ($\(Util.doubleToDecimalString(item.price * Double(bridge.itemQuantity))) total)"
         cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 10)
