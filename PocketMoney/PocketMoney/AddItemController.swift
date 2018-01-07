@@ -103,7 +103,7 @@ extension AddItemController: UITextFieldDelegate {
                 nameLabel.textColor = UIColor.darkGray
                 nameView.changeUnderline(to: UIColor.darkGray)
             } else {
-                nameTextField.text = nameTextField.attributedText!.string
+                nameTextField.text = nameTextField.attributedText!.string.trimmingCharacters(in: .whitespacesAndNewlines)
                 nameTextField.textColor = Util.Color.VIOLET
                 autofill = nil
             }
@@ -135,6 +135,10 @@ extension AddItemController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
 
+        if newString == " " {
+            return false
+        }
+        
         if autofill != nil {
             if !autofill!.getAutofill().string.isEmpty {
                 // Check if adding or removing a character
@@ -170,6 +174,7 @@ extension AddItemController: UITextFieldDelegate {
         }
 
         if textField == nameTextField {
+            
             if autofill == nil {
                 autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
             }
