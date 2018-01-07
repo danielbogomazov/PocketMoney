@@ -77,6 +77,14 @@ extension AddItemController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == nameTextField {
+            
+            if autofill != nil {
+                let offset = autofill!.getString().string.count
+                if let newPosition = nameTextField.position(from: nameTextField.beginningOfDocument, offset: offset) {
+                    nameTextField.selectedTextRange = nameTextField.textRange(from: newPosition, to: newPosition)
+                }
+            }
+            
             nameLabel.textColor = Util.Color.BLUE
             nameView.changeUnderline(to: Util.Color.BLUE)
         } else if textField == priceTextField {
