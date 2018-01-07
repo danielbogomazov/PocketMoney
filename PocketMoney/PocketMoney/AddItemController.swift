@@ -131,7 +131,11 @@ extension AddItemController: UITextFieldDelegate {
             if newString.isEmpty {
                 validate(name: nameTextField.text!, price: priceTextField.text!, quantity: "0")
             } else {
-                validate(name: nameTextField.text!, price: priceTextField.text!, quantity: quantityTextField.text!)
+                if let quantity = Int16(newString) {
+                    quantityTextField.text = "\(quantity)"
+                    validate(name: nameTextField.text!, price: priceTextField.text!, quantity: "\(quantity)")
+                }
+                return false
             }
         }
         
