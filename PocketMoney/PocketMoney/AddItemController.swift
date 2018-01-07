@@ -98,9 +98,15 @@ extension AddItemController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == nameTextField && nameTextField.text!.isEmpty {
-            nameLabel.textColor = UIColor.darkGray
-            nameView.changeUnderline(to: UIColor.darkGray)
+        if textField == nameTextField {
+            if nameTextField.text!.isEmpty {
+                nameLabel.textColor = UIColor.darkGray
+                nameView.changeUnderline(to: UIColor.darkGray)
+            } else {
+                nameTextField.text = nameTextField.attributedText!.string
+                nameTextField.textColor = Util.Color.VIOLET
+                autofill = nil
+            }
         } else if textField == priceTextField {
             if priceTextField.text!.isEmpty {
                 priceTextField.text = "0.00"
