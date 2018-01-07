@@ -61,6 +61,13 @@ class ViewGoalController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func reloadGoal() {
+        bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
+        moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
+        itemTableView.reloadData()
+        goalsController.reloadGoals()
+    }
 
 }
 

@@ -37,7 +37,6 @@ class AddGoalController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Util.Color.VIOLET
         hideKeyboardOnTap()
 
         minimumDate = Util.addToDate(Date(), days: 1, months: 0, years: 0)
@@ -120,12 +119,11 @@ extension AddGoalController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
         if textField == titleTextField {
-            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             validate(title: newString, budget: Util.doubleToDecimalString(Double(budgetTextField.text!)!))
         } else if textField == budgetTextField {
-            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             if newString.isEmpty {
                 validate(title: titleTextField.text!, budget: "0.00")
             } else {
