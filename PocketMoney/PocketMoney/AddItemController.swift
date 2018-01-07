@@ -25,6 +25,8 @@ class AddItemController: UIViewController {
     
     @IBOutlet weak var addItemButton: UIButton!
     
+    var autofill: Autofill?
+    
     var viewGoalController: ViewGoalController!
     
     override func viewDidLoad() {
@@ -117,10 +119,30 @@ extension AddItemController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        var newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if autofill != nil {
+            let fullName = autofill!.getFullString().string
+            let index = fullName.index(fullName.startIndex, offsetBy: autofill!.getString().string.count)
+            print(String(nameTextField.text![...index]))
+            newString = String(nameTextField.text![...index])
+            autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+        }
 
         if textField == nameTextField {
+            if autofill == nil {
+                autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+            }
+
+            nameTextField.attributedText = autofill!.getFullString()
+            
+            let offset = newString.count
+            if let newPosition = nameTextField.position(from: nameTextField.beginningOfDocument, offset: offset) {
+                nameTextField.selectedTextRange = nameTextField.textRange(from: newPosition, to: newPosition)
+            }
+            
             validate(name: newString, price: Util.doubleToDecimalString(Double(priceTextField.text!)!), quantity: quantityTextField.text!)
+            return false
         } else if textField == priceTextField {
             if newString.isEmpty {
                 validate(name: nameTextField.text!, price: "0.00", quantity: quantityTextField.text!)
@@ -147,6 +169,7 @@ extension AddItemController: UITextFieldDelegate {
         return true
     }
 }
+
 
 
 

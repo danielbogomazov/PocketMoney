@@ -247,5 +247,31 @@ open class Util {
     open class func doubleToDecimalString(_ double: Double) -> String {
         return String(format: "%.2f", double)
     }
+    
+    open class func autofill(substring: String) -> String {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.sortDescriptors = sortDescriptor
+        fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[c] %@", substring as CVarArg)
+        do {
+            let item = try PersistenceService.context.fetch(fetchRequest)
+            if !item.isEmpty {
+                let name = item[0].name.lowercased()
+                let index = name.index(name.startIndex, offsetBy: substring.count)
+                let autofill = String(name[index...])
+                return autofill
+//                let fullString: NSMutableAttributedString = NSMutableAttributedString(string: substring, attributes: [NSAttributedStringKey.foregroundColor: Color.VIOLET])
+//                fullString.append(NSAttributedString(string: autofill, attributes: [NSAttributedStringKey.foregroundColor: Color.VIOLET.withAlphaComponent(0.3)]))
+//                return fullString
+            }
+        } catch {
+            // TODO
+        }
+        return ""
+    }
+    
+    open class func removeAutofill(string: NSAttributedString) -> String {
+        return ""
+    }
 }
 
