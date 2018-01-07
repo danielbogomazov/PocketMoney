@@ -122,11 +122,23 @@ extension AddItemController: UITextFieldDelegate {
         var newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
 
         if autofill != nil {
-            let fullName = autofill!.getFullString().string
-            let index = fullName.index(fullName.startIndex, offsetBy: autofill!.getString().string.count)
-            print(String(nameTextField.text![...index]))
-            newString = String(nameTextField.text![...index])
-            autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+            // Check if adding or removing a character
+            if nameTextField.text!.count < newString.count {
+                let fullName = autofill!.getFullString().string
+                let index = fullName.index(fullName.startIndex, offsetBy: autofill!.getString().string.count)
+                newString = String(newString[...index])
+                
+                if autofill!.getFullString().string != Util.loadItemWithName(name: newString, substring: true).lowercased() {
+                    autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+                } else {
+                    newString = String(nameTextField.text![...index])
+                    autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+                }
+            } else {
+                newString = autofill!.getString().string
+                newString.remove(at: newString.index(before: newString.endIndex))
+                autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+            }
         }
 
         if textField == nameTextField {

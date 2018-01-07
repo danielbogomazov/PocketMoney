@@ -158,6 +158,25 @@ open class Util {
         }
     }
     
+    open class func loadItemWithName(name: String, substring: Bool) -> String {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[c] %@", name as CVarArg)
+        if substring {
+            let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
+            fetchRequest.sortDescriptors = sortDescriptor
+        }
+        do {
+            let item = try PersistenceService.context.fetch(fetchRequest)
+            if !item.isEmpty {
+                return item[0].name
+            }
+        } catch {
+            
+        }
+        return ""
+    }
+
+    
     open class func findItemInGoal(_ goal: Goal, item: Item) -> GoalItemBridge? {
         if let bridges: [GoalItemBridge] = goal.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
@@ -249,29 +268,16 @@ open class Util {
     }
     
     open class func autofill(substring: String) -> String {
-        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
-        fetchRequest.sortDescriptors = sortDescriptor
-        fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[c] %@", substring as CVarArg)
-        do {
-            let item = try PersistenceService.context.fetch(fetchRequest)
-            if !item.isEmpty {
-                let name = item[0].name.lowercased()
-                let index = name.index(name.startIndex, offsetBy: substring.count)
-                let autofill = String(name[index...])
-                return autofill
-//                let fullString: NSMutableAttributedString = NSMutableAttributedString(string: substring, attributes: [NSAttributedStringKey.foregroundColor: Color.VIOLET])
-//                fullString.append(NSAttributedString(string: autofill, attributes: [NSAttributedStringKey.foregroundColor: Color.VIOLET.withAlphaComponent(0.3)]))
-//                return fullString
-            }
-        } catch {
-            // TODO
+        let name = loadItemWithName(name: substring, substring: true).lowercased()
+        
+        if !name.isEmpty {
+            let index = name.index(name.startIndex, offsetBy: substring.count)
+            let autofill = String(name[index...])
+            return autofill
         }
+        
         return ""
     }
     
-    open class func removeAutofill(string: NSAttributedString) -> String {
-        return ""
-    }
 }
 
