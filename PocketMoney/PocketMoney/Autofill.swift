@@ -24,6 +24,10 @@ class Autofill {
         return string
     }
     
+    public func getAutofill() -> NSMutableAttributedString {
+        return autofill
+    }
+    
     public func setString(to string: String) {
         self.string = NSMutableAttributedString(string: string, attributes: [NSAttributedStringKey.foregroundColor: Util.Color.VIOLET])
     }

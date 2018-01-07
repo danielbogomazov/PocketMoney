@@ -122,22 +122,36 @@ extension AddItemController: UITextFieldDelegate {
         var newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
 
         if autofill != nil {
-            // Check if adding or removing a character
-            if nameTextField.text!.count < newString.count {
-                let fullName = autofill!.getFullString().string
-                let index = fullName.index(fullName.startIndex, offsetBy: autofill!.getString().string.count)
-                newString = String(newString[...index])
-                
-                if autofill!.getFullString().string != Util.loadItemWithName(name: newString, substring: true).lowercased() {
-                    autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+            if !autofill!.getAutofill().string.isEmpty {
+                // Check if adding or removing a character
+                if nameTextField.text!.count < newString.count {
+                    let fullName = autofill!.getFullString().string
+                    let index = fullName.index(fullName.startIndex, offsetBy: autofill!.getString().string.count)
+                    newString = String(newString[...index])
+                    
+                    if autofill!.getFullString().string != Util.loadItemWithName(name: newString, substring: true).lowercased() {
+                        autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+                    } else {
+                        newString = String(nameTextField.text![...index])
+                        autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+                    }
+                    
                 } else {
-                    newString = String(nameTextField.text![...index])
+                    newString = autofill!.getString().string
+                    newString.remove(at: newString.index(before: newString.endIndex))
                     autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
                 }
             } else {
-                newString = autofill!.getString().string
-                newString.remove(at: newString.index(before: newString.endIndex))
                 autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
+                if !autofill!.getAutofill().string.isEmpty {
+                    nameTextField.attributedText = autofill!.getFullString()
+                    let offset = newString.count
+                    if let newPosition = nameTextField.position(from: nameTextField.beginningOfDocument, offset: offset) {
+                        nameTextField.selectedTextRange = nameTextField.textRange(from: newPosition, to: newPosition)
+                    }
+                    return false
+                }
+                return true
             }
         }
 
@@ -146,6 +160,11 @@ extension AddItemController: UITextFieldDelegate {
                 autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
             }
 
+            if autofill!.getAutofill().string.isEmpty {
+                nameTextField.text = newString
+                return false
+            }
+            
             nameTextField.attributedText = autofill!.getFullString()
             
             let offset = newString.count
