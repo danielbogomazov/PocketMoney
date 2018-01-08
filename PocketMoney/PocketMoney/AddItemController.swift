@@ -102,8 +102,8 @@ extension AddItemController: UITextFieldDelegate {
             if nameTextField.text!.isEmpty {
                 nameLabel.textColor = UIColor.darkGray
                 nameView.changeUnderline(to: UIColor.darkGray)
-            } else {
-                nameTextField.text = nameTextField.attributedText!.string.trimmingCharacters(in: .whitespacesAndNewlines)
+            } else if autofill != nil {
+                nameTextField.text = autofill!.getString().string
                 nameTextField.textColor = Util.Color.VIOLET
                 autofill = nil
             }
@@ -130,6 +130,7 @@ extension AddItemController: UITextFieldDelegate {
                 quantityView.changeUnderline(to: UIColor.darkGray)
             }
         }
+        validate(name: nameTextField.text!, price: priceTextField.text!, quantity: quantityTextField.text!)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -167,8 +168,10 @@ extension AddItemController: UITextFieldDelegate {
                     if let newPosition = nameTextField.position(from: nameTextField.beginningOfDocument, offset: offset) {
                         nameTextField.selectedTextRange = nameTextField.textRange(from: newPosition, to: newPosition)
                     }
+                    validate(name: nameTextField.attributedText!.string, price: Util.doubleToDecimalString(Double(priceTextField.text!)!), quantity: quantityTextField.text!)
                     return false
                 }
+                validate(name: newString, price: priceTextField.text!, quantity: quantityTextField.text!)
                 return true
             }
         }
@@ -181,6 +184,7 @@ extension AddItemController: UITextFieldDelegate {
 
             if autofill!.getAutofill().string.isEmpty {
                 nameTextField.text = newString
+                validate(name: nameTextField.text!, price: Util.doubleToDecimalString(Double(priceTextField.text!)!), quantity: quantityTextField.text!)
                 return false
             }
             
@@ -210,11 +214,17 @@ extension AddItemController: UITextFieldDelegate {
                 return false
             }
         }
-        
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        if textField == nameTextField {
+            nameTextField.text = nameTextField.attributedText!.string.trimmingCharacters(in: .whitespacesAndNewlines)
+            nameTextField.textColor = Util.Color.VIOLET
+            autofill = nil
+        }
+        
         view.endEditing(true)
         return true
     }
