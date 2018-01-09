@@ -158,9 +158,23 @@ open class Util {
         }
     }
     
-    open class func loadItemWithName(name: String, substring: Bool) -> String {
+    open class func loadItemWithName(name: String) -> Item? {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[c] %@", name as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[cd] %@", name as CVarArg)
+        do {
+            let item = try PersistenceService.context.fetch(fetchRequest)
+            if !item.isEmpty {
+                return item[0]
+            }
+        } catch {
+            
+        }
+        return nil
+    }
+    
+    open class func findItemWithName(name: String, substring: Bool) -> String {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[cd] %@", name as CVarArg)
         if substring {
             let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
             fetchRequest.sortDescriptors = sortDescriptor
@@ -180,7 +194,7 @@ open class Util {
     open class func findItemInGoal(_ goal: Goal, item: Item) -> GoalItemBridge? {
         if let bridges: [GoalItemBridge] = goal.goalItemBridges?.allObjects as? [GoalItemBridge] {
             for bridge in bridges {
-                if bridge.item.id == item.id {
+                if bridge.item == item {
                     return bridge
                 }
             }
@@ -204,7 +218,7 @@ open class Util {
         }
         PersistenceService.saveContext()
     }
-
+    
     // MARK:- Date functions
     
     open class func stringToDate(_ date: String) -> Date {
@@ -268,7 +282,7 @@ open class Util {
     }
     
     open class func autofill(substring: String) -> String {
-        let name = loadItemWithName(name: substring, substring: true).lowercased()
+        let name = findItemWithName(name: substring, substring: true).lowercased()
         
         if !name.isEmpty {
             let index = name.index(name.startIndex, offsetBy: substring.count)

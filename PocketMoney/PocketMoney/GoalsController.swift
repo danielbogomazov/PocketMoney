@@ -24,6 +24,7 @@ class GoalsController: UIViewController {
         navigationController!.navigationBar.barTintColor = Util.Color.VIOLET
         
         Util.deleteGoals()
+        Util.deleteItems()
         currentGoals = Util.loadAllOngoingGoals()
         
         //MARK:- PRODUCTION CODE -- REMOVE AFTER TESTING
@@ -52,7 +53,6 @@ class GoalsController: UIViewController {
             Util.addItemToGoal(currentGoals[4], item: Util.createItem(name: "100%", price: 80.0), quantity: 1)
             Util.addItemToGoal(currentGoals[5], item: Util.createItem(name: "100%", price: 100.0), quantity: 1)
             Util.addItemToGoal(currentGoals[6], item: Util.createItem(name: "200%", price: 200.0), quantity: 1)
-
         }
     }
     

@@ -57,19 +57,16 @@ class AddItemController: UIViewController {
     }
     
     @IBAction func addItemTapped(_ sender: UIButton) {
-        for bridge in viewGoalController.bridges {
-            if bridge.item.name.lowercased() == nameTextField.text!.lowercased() && Util.doubleToDecimalString(bridge.item.price) == priceTextField.text! {
-                bridge.itemQuantity += Int16(quantityTextField.text!)!
-                viewGoalController.reloadGoal()
-                navigationController?.popViewController(animated: true)
-                return
-            }
+        if let item = Util.loadItemWithName(name: nameTextField.text!) {
+            Util.addItemToGoal(viewGoalController.goal, item: item, quantity: Int16(quantityTextField.text!)!)
+            viewGoalController.reloadGoal()
+            navigationController?.popViewController(animated: true)
+        } else {
+            let newItem = Util.createItem(name: nameTextField.text!, price: Double(priceTextField.text!)!)
+            Util.addItemToGoal(viewGoalController.goal, item: newItem, quantity: Int16(quantityTextField.text!)!)
+            viewGoalController.reloadGoal()
+            navigationController?.popViewController(animated: true)
         }
-
-        let newItem = Util.createItem(name: nameTextField.text!, price: Double(priceTextField.text!)!)
-        Util.addItemToGoal(viewGoalController.goal, item: newItem, quantity: Int16(quantityTextField.text!)!)
-        viewGoalController.reloadGoal()
-        navigationController?.popViewController(animated: true)
     }
     
     func validate(name: String, price: String, quantity: String) {
@@ -158,7 +155,7 @@ extension AddItemController: UITextFieldDelegate {
                     let index = fullName.index(fullName.startIndex, offsetBy: autofill!.getString().string.count)
                     newString = String(newString[...index])
                     
-                    if autofill!.getFullString().string != Util.loadItemWithName(name: newString, substring: true).lowercased() {
+                    if autofill!.getFullString().string != Util.findItemWithName(name: newString, substring: true).lowercased() {
                         autofill = Autofill(string: newString, autofill: Util.autofill(substring: newString))
                     } else {
                         newString = String(nameTextField.text![...index])
