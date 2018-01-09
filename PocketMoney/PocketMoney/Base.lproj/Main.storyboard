@@ -495,7 +495,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="addGoalTapped:" destination="zoB-fT-teJ" eventType="touchUpInside" id="Oc7-vC-6kJ"/>
+                                            <action selector="addGoalButtonPressed:" destination="zoB-fT-teJ" eventType="touchUpInside" id="GmH-zU-FME"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61k-s9-FiW">
@@ -556,7 +556,7 @@
                         <viewLayoutGuide key="safeArea" id="RYQ-jC-8id"/>
                     </view>
                     <connections>
-                        <outlet property="addGoalButton" destination="MjX-lw-TJU" id="16z-mH-kdJ"/>
+                        <outlet property="addGoalButton" destination="MjX-lw-TJU" id="ZUh-wz-QYz"/>
                         <outlet property="budgetLabel" destination="JDI-KH-iqW" id="a9d-ZG-UMC"/>
                         <outlet property="budgetTextField" destination="zeV-3V-wHO" id="VTK-Ed-cu3"/>
                         <outlet property="budgetView" destination="McA-FE-VTH" id="JQe-9g-Ahc"/>

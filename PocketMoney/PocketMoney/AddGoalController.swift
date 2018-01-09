@@ -23,10 +23,6 @@ class AddGoalController: UIViewController {
     @IBOutlet weak var expiryLabel: UILabel!
     @IBOutlet weak var expiryDatePicker: UIDatePicker!
     
-    @IBOutlet weak var descriptionView: UIView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    
     @IBOutlet weak var addGoalButton: UIButton!
     
     var minimumDate: Date!
@@ -50,7 +46,6 @@ class AddGoalController: UIViewController {
         titleView.addUnderline(color: UIColor.darkGray)
         budgetView.addUnderline(color: UIColor.darkGray)
         expiryView.addUnderline(color: Util.Color.BLUE)
-        descriptionView.addUnderline(color: UIColor.darkGray)
         expiryLabel.textColor = Util.Color.BLUE
 
         budgetTextField.text = "0.00"
@@ -140,20 +135,3 @@ extension AddGoalController: UITextFieldDelegate {
     }
 }
 
-extension AddGoalController: UITextViewDelegate {
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView == descriptionTextView {
-            descriptionLabel.textColor = Util.Color.BLUE
-            descriptionView.changeUnderline(to: Util.Color.BLUE)
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView == descriptionTextView && descriptionTextView.text.isEmpty {
-            descriptionLabel.textColor = UIColor.darkGray
-            descriptionView.changeUnderline(to: UIColor.darkGray)
-        }
-    }
-    
-}
