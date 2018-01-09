@@ -57,6 +57,14 @@ class AddItemController: UIViewController {
     }
     
     @IBAction func addItemTapped(_ sender: UIButton) {
+        for bridge in viewGoalController.bridges {
+            if bridge.item.name.lowercased() == nameTextField.text!.lowercased() && Util.doubleToDecimalString(bridge.item.price) == priceTextField.text! {
+                bridge.itemQuantity += Int16(quantityTextField.text!)!
+                viewGoalController.reloadGoal()
+                return
+            }
+        }
+
         let newItem = Util.createItem(name: nameTextField.text!, price: Double(priceTextField.text!)!)
         Util.addItemToGoal(viewGoalController.goal, item: newItem, quantity: Int16(quantityTextField.text!)!)
         viewGoalController.reloadGoal()
