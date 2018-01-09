@@ -61,6 +61,7 @@ class AddItemController: UIViewController {
             if bridge.item.name.lowercased() == nameTextField.text!.lowercased() && Util.doubleToDecimalString(bridge.item.price) == priceTextField.text! {
                 bridge.itemQuantity += Int16(quantityTextField.text!)!
                 viewGoalController.reloadGoal()
+                navigationController?.popViewController(animated: true)
                 return
             }
         }
@@ -68,6 +69,7 @@ class AddItemController: UIViewController {
         let newItem = Util.createItem(name: nameTextField.text!, price: Double(priceTextField.text!)!)
         Util.addItemToGoal(viewGoalController.goal, item: newItem, quantity: Int16(quantityTextField.text!)!)
         viewGoalController.reloadGoal()
+        navigationController?.popViewController(animated: true)
     }
     
     func validate(name: String, price: String, quantity: String) {
