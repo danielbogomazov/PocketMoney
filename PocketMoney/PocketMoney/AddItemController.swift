@@ -223,6 +223,16 @@ extension AddItemController: UITextFieldDelegate {
             nameTextField.text = nameTextField.attributedText!.string.trimmingCharacters(in: .whitespacesAndNewlines)
             nameTextField.textColor = Util.Color.VIOLET
             autofill = nil
+            
+            for bridge in viewGoalController.bridges {
+                if bridge.item.name.lowercased() == nameTextField.text!.lowercased() {
+                    priceTextField.text = Util.doubleToDecimalString(bridge.item.price)
+                    currencyButton.setTitleColor(Util.Color.BLUE, for: .normal)
+                    priceLabel.textColor = Util.Color.BLUE
+                    priceView.changeUnderline(to: Util.Color.BLUE)
+                    break
+                }
+            }
         }
         
         view.endEditing(true)
