@@ -57,7 +57,7 @@ class AddItemController: UIViewController {
     }
     
     @IBAction func addItemTapped(_ sender: UIButton) {
-        if let item = Util.loadItemWithName(name: nameTextField.text!) {
+        if let item = Util.loadItemWithName(name: nameTextField.text!), item.price == Double(priceTextField.text!)! {
             Util.addItemToGoal(viewGoalController.goal, item: item, quantity: Int16(quantityTextField.text!)!)
             viewGoalController.reloadGoal()
             navigationController?.popViewController(animated: true)
