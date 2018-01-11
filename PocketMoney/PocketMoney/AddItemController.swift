@@ -57,16 +57,20 @@ class AddItemController: UIViewController {
     }
     
     @IBAction func addItemTapped(_ sender: UIButton) {
-        if let item = Util.loadItemWithName(name: nameTextField.text!), item.price == Double(priceTextField.text!)! {
-            Util.addItemToGoal(viewGoalController.goal, item: item, quantity: Int16(quantityTextField.text!)!)
-            viewGoalController.reloadGoal()
-            navigationController?.popViewController(animated: true)
-        } else {
-            let newItem = Util.createItem(name: nameTextField.text!, price: Double(priceTextField.text!)!)
-            Util.addItemToGoal(viewGoalController.goal, item: newItem, quantity: Int16(quantityTextField.text!)!)
-            viewGoalController.reloadGoal()
-            navigationController?.popViewController(animated: true)
+        let items = Util.loadItemsWithName(name: nameTextField.text!)
+        for item in items {
+            if item.price == Double(priceTextField.text!)! {
+                Util.addItemToGoal(viewGoalController.goal, item: item, quantity: Int16(quantityTextField.text!)!)
+                viewGoalController.reloadGoal()
+                navigationController?.popViewController(animated: true)
+                return
+            }
         }
+        
+        let newItem = Util.createItem(name: nameTextField.text!, price: Double(priceTextField.text!)!)
+        Util.addItemToGoal(viewGoalController.goal, item: newItem, quantity: Int16(quantityTextField.text!)!)
+        viewGoalController.reloadGoal()
+        navigationController?.popViewController(animated: true)
     }
     
     func validate(name: String, price: String, quantity: String) {
@@ -245,14 +249,11 @@ extension AddItemController: UITextFieldDelegate {
         view.endEditing(true)
         return true
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        if textField == nameTextField {
+            validate(name: "", price: Util.doubleToDecimalString(Double(priceTextField.text!)!), quantity: quantityTextField.text!)
+        }
+        return true
+    }
 }
-
-
-
-
-
-
-
-
-
-

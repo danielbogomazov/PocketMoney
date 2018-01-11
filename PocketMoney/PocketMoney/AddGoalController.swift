@@ -133,5 +133,12 @@ extension AddGoalController: UITextFieldDelegate {
         view.endEditing(true)
         return true
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        if textField == titleTextField {
+            validate(title: "", budget: Util.doubleToDecimalString(Double(budgetTextField.text!)!))
+        }
+        return true
+    }
 }
 

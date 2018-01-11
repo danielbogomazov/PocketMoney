@@ -172,6 +172,20 @@ open class Util {
         return nil
     }
     
+    open class func loadItemsWithName(name: String) -> [Item] {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[cd] %@", name as CVarArg)
+        do {
+            let item = try PersistenceService.context.fetch(fetchRequest)
+            if !item.isEmpty {
+                return item
+            }
+        } catch {
+            
+        }
+        return []
+    }
+    
     open class func findItemWithName(name: String, substring: Bool) -> String {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[cd] %@", name as CVarArg)
