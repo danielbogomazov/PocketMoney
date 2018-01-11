@@ -337,19 +337,6 @@
                                     <constraint firstAttribute="trailing" secondItem="xcI-fI-4sM" secondAttribute="trailing" constant="8" id="pjg-11-XRg"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIT-D4-Zbq">
-                                <rect key="frame" x="16" y="344" width="343" height="36"/>
-                                <color key="backgroundColor" red="1" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="UZn-6p-rFS"/>
-                                </constraints>
-                                <state key="normal" title="Add Item">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="addItemTapped:" destination="MTP-54-cSt" eventType="touchUpInside" id="otv-OU-shf"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -357,19 +344,15 @@
                             <constraint firstItem="eRo-2Y-pQd" firstAttribute="leading" secondItem="mZQ-7Y-yKo" secondAttribute="leading" constant="16" id="FO3-WG-oza"/>
                             <constraint firstItem="mZQ-7Y-yKo" firstAttribute="trailing" secondItem="HnX-0r-qyJ" secondAttribute="trailing" constant="16" id="Fdy-Ji-5Va"/>
                             <constraint firstItem="xBx-RA-0XX" firstAttribute="top" secondItem="mZQ-7Y-yKo" secondAttribute="top" constant="20" id="Nez-pY-ebh"/>
-                            <constraint firstItem="zIT-D4-Zbq" firstAttribute="leading" secondItem="mZQ-7Y-yKo" secondAttribute="leading" constant="16" id="Of2-I6-hpn"/>
                             <constraint firstItem="mZQ-7Y-yKo" firstAttribute="trailing" secondItem="eRo-2Y-pQd" secondAttribute="trailing" constant="16" id="Qr5-A4-oe0"/>
                             <constraint firstItem="mZQ-7Y-yKo" firstAttribute="trailing" secondItem="xBx-RA-0XX" secondAttribute="trailing" constant="16" id="TJ6-gM-rSM"/>
-                            <constraint firstItem="mZQ-7Y-yKo" firstAttribute="trailing" secondItem="zIT-D4-Zbq" secondAttribute="trailing" constant="16" id="dsu-4p-uMz"/>
                             <constraint firstItem="HnX-0r-qyJ" firstAttribute="top" secondItem="xBx-RA-0XX" secondAttribute="bottom" constant="32" id="gYm-Bi-3uK"/>
-                            <constraint firstItem="zIT-D4-Zbq" firstAttribute="top" secondItem="eRo-2Y-pQd" secondAttribute="bottom" constant="70" id="gvi-Bx-le1"/>
                             <constraint firstItem="eRo-2Y-pQd" firstAttribute="top" secondItem="HnX-0r-qyJ" secondAttribute="bottom" constant="32" id="mtd-Xx-fCm"/>
                             <constraint firstItem="HnX-0r-qyJ" firstAttribute="leading" secondItem="mZQ-7Y-yKo" secondAttribute="leading" constant="16" id="vez-D7-nYv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mZQ-7Y-yKo"/>
                     </view>
                     <connections>
-                        <outlet property="addItemButton" destination="zIT-D4-Zbq" id="C67-Tr-gDc"/>
                         <outlet property="currencyButton" destination="WIx-z6-mv3" id="7wb-P4-KnW"/>
                         <outlet property="nameLabel" destination="bSc-jo-NdF" id="P4D-xN-PeE"/>
                         <outlet property="nameTextField" destination="nTW-hh-rfZ" id="54u-12-wKw"/>
@@ -485,19 +468,6 @@
                                             <constraint firstAttribute="trailing" secondItem="zeV-3V-wHO" secondAttribute="trailing" constant="8" id="zxm-JP-BhN"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjX-lw-TJU">
-                                        <rect key="frame" x="16" y="412" width="343" height="36"/>
-                                        <color key="backgroundColor" red="1" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="eSY-d3-YrH"/>
-                                        </constraints>
-                                        <state key="normal" title="Add Goal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addGoalTapped:" destination="zoB-fT-teJ" eventType="touchUpInside" id="Oc7-vC-6kJ"/>
-                                        </connections>
-                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61k-s9-FiW">
                                         <rect key="frame" x="16" y="214" width="343" height="128"/>
                                         <subviews>
@@ -537,11 +507,8 @@
                                     <constraint firstItem="61k-s9-FiW" firstAttribute="top" secondItem="McA-FE-VTH" secondAttribute="bottom" constant="32" id="A0P-9y-oy2"/>
                                     <constraint firstAttribute="trailing" secondItem="61k-s9-FiW" secondAttribute="trailing" constant="16" id="QAa-Kt-Sto"/>
                                     <constraint firstItem="McA-FE-VTH" firstAttribute="top" secondItem="Zus-fB-ngP" secondAttribute="bottom" constant="32" id="ScV-bQ-8yn"/>
-                                    <constraint firstItem="MjX-lw-TJU" firstAttribute="leading" secondItem="qQZ-M3-psH" secondAttribute="leading" constant="16" id="TtP-Fr-IBT"/>
                                     <constraint firstItem="Zus-fB-ngP" firstAttribute="top" secondItem="qQZ-M3-psH" secondAttribute="top" constant="20" id="a7g-Bt-mje"/>
-                                    <constraint firstItem="MjX-lw-TJU" firstAttribute="top" secondItem="61k-s9-FiW" secondAttribute="bottom" constant="70" id="fVP-9e-Me2"/>
                                     <constraint firstItem="61k-s9-FiW" firstAttribute="leading" secondItem="qQZ-M3-psH" secondAttribute="leading" constant="16" id="gEs-Dj-e0Q"/>
-                                    <constraint firstAttribute="trailing" secondItem="MjX-lw-TJU" secondAttribute="trailing" constant="16" id="lkf-bk-z3s"/>
                                     <constraint firstAttribute="trailing" secondItem="Zus-fB-ngP" secondAttribute="trailing" constant="16" id="sOU-Pu-YDn"/>
                                     <constraint firstItem="Zus-fB-ngP" firstAttribute="leading" secondItem="qQZ-M3-psH" secondAttribute="leading" constant="16" id="zKV-di-KHt"/>
                                 </constraints>
@@ -556,7 +523,6 @@
                         <viewLayoutGuide key="safeArea" id="RYQ-jC-8id"/>
                     </view>
                     <connections>
-                        <outlet property="addGoalButton" destination="MjX-lw-TJU" id="16z-mH-kdJ"/>
                         <outlet property="budgetLabel" destination="JDI-KH-iqW" id="a9d-ZG-UMC"/>
                         <outlet property="budgetTextField" destination="zeV-3V-wHO" id="VTK-Ed-cu3"/>
                         <outlet property="budgetView" destination="McA-FE-VTH" id="JQe-9g-Ahc"/>

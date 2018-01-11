@@ -22,9 +22,7 @@ class AddGoalController: UIViewController {
     @IBOutlet weak var expiryView: UIView!
     @IBOutlet weak var expiryLabel: UILabel!
     @IBOutlet weak var expiryDatePicker: UIDatePicker!
-    
-    @IBOutlet weak var addGoalButton: UIButton!
-    
+        
     var minimumDate: Date!
     var maximumDate: Date!
     
@@ -34,6 +32,13 @@ class AddGoalController: UIViewController {
         super.viewDidLoad()
         
         hideKeyboardOnTap()
+        
+        let button = UIButton(type: .custom)
+        button.setImage(#imageLiteral(resourceName: "checkmark"), for: .normal)
+        button.addTarget(self, action: #selector(addGoalTapped), for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
+        self.navigationItem.rightBarButtonItem!.isEnabled = false
 
         minimumDate = Util.addToDate(Date(), days: 1, months: 0, years: 0)
         maximumDate = Util.addToDate(Date(), days: 0, months: 0, years: 100)
@@ -50,9 +55,6 @@ class AddGoalController: UIViewController {
 
         budgetTextField.text = "0.00"
         budgetTextField.keyboardType = .decimalPad
-        
-        addGoalButton.isEnabled = false
-        addGoalButton.backgroundColor = Util.Color.RED.withAlphaComponent(0.3)
         
     }
 
@@ -72,11 +74,9 @@ class AddGoalController: UIViewController {
     
     func validate(title: String, budget: String) {
         if title.isEmpty || budget == "0.00" {
-            addGoalButton.isEnabled = false
-            addGoalButton.backgroundColor = Util.Color.RED.withAlphaComponent(0.3)
+            self.navigationItem.rightBarButtonItem!.isEnabled = false
         } else {
-            addGoalButton.isEnabled = true
-            addGoalButton.backgroundColor = Util.Color.RED
+            self.navigationItem.rightBarButtonItem!.isEnabled = true
         }
     }
     

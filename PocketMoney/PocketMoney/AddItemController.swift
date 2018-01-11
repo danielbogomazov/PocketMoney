@@ -23,8 +23,6 @@ class AddItemController: UIViewController {
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var quantityTextField: UITextField!
     
-    @IBOutlet weak var addItemButton: UIButton!
-    
     var autofill: Autofill?
     
     var viewGoalController: ViewGoalController!
@@ -33,6 +31,13 @@ class AddItemController: UIViewController {
         super.viewDidLoad()
 
         hideKeyboardOnTap()
+        
+        let button = UIButton(type: .custom)
+        button.setImage(#imageLiteral(resourceName: "checkmark"), for: .normal)
+        button.addTarget(self, action: #selector(addItemTapped), for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
+        self.navigationItem.rightBarButtonItem!.isEnabled = false
         
         nameView.addUnderline(color: UIColor.darkGray)
         priceView.addUnderline(color: UIColor.darkGray)
@@ -43,9 +48,6 @@ class AddItemController: UIViewController {
         
         quantityTextField.text = "0"
         quantityTextField.keyboardType = .numberPad
-        
-        addItemButton.isEnabled = false
-        addItemButton.backgroundColor = Util.Color.RED.withAlphaComponent(0.3)
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,11 +77,9 @@ class AddItemController: UIViewController {
     
     func validate(name: String, price: String, quantity: String) {
         if name.isEmpty || price == "0.00" || quantity == "0" {
-            addItemButton.isEnabled = false
-            addItemButton.backgroundColor = Util.Color.RED.withAlphaComponent(0.3)
+            self.navigationItem.rightBarButtonItem!.isEnabled = false
         } else {
-            addItemButton.isEnabled = true
-            addItemButton.backgroundColor = Util.Color.RED
+            self.navigationItem.rightBarButtonItem!.isEnabled = true
         }
     }
 }
