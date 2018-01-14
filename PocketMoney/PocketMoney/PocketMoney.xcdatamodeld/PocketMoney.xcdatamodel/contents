@@ -13,6 +13,7 @@
     <entity name="GoalItemBridge" representedClassName="GoalItemBridge" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="itemQuantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="goalItemBridges" inverseEntity="Goal" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="goalItemBridges" inverseEntity="Item" syncable="YES"/>
     </entity>
@@ -24,7 +25,7 @@
     </entity>
     <elements>
         <element name="Goal" positionX="-101" positionY="72" width="128" height="165"/>
-        <element name="GoalItemBridge" positionX="-99" positionY="45" width="128" height="105"/>
+        <element name="GoalItemBridge" positionX="-99" positionY="45" width="128" height="120"/>
         <element name="Item" positionX="-117" positionY="-99" width="128" height="105"/>
     </elements>
 </model>

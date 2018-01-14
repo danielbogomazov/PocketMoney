@@ -219,6 +219,7 @@ open class Util {
     open class func addItemToGoal(_ goal: Goal, item: Item, quantity: Int16) {
         if let bridge = findItemInGoal(goal, item: item) {
             bridge.itemQuantity += quantity
+            bridge.lastUpdated = Date()
             goal.amountSpent += item.price * Double(quantity)
         } else {
             let bridge = GoalItemBridge(context: PersistenceService.context)
@@ -226,6 +227,7 @@ open class Util {
             bridge.goal = goal
             bridge.item = item
             bridge.itemQuantity = quantity
+            bridge.lastUpdated = Date()
             
             goal.amountSpent += item.price * Double(quantity)
             goal.addToGoalItemBridges(bridge)

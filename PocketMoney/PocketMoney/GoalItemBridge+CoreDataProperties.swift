@@ -19,6 +19,7 @@ extension GoalItemBridge {
 
     @NSManaged public var id: UUID
     @NSManaged public var itemQuantity: Int16
+    @NSManaged public var lastUpdated: Date
     @NSManaged public var item: Item
     @NSManaged public var goal: Goal
 
