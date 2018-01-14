@@ -156,7 +156,7 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.section == 1 {
             goal = archiveGoals[indexPath.row]
         } else {
-            return UITableViewCell()
+            fatalError("GoalsController - cellForRowAt - index out of bounds")
         }
 
         var color: UIColor!
