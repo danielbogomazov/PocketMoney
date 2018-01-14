@@ -18,10 +18,10 @@ class ViewGoalController: UIViewController {
     @IBOutlet weak var remainingDaysLabel: UILabel!
 
     /// Dollar value remaining
-    @IBOutlet weak var dollarLabel: UILabel!
+    @IBOutlet weak var budgetLabel: UILabel!
     /// Cent value remaining
-//    @IBOutlet weak var centLabel: UILabel!
-
+    @IBOutlet weak var centLabel: UILabel!
+    
     /// Current goal - set in root controller before segue
     var goal: Goal!
     /// Reference to goal's items + quantity
@@ -32,31 +32,20 @@ class ViewGoalController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         /// Right bar button - segue to AddItemController
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.white
-        
-        /// Set up
+        /// Change color
+        endDateLabel.textColor = Util.Color.BLUE
+        centLabel.textColor = Util.Color.BLUE
+        /// Load data
         bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
-        setLabelTint()
-        
-
-//        expiryDateLabel.textColor = Util.Color.RED
-//        let daysUntilExpiration = Int(goal.endDate.timeIntervalSince(goal.startDate))/60/60/24 + 1
-//        if daysUntilExpiration < 0 {
-//            expiryDateLabel.text = "Expired \(daysUntilExpiration * -1) "
-//            daysUntilExpiration == -1 ? expiryDateLabel.text?.append("day ago") : expiryDateLabel.text?.append("days ago")
-//        } else if daysUntilExpiration > 0 {
-//            expiryDateLabel.text = "Expires in \(daysUntilExpiration) "
-//            daysUntilExpiration == 1 ? expiryDateLabel.text?.append("day") : expiryDateLabel.text?.append("days")
-//        } else {
-//            expiryDateLabel.text = "Expires today"
-//        }
-//
-//        moneySpentLabel.textColor = Util.Color.VIOLET
-//        moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
-        
+        endDateLabel.text = Util.dateToReadableString(goal.endDate)
+        remainingDaysLabel.text = "(" + "\(Int(goal.endDate.timeIntervalSince(goal.startDate)/60/60/24+1))" + " days)"
+        let dollar = Int(goal.amountSpent)
+        budgetLabel.text = "$" + "\(dollar)"
+        let cent = Int((goal.amountSpent - Double(dollar)) * 100)
+        centLabel.text = "\(cent)"        
     }
     
     @objc func addTapped() {
@@ -83,12 +72,6 @@ class ViewGoalController: UIViewController {
         itemTableView.reloadData()
         goalsController.reloadGoals()
     }
-    
-    func setLabelTint() {
-        endDateLabel.textColor = Util.Color.BLUE
-//        dollarLabel.textColor = UIColor.black.withAlphaComponent(0.8)
-    }
-
 }
 
 extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {

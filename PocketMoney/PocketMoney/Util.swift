@@ -256,7 +256,7 @@ open class Util {
     
     open class func dateToReadableString(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, yyyy"
+        formatter.dateFormat = "MM-dd-yy"
         return formatter.string(from: date)
     }
     

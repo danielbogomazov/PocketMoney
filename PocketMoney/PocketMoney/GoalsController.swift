@@ -66,9 +66,6 @@ class GoalsController: UIViewController {
             
             Util.addItemToGoal(archiveGoals[2], item: Util.createItem(name: "ITEM ONE", price: 10.0), quantity: 1)
             Util.addItemToGoal(archiveGoals[2], item: Util.createItem(name: "ITEM TWO", price: 10.0), quantity: 13)
-
-
-
             
         }
     }
