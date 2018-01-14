@@ -16,19 +16,18 @@ class ViewGoalController: UIViewController {
     @IBOutlet weak var endDateLabel: UILabel!
     /// Remaining days of goal
     @IBOutlet weak var remainingDaysLabel: UILabel!
-
     /// Dollar value remaining
     @IBOutlet weak var budgetLabel: UILabel!
     /// Cent value remaining
     @IBOutlet weak var centLabel: UILabel!
-    
-    /// Current goal - set in root controller before segue
-    var goal: Goal!
-    /// Reference to goal's items + quantity
-    var bridges: [GoalItemBridge] = []
-
+    /// Recent transactions
+    @IBOutlet weak var transactionsTableView: UITableView!
     /// Root controller
     var goalsController: GoalsController!
+    /// Current goal - set in root controller before segue
+    var goal: Goal!
+    /// Reference to goal's items + quantity - sorted by last update
+    var bridges: [GoalItemBridge] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +37,24 @@ class ViewGoalController: UIViewController {
         /// Change color
         endDateLabel.textColor = Util.Color.BLUE
         centLabel.textColor = Util.Color.BLUE
-        /// Load data
-        bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
+        /// End labels
         endDateLabel.text = Util.dateToReadableString(goal.endDate)
-        remainingDaysLabel.text = "(" + "\(Int(goal.endDate.timeIntervalSince(goal.startDate)/60/60/24+1))" + " days)"
+        let days = Int(goal.endDate.timeIntervalSince(goal.startDate)/60/60/24+1)
+        remainingDaysLabel.text = "(" + "\(days) "
+        if days <= 1 {
+            remainingDaysLabel.text!.append("day)")
+        } else {
+            remainingDaysLabel.text!.append("days)")
+        }
+        /// Budget labels
         let dollar = Int(goal.amountSpent)
         budgetLabel.text = "$" + "\(dollar)"
         let cent = Int((goal.amountSpent - Double(dollar)) * 100)
-        centLabel.text = "\(cent)"        
-    }
+        centLabel.text = "\(cent)"
+        /// Load goal's bridges and sort
+        bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
+        bridges.sort(by: {$0.lastUpdated > $1.lastUpdated})
+}
     
     @objc func addTapped() {
         performSegue(withIdentifier: "AddItemController", sender: self)
@@ -76,26 +84,48 @@ class ViewGoalController: UIViewController {
 
 extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bridges.count
+        return 5
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let v = UIView()
+        /// Title
+        let titleLabel = UILabel(frame: CGRect(x: 8, y: 0, width: tableView.frame.width - 17, height: tableView.sectionHeaderHeight))
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 21)
+        titleLabel.text = "Recent Transactions"
+        v.addSubview(titleLabel)
+        /// More Button - Displays all transactions on touch
+        let viewMoreButton = UIButton(frame: CGRect(x: tableView.frame.width - 25, y: 0, width: 25, height: tableView.sectionHeaderHeight))
+        viewMoreButton.setTitle(">", for: .normal)
+        viewMoreButton.setTitleColor(Util.Color.BLUE, for: .normal)
+        v.addSubview(viewMoreButton)
+        return v
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        let bridge = bridges[indexPath.row]
-        let item = bridges[indexPath.row].item
-        
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        cell.textLabel?.textColor = Util.Color.VIOLET
-        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Util.Color.VIOLET.withAlphaComponent(0.6)]
-        let str = NSMutableAttributedString(string: "\(bridge.itemQuantity)x ", attributes: attributes)
-        str.append(NSAttributedString(string: item.name))
-        cell.textLabel?.attributedText = str
-        
-        cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(item.price))/unit ($\(Util.doubleToDecimalString(item.price * Double(bridge.itemQuantity))) total)"
-        cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
-        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 10)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell") as! TransactionCell
+        /// Pass transactions into table view
+        /// Name
+        cell.itemNameLabel.text = bridges[indexPath.row].item.name
+        /// Date
+        let day = Int(Date().timeIntervalSince(bridges[indexPath.row].lastUpdated)/60/60/24+1)
+        cell.transactionDateLabel.text = "\(day) "
+        if day <= 1 {
+            cell.transactionDateLabel.text!.append("day ago")
+        } else {
+            cell.transactionDateLabel.text!.append("days ago")
+        }
+        /// Price
+        cell.itemPriceLabel.text = "$" + Util.doubleToDecimalString(bridges[indexPath.row].item.price)
+        cell.itemPriceLabel.textColor = Util.Color.BLUE
 
         return cell
     }
     
+}
+
+class TransactionCell: UITableViewCell {
+    @IBOutlet weak var itemNameLabel: UILabel!
+    @IBOutlet weak var transactionDateLabel: UILabel!
+    @IBOutlet weak var itemPriceLabel: UILabel!
 }
