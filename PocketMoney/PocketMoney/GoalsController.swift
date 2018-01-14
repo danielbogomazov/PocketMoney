@@ -103,6 +103,7 @@ class GoalsController: UIViewController {
             let row = tableView.indexPath(for: (sender as! GoalCell))!.row
             viewArchiveGoalController.goal = archiveGoals[row]
             viewArchiveGoalController.goalsController = self
+            viewArchiveGoalController.archiveIndex = row
         }
     }
     

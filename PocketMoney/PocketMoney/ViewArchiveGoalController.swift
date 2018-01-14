@@ -19,11 +19,16 @@ class ViewArchiveGoalController: UIViewController {
     var goal: Goal!
     var bridges: [GoalItemBridge] = []
     
+    var archiveIndex: Int!
+    
     var goalsController: GoalsController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+
         bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
         startDateLabel.textColor = Util.Color.VIOLET
         endDateLabel.textColor = Util.Color.VIOLET
@@ -39,8 +44,23 @@ class ViewArchiveGoalController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func extendGoalTapped(_ sender: UIButton) {
+    @objc func editTapped() {
+        // Edit button loses alpha after being tapped - native iOS bug?
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        performSegue(withIdentifier: "ExtendArchivedGoalController", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let extendArchivedGoalController = segue.destination as? ExtendArchivedGoalController {
+            let backItem = UIBarButtonItem()
+            navigationItem.backBarButtonItem = backItem
+            navigationItem.backBarButtonItem!.tintColor = UIColor.white
+            extendArchivedGoalController.viewArchiveGoalController = self
+        }
+    }
+
+    
+    
 }
 
 extension ViewArchiveGoalController: UITableViewDelegate, UITableViewDataSource {
@@ -66,6 +86,5 @@ extension ViewArchiveGoalController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
-    
     
 }

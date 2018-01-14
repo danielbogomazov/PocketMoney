@@ -235,6 +235,11 @@ open class Util {
     
     // MARK:- Date functions
     
+    
+    /// Convert string to date with format MM-dd-yyyy
+    ///
+    /// - Parameter date: String to be converted to date (format: MM-dd-yyyy)
+    /// - Returns: Date object of the inserted string
     open class func stringToDate(_ date: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"

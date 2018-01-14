@@ -19,6 +19,7 @@
 		65514E481F8AF81500F46342 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65514E471F8AF81500F46342 /* PersistenceService.swift */; };
 		657F8F961FE2028E00CD6031 /* AddGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F8F951FE2028E00CD6031 /* AddGoalController.swift */; };
 		6594FF3C200B3506009A837E /* ViewArchiveGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594FF3B200B3506009A837E /* ViewArchiveGoalController.swift */; };
+		6594FF3E200B8F09009A837E /* ExtendArchivedGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594FF3D200B8F09009A837E /* ExtendArchivedGoalController.swift */; };
 		659992141FA9791100E15715 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659992131FA9791100E15715 /* UIViewControllerExtension.swift */; };
 		65BE34562000A1C1005BB2A6 /* AddItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BE34552000A1C1005BB2A6 /* AddItemController.swift */; };
 		65C6071120020DEB00801E49 /* Autofill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6071020020DEB00801E49 /* Autofill.swift */; };
@@ -46,6 +47,7 @@
 		65514E471F8AF81500F46342 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		657F8F951FE2028E00CD6031 /* AddGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalController.swift; sourceTree = "<group>"; };
 		6594FF3B200B3506009A837E /* ViewArchiveGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewArchiveGoalController.swift; sourceTree = "<group>"; };
+		6594FF3D200B8F09009A837E /* ExtendArchivedGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendArchivedGoalController.swift; sourceTree = "<group>"; };
 		659992131FA9791100E15715 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		65BE34552000A1C1005BB2A6 /* AddItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemController.swift; sourceTree = "<group>"; };
 		65C6071020020DEB00801E49 /* Autofill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autofill.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				65EA6E0A1FDF7DD400D5F8F1 /* GoalsController.swift */,
 				657F8F951FE2028E00CD6031 /* AddGoalController.swift */,
 				65BE34552000A1C1005BB2A6 /* AddItemController.swift */,
+				6594FF3D200B8F09009A837E /* ExtendArchivedGoalController.swift */,
 				651F0D951FF851BE00FDE4C4 /* ViewGoalController.swift */,
 				6594FF3B200B3506009A837E /* ViewArchiveGoalController.swift */,
 			);
@@ -332,6 +335,7 @@
 				6594FF3C200B3506009A837E /* ViewArchiveGoalController.swift in Sources */,
 				6503CBB31FBAA53900256819 /* GoalItemBridge+CoreDataProperties.swift in Sources */,
 				651F0D961FF851BE00FDE4C4 /* ViewGoalController.swift in Sources */,
+				6594FF3E200B8F09009A837E /* ExtendArchivedGoalController.swift in Sources */,
 				6503CBAF1FBAA53900256819 /* Goal+CoreDataProperties.swift in Sources */,
 				65514E481F8AF81500F46342 /* PersistenceService.swift in Sources */,
 				65C8B7FF1F8992E700AB1D2F /* PocketMoney.xcdatamodeld in Sources */,

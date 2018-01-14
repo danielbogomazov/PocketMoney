@@ -205,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUQ-hq-6N6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2062" y="1174"/>
+            <point key="canvasLocation" x="2062" y="1142"/>
         </scene>
         <!--View Archive Goal Controller-->
         <scene sceneID="MPd-Mb-g5l">
@@ -242,13 +242,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLv-M6-V69">
-                                <rect key="frame" x="16" y="631" width="343" height="30"/>
-                                <state key="normal" title="Extend Goal"/>
-                                <connections>
-                                    <action selector="extendGoalTapped:" destination="vSO-Xc-LE6" eventType="touchUpInside" id="BYq-Xi-EKp"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="udJ-hG-zfl">
                                 <rect key="frame" x="16" y="199" width="343" height="372"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -265,14 +258,11 @@
                         <constraints>
                             <constraint firstItem="fWT-FG-Jpf" firstAttribute="leading" secondItem="V7b-Rc-fQo" secondAttribute="leading" constant="16" id="1nX-As-vjr"/>
                             <constraint firstItem="fWT-FG-Jpf" firstAttribute="top" secondItem="JnE-b7-dDc" secondAttribute="bottom" constant="8" id="4Nr-Kj-HjU"/>
-                            <constraint firstItem="eLv-M6-V69" firstAttribute="top" secondItem="udJ-hG-zfl" secondAttribute="bottom" constant="60" id="4dc-AB-umL"/>
-                            <constraint firstItem="eLv-M6-V69" firstAttribute="leading" secondItem="V7b-Rc-fQo" secondAttribute="leading" constant="16" id="6qo-Rh-vHO"/>
                             <constraint firstItem="JnE-b7-dDc" firstAttribute="leading" secondItem="V7b-Rc-fQo" secondAttribute="leading" constant="16" id="B6D-Or-Ila"/>
                             <constraint firstItem="udJ-hG-zfl" firstAttribute="top" secondItem="pjF-hu-Fsn" secondAttribute="bottom" constant="60" id="H1J-bU-45b"/>
                             <constraint firstItem="V7b-Rc-fQo" firstAttribute="trailing" secondItem="fWT-FG-Jpf" secondAttribute="trailing" constant="16" id="MNh-Wi-5df"/>
                             <constraint firstItem="V7b-Rc-fQo" firstAttribute="trailing" secondItem="pjF-hu-Fsn" secondAttribute="trailing" constant="16" id="ND0-d4-Q6Y"/>
                             <constraint firstItem="pjF-hu-Fsn" firstAttribute="top" secondItem="fWT-FG-Jpf" secondAttribute="bottom" constant="8" id="RYf-08-LRR"/>
-                            <constraint firstItem="V7b-Rc-fQo" firstAttribute="trailing" secondItem="eLv-M6-V69" secondAttribute="trailing" constant="16" id="frd-4s-thC"/>
                             <constraint firstItem="JnE-b7-dDc" firstAttribute="top" secondItem="V7b-Rc-fQo" secondAttribute="top" constant="60" id="hgH-NB-hBn"/>
                             <constraint firstItem="V7b-Rc-fQo" firstAttribute="trailing" secondItem="JnE-b7-dDc" secondAttribute="trailing" constant="16" id="igx-RO-nHz"/>
                             <constraint firstItem="pjF-hu-Fsn" firstAttribute="leading" secondItem="V7b-Rc-fQo" secondAttribute="leading" constant="16" id="qHB-mH-NUL"/>
@@ -286,11 +276,56 @@
                         <outlet property="itemTableView" destination="udJ-hG-zfl" id="zeb-35-4RR"/>
                         <outlet property="moneySpentLabel" destination="pjF-hu-Fsn" id="kxz-Sa-5tQ"/>
                         <outlet property="startDateLabel" destination="JnE-b7-dDc" id="TbX-ke-un9"/>
+                        <segue destination="9j5-AW-zbx" kind="show" identifier="ExtendArchivedGoalController" id="J5K-eS-VUv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rkj-3H-D42" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1188" y="1914.5320197044337"/>
+        </scene>
+        <!--Extend Goal-->
+        <scene sceneID="x6u-Gh-pMC">
+            <objects>
+                <viewController title="Extend Goal" id="9j5-AW-zbx" customClass="ExtendArchivedGoalController" customModule="PocketMoney" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="niG-ke-xPh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extend Goal To" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxq-lH-NDG">
+                                <rect key="frame" x="16" y="60" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mx7-0J-hXB">
+                                <rect key="frame" x="0.0" y="141" width="375" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="Zyw-vs-6e9"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="537628362.81131196">
+                                    <!--2018-01-14 13:12:42 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mxq-lH-NDG" firstAttribute="leading" secondItem="LY5-1Z-5JP" secondAttribute="leading" constant="16" id="27U-nz-0re"/>
+                            <constraint firstItem="Mx7-0J-hXB" firstAttribute="trailing" secondItem="LY5-1Z-5JP" secondAttribute="trailing" id="69F-27-cdL"/>
+                            <constraint firstItem="LY5-1Z-5JP" firstAttribute="trailing" secondItem="mxq-lH-NDG" secondAttribute="trailing" constant="16" id="Buj-n4-PWP"/>
+                            <constraint firstItem="Mx7-0J-hXB" firstAttribute="leading" secondItem="LY5-1Z-5JP" secondAttribute="leading" id="CpX-DN-jDf"/>
+                            <constraint firstItem="Mx7-0J-hXB" firstAttribute="top" secondItem="mxq-lH-NDG" secondAttribute="bottom" constant="60" id="iC3-Zl-NpQ"/>
+                            <constraint firstItem="mxq-lH-NDG" firstAttribute="top" secondItem="LY5-1Z-5JP" secondAttribute="top" constant="60" id="zbw-xx-6Rv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LY5-1Z-5JP"/>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="Mx7-0J-hXB" id="tIr-JY-PgL"/>
+                        <outlet property="endDateLabel" destination="mxq-lH-NDG" id="p9d-Ly-8TR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fDA-DM-UVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2061.5999999999999" y="1914.5320197044337"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="G3C-CE-ncX">
@@ -623,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWY-1F-jMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2062" y="405"/>
+            <point key="canvasLocation" x="2062" y="301"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PhI-xM-73k">
