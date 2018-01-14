@@ -96,7 +96,3 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
-extension ViewGoalController: UITextViewDelegate {
-    
-}

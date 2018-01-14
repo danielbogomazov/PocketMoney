@@ -163,8 +163,8 @@
 			children = (
 				65EA6E0A1FDF7DD400D5F8F1 /* GoalsController.swift */,
 				657F8F951FE2028E00CD6031 /* AddGoalController.swift */,
-				651F0D951FF851BE00FDE4C4 /* ViewGoalController.swift */,
 				65BE34552000A1C1005BB2A6 /* AddItemController.swift */,
+				651F0D951FF851BE00FDE4C4 /* ViewGoalController.swift */,
 				6594FF3B200B3506009A837E /* ViewArchiveGoalController.swift */,
 			);
 			name = Controllers;
