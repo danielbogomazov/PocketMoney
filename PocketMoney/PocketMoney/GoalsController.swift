@@ -14,7 +14,7 @@ class GoalsController: UIViewController {
     @IBOutlet weak var addGoalButton: UIBarButtonItem!
     
     var currentGoals: [Goal] = []
-    var hisrory: [Goal] = []
+    var archiveGoals: [Goal] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,6 @@ class GoalsController: UIViewController {
             currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
             currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
 
-
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Game of Thrones", price: 11.99), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Clash of Kings", price: 12.99), quantity: 1)
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Storm of Swords", price: 14.00), quantity: 1)
@@ -53,6 +52,24 @@ class GoalsController: UIViewController {
             Util.addItemToGoal(currentGoals[4], item: Util.createItem(name: "100%", price: 80.0), quantity: 1)
             Util.addItemToGoal(currentGoals[5], item: Util.createItem(name: "100%", price: 100.0), quantity: 1)
             Util.addItemToGoal(currentGoals[6], item: Util.createItem(name: "200%", price: 200.0), quantity: 1)
+            
+            archiveGoals.append(Util.createGoal(title: "ARCHIVE1", budget: 100.0, startDate: Util.stringToDate("01-01-2015"), endDate: Util.stringToDate("01-01-2016"), isOngoing: false))
+            archiveGoals.append(Util.createGoal(title: "ARCHIVE2", budget: 100.0, startDate: Util.stringToDate("01-01-2015"), endDate: Util.stringToDate("01-01-2016"), isOngoing: false))
+            archiveGoals.append(Util.createGoal(title: "ARCHIVE3", budget: 100.0, startDate: Util.stringToDate("01-01-2015"), endDate: Util.stringToDate("01-01-2016"), isOngoing: false))
+            archiveGoals.append(Util.createGoal(title: "ARCHIVE4", budget: 100.0, startDate: Util.stringToDate("01-01-2015"), endDate: Util.stringToDate("01-01-2016"), isOngoing: false))
+
+            Util.addItemToGoal(archiveGoals[0], item: Util.createItem(name: "ITEM ONE", price: 10.0), quantity: 1)
+            Util.addItemToGoal(archiveGoals[0], item: Util.createItem(name: "ITEM TWO", price: 10.0), quantity: 8)
+            
+            Util.addItemToGoal(archiveGoals[1], item: Util.createItem(name: "ITEM ONE", price: 10.0), quantity: 1)
+            Util.addItemToGoal(archiveGoals[1], item: Util.createItem(name: "ITEM TWO", price: 10.0), quantity: 9)
+            
+            Util.addItemToGoal(archiveGoals[2], item: Util.createItem(name: "ITEM ONE", price: 10.0), quantity: 1)
+            Util.addItemToGoal(archiveGoals[2], item: Util.createItem(name: "ITEM TWO", price: 10.0), quantity: 13)
+
+
+
+            
         }
     }
     
@@ -78,6 +95,14 @@ class GoalsController: UIViewController {
             let row = tableView.indexPath(for: (sender as! GoalCell))!.row
             viewGoalController.goal = currentGoals[row]
             viewGoalController.goalsController = self
+        } else if let viewArchiveGoalController = segue.destination as? ViewArchiveGoalController {
+            let backItem = UIBarButtonItem()
+            navigationItem.backBarButtonItem = backItem
+            navigationItem.backBarButtonItem!.tintColor = UIColor.white
+            viewArchiveGoalController.title = (sender as! GoalCell).titleLabel.text
+            let row = tableView.indexPath(for: (sender as! GoalCell))!.row
+            viewArchiveGoalController.goal = archiveGoals[row]
+            viewArchiveGoalController.goalsController = self
         }
     }
     
@@ -103,7 +128,7 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             return currentGoals.count
         } else if section == 1 {
-            return hisrory.count
+            return archiveGoals.count
         }
         return 0
     }
@@ -122,21 +147,34 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "GoalCell") as! GoalCell
-        let goal = currentGoals[indexPath.row]
+        let goal: Goal!
+        
+        if indexPath.section == 0 {
+            goal = currentGoals[indexPath.row]
+        } else if indexPath.section == 1 {
+            goal = archiveGoals[indexPath.row]
+        } else {
+            return UITableViewCell()
+        }
 
         var color: UIColor!
         
         let percentage = Int(goal.amountSpent / goal.budget * 100)
         
-        if percentage <= 0 {
-            color = Util.Color.PINK
-        } else if percentage < 33 {
-            color = Util.Color.BLUE
-        } else if percentage < 66 {
-            color = Util.Color.YELLOW
-        } else {
-            color = Util.Color.RED
+        if indexPath.section == 0 {
+            if percentage <= 0 {
+                color = Util.Color.PINK
+            } else if percentage < 33 {
+                color = Util.Color.BLUE
+            } else if percentage < 66 {
+                color = Util.Color.YELLOW
+            } else {
+                color = Util.Color.RED
+            }
+        } else if indexPath.section == 1 {
+            color = Util.Color.VIOLET
         }
 
         cell.colorView.backgroundColor = color
@@ -151,8 +189,12 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
             
         cell.titleLabel.text = goal.title
         
-        cell.expiryLabel.text = "Expires \(Util.dateToReadableString(goal.endDate))"
-                
+        if indexPath.section == 0 {
+            cell.expiryLabel.text = "Expires \(Util.dateToReadableString(goal.endDate))"
+        } else if indexPath.section == 1 {
+            cell.expiryLabel.text = "Expired \(Util.dateToReadableString(goal.endDate))"
+        }
+        
         cell.spentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) SPENT ($\(Util.doubleToDecimalString(goal.budget)) BUDGET)"
         
         let attributes = [NSAttributedStringKey.foregroundColor: Util.Color.VIOLET.withAlphaComponent(0.4)]
@@ -162,6 +204,14 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            performSegue(withIdentifier: "ViewCurrentGoal", sender: tableView.cellForRow(at: indexPath))
+        } else if indexPath.section == 1 {
+            performSegue(withIdentifier: "ViewArchiveGoal", sender: tableView.cellForRow(at: indexPath))
+        }
+    }
+    
 }
 
 class GoalCell: UITableViewCell {
@@ -172,3 +222,4 @@ class GoalCell: UITableViewCell {
     @IBOutlet weak var expiryLabel: UILabel!
     @IBOutlet weak var spentLabel: UILabel!
 }
+
