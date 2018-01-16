@@ -156,7 +156,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="40" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zkb-3k-ERe">
-                                <rect key="frame" x="16" y="222" width="343" height="240"/>
+                                <rect key="frame" x="16" y="190" width="343" height="240"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="Gay-WP-aqv"/>
@@ -321,10 +321,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beu-Gn-1xW" customClass="ProgressView" customModule="PocketMoney" customModuleProvider="target">
-                                <rect key="frame" x="85" y="486" width="204" height="204"/>
+                                <rect key="frame" x="89" y="462" width="196" height="196"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="beu-Gn-1xW" secondAttribute="height" multiplier="1:1" id="Inh-AU-L1T"/>
+                                    <constraint firstAttribute="width" secondItem="beu-Gn-1xW" secondAttribute="height" multiplier="1:1" id="JSc-ux-pR9"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -333,16 +333,16 @@
                             <constraint firstItem="xYr-3c-scQ" firstAttribute="top" secondItem="Gqp-ln-0lY" secondAttribute="bottom" constant="64" id="07R-Vc-FcC"/>
                             <constraint firstItem="zkb-3k-ERe" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="0uY-ip-ds1"/>
                             <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="Gqp-ln-0lY" secondAttribute="trailing" constant="32" id="295-4o-xP7"/>
-                            <constraint firstItem="beu-Gn-1xW" firstAttribute="top" secondItem="zkb-3k-ERe" secondAttribute="bottom" constant="24" id="39d-CH-qT8"/>
-                            <constraint firstItem="beu-Gn-1xW" firstAttribute="centerX" secondItem="AAA-OF-sue" secondAttribute="centerX" id="BCT-3R-KAW"/>
+                            <constraint firstItem="beu-Gn-1xW" firstAttribute="centerX" secondItem="AAA-OF-sue" secondAttribute="centerX" id="5Wb-3R-v4C"/>
                             <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="xYr-3c-scQ" secondAttribute="trailing" constant="8" id="F7Z-3S-87f"/>
                             <constraint firstItem="Gqp-ln-0lY" firstAttribute="top" secondItem="8A6-Cn-1iM" secondAttribute="top" constant="64" id="Mtu-lg-cSM"/>
                             <constraint firstItem="QHB-zw-tul" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="32" id="OQx-oz-1dQ"/>
                             <constraint firstItem="QHB-zw-tul" firstAttribute="top" secondItem="8A6-Cn-1iM" secondAttribute="top" constant="64" id="Vy6-5F-xTO"/>
                             <constraint firstItem="xYr-3c-scQ" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="8" id="ZdK-aF-Kk0"/>
+                            <constraint firstItem="beu-Gn-1xW" firstAttribute="top" secondItem="zkb-3k-ERe" secondAttribute="bottom" constant="32" id="amv-cu-Nl1"/>
                             <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="zkb-3k-ERe" secondAttribute="trailing" constant="16" id="bGK-zJ-bwf"/>
-                            <constraint firstItem="beu-Gn-1xW" firstAttribute="bottom" secondItem="8A6-Cn-1iM" secondAttribute="bottom" id="mQs-Fe-Yuq"/>
-                            <constraint firstItem="zkb-3k-ERe" firstAttribute="top" secondItem="xYr-3c-scQ" secondAttribute="bottom" constant="64" id="s0q-0K-lLe"/>
+                            <constraint firstItem="zkb-3k-ERe" firstAttribute="top" secondItem="xYr-3c-scQ" secondAttribute="bottom" constant="32" id="s0q-0K-lLe"/>
+                            <constraint firstItem="8A6-Cn-1iM" firstAttribute="bottom" secondItem="beu-Gn-1xW" secondAttribute="bottom" constant="32" id="uYu-c7-dLn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8A6-Cn-1iM"/>
                     </view>
