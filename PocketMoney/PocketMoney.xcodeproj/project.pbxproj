@@ -18,6 +18,7 @@
 		652867151FC3D36100CDC3EA /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652867141FC3D36100CDC3EA /* CGFloatExtension.swift */; };
 		65514E481F8AF81500F46342 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65514E471F8AF81500F46342 /* PersistenceService.swift */; };
 		657F8F961FE2028E00CD6031 /* AddGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F8F951FE2028E00CD6031 /* AddGoalController.swift */; };
+		65806D83200D92D50059B0A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65806D82200D92D50059B0A9 /* Assets.xcassets */; };
 		6594FF3C200B3506009A837E /* ViewArchiveGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594FF3B200B3506009A837E /* ViewArchiveGoalController.swift */; };
 		6594FF3E200B8F09009A837E /* ExtendArchivedGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6594FF3D200B8F09009A837E /* ExtendArchivedGoalController.swift */; };
 		659992141FA9791100E15715 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659992131FA9791100E15715 /* UIViewControllerExtension.swift */; };
@@ -45,6 +46,7 @@
 		652867141FC3D36100CDC3EA /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		65514E471F8AF81500F46342 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		657F8F951FE2028E00CD6031 /* AddGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalController.swift; sourceTree = "<group>"; };
+		65806D82200D92D50059B0A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		6594FF3B200B3506009A837E /* ViewArchiveGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewArchiveGoalController.swift; sourceTree = "<group>"; };
 		6594FF3D200B8F09009A837E /* ExtendArchivedGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendArchivedGoalController.swift; sourceTree = "<group>"; };
 		659992131FA9791100E15715 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				65C8B7F61F8992E700AB1D2F /* AppDelegate.swift */,
 				65C8B7FA1F8992E700AB1D2F /* Main.storyboard */,
 				65C8B8021F8992E700AB1D2F /* LaunchScreen.storyboard */,
+				65806D82200D92D50059B0A9 /* Assets.xcassets */,
 				65C8B8051F8992E700AB1D2F /* Info.plist */,
 				65D6A2221FE5CC7100DEBB6B /* Bridging-Header.h */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C8B8041F8992E700AB1D2F /* LaunchScreen.storyboard in Resources */,
+				65806D83200D92D50059B0A9 /* Assets.xcassets in Resources */,
 				65C8B7FC1F8992E700AB1D2F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
