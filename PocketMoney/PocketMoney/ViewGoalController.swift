@@ -9,8 +9,6 @@
 import UIKit
 
 class ViewGoalController: UIViewController {
-
-    @IBOutlet weak var itemTableView: UITableView!
     
     /// End date of goal (dd-mm-yy)
     @IBOutlet weak var endDateLabel: UILabel!
@@ -22,6 +20,8 @@ class ViewGoalController: UIViewController {
     @IBOutlet weak var centLabel: UILabel!
     /// Recent transactions
     @IBOutlet weak var transactionsTableView: UITableView!
+    /// Progress view of current goal
+    @IBOutlet weak var progressView: ProgressView!
     /// Root controller
     var goalsController: GoalsController!
     /// Current goal - set in root controller before segue
@@ -54,7 +54,9 @@ class ViewGoalController: UIViewController {
         /// Load goal's bridges and sort
         bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
         bridges.sort(by: {$0.lastUpdated > $1.lastUpdated})
-}
+        /// Init progressView
+        progressView.initProgressView(for: goal)
+    }
     
     @objc func addTapped() {
         performSegue(withIdentifier: "AddItemController", sender: self)
@@ -77,7 +79,7 @@ class ViewGoalController: UIViewController {
     func reloadGoal() {
         bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
 //        moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
-        itemTableView.reloadData()
+        transactionsTableView.reloadData()
         goalsController.reloadGoals()
     }
 }

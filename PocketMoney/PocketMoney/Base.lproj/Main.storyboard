@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -319,18 +320,28 @@
                                     <constraint firstAttribute="height" constant="2" id="Gc0-q3-t60"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beu-Gn-1xW" customClass="ProgressView" customModule="PocketMoney" customModuleProvider="target">
+                                <rect key="frame" x="85" y="486" width="204" height="204"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="beu-Gn-1xW" secondAttribute="height" multiplier="1:1" id="Inh-AU-L1T"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xYr-3c-scQ" firstAttribute="top" secondItem="Gqp-ln-0lY" secondAttribute="bottom" constant="64" id="07R-Vc-FcC"/>
                             <constraint firstItem="zkb-3k-ERe" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="16" id="0uY-ip-ds1"/>
                             <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="Gqp-ln-0lY" secondAttribute="trailing" constant="32" id="295-4o-xP7"/>
+                            <constraint firstItem="beu-Gn-1xW" firstAttribute="top" secondItem="zkb-3k-ERe" secondAttribute="bottom" constant="24" id="39d-CH-qT8"/>
+                            <constraint firstItem="beu-Gn-1xW" firstAttribute="centerX" secondItem="AAA-OF-sue" secondAttribute="centerX" id="BCT-3R-KAW"/>
                             <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="xYr-3c-scQ" secondAttribute="trailing" constant="8" id="F7Z-3S-87f"/>
                             <constraint firstItem="Gqp-ln-0lY" firstAttribute="top" secondItem="8A6-Cn-1iM" secondAttribute="top" constant="64" id="Mtu-lg-cSM"/>
                             <constraint firstItem="QHB-zw-tul" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="32" id="OQx-oz-1dQ"/>
                             <constraint firstItem="QHB-zw-tul" firstAttribute="top" secondItem="8A6-Cn-1iM" secondAttribute="top" constant="64" id="Vy6-5F-xTO"/>
                             <constraint firstItem="xYr-3c-scQ" firstAttribute="leading" secondItem="8A6-Cn-1iM" secondAttribute="leading" constant="8" id="ZdK-aF-Kk0"/>
                             <constraint firstItem="8A6-Cn-1iM" firstAttribute="trailing" secondItem="zkb-3k-ERe" secondAttribute="trailing" constant="16" id="bGK-zJ-bwf"/>
+                            <constraint firstItem="beu-Gn-1xW" firstAttribute="bottom" secondItem="8A6-Cn-1iM" secondAttribute="bottom" id="mQs-Fe-Yuq"/>
                             <constraint firstItem="zkb-3k-ERe" firstAttribute="top" secondItem="xYr-3c-scQ" secondAttribute="bottom" constant="64" id="s0q-0K-lLe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8A6-Cn-1iM"/>
@@ -339,7 +350,7 @@
                         <outlet property="budgetLabel" destination="XjS-3N-GYo" id="Dyo-Ln-Kxq"/>
                         <outlet property="centLabel" destination="bDQ-UL-hHp" id="4QL-Qc-nP1"/>
                         <outlet property="endDateLabel" destination="LC9-P4-j8Y" id="w0c-BR-9gd"/>
-                        <outlet property="itemTableView" destination="zkb-3k-ERe" id="jI9-Jn-GMB"/>
+                        <outlet property="progressView" destination="beu-Gn-1xW" id="DS0-fX-GLn"/>
                         <outlet property="remainingDaysLabel" destination="I1R-M2-ucZ" id="3dZ-rG-tfX"/>
                         <outlet property="transactionsTableView" destination="zkb-3k-ERe" id="Va1-wj-KEB"/>
                         <segue destination="MTP-54-cSt" kind="show" identifier="AddItemController" id="1Vq-v9-bxR"/>

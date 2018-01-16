@@ -181,7 +181,7 @@ extension GoalsController: UITableViewDataSource, UITableViewDelegate {
         cell.expiryLabel.textColor = Util.Color.VIOLET
         cell.spentLabel.textColor = Util.Color.VIOLET
 
-        cell.progressView.initProgressView(for: goal, color: color)
+        cell.progressView.initProgressView(for: goal)
         
         cell.percentageLabel.text = "\(percentage)%"
             
