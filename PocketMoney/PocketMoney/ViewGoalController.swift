@@ -110,7 +110,10 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
         /// Pass transactions into table view
         let transaction = transactions[indexPath.row]
         /// Name
-        cell.itemNameLabel.text = transaction.item.name
+        let attribute = [NSAttributedStringKey.foregroundColor: Util.Color.BLUE]
+        let str: NSMutableAttributedString = NSMutableAttributedString(string: "\(transaction.quantity)x ", attributes: attribute)
+        str.append(NSMutableAttributedString(string: transaction.item.name))
+        cell.itemNameLabel.attributedText = str
         /// Date
         let day = Int(Date().timeIntervalSince(transaction.date)/60/60/24+1)
         cell.transactionDateLabel.text = "\(day) "
