@@ -22,6 +22,7 @@ class ProgressView: UIView {
     var arcCenter: CGPoint!
     var radius: CGFloat!
     var startAngle: CGFloat = CGFloat(270).degreesToRadians
+    var percentLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,7 +32,7 @@ class ProgressView: UIView {
         super.init(coder: aDecoder)
     }
 
-    func initProgressView(for goal: Goal, color: UIColor) {
+    func initProgressView(for goal: Goal) {
 
         self.backgroundColor = UIColor.clear
         
@@ -61,21 +62,17 @@ class ProgressView: UIView {
         circleLayer.path = path.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
         circleLayer.lineWidth = 5.0
-        circleLayer.strokeColor = color.cgColor
+        circleLayer.strokeColor = Util.Color.BLUE.cgColor
 
         layer.addSublayer(circleLayer)
-    }
-
-    func updateProgressView() {
-        let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle(), clockwise: true)
-
-        let updateLayer = CAShapeLayer()
-        updateLayer.path = path.cgPath
-        updateLayer.fillColor = UIColor.clear.cgColor
-        updateLayer.lineWidth = lineWidth
-        updateLayer.strokeColor = Util.Constant.TINT_COLOR.cgColor
-
-        layer.addSublayer(updateLayer)
+        
+        let labelHeight = frame.size.height / 2
+        percentLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height / 2 - (labelHeight / 2), width: frame.size.width, height: labelHeight))
+        percentLabel.font = UIFont.boldSystemFont(ofSize: 50)
+        percentLabel.textColor = Util.Color.BLUE
+        percentLabel.textAlignment = .center
+        percentLabel.text = "\(Int(goal.amountSpent / goal.budget * 100))%"
+        addSubview(percentLabel)
     }
 
     func endAngle() -> CGFloat {
