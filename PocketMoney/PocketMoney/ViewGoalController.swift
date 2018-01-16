@@ -47,10 +47,7 @@ class ViewGoalController: UIViewController {
             remainingDaysLabel.text!.append("days)")
         }
         /// Budget labels
-        let dollar = Int(goal.amountSpent)
-        budgetLabel.text = "$" + "\(dollar)"
-        let cent = Int((goal.amountSpent - Double(dollar)) * 100)
-        centLabel.text = "\(cent)"
+        reloadBudget()
         /// Load goal's transactions sorted by date
         transactions = goal.transactions?.allObjects as! [Transaction]
         transactions.sort(by: {$0.date > $1.date})
@@ -79,9 +76,17 @@ class ViewGoalController: UIViewController {
     func reloadGoal() {
         transactions = goal.transactions?.allObjects as! [Transaction]
         transactions.sort(by: {$0.date > $1.date})
-//        moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
+        reloadBudget()
         transactionsTableView.reloadData()
         goalsController.reloadGoals()
+    }
+    
+    func reloadBudget() {
+        let remaining = goal.budget - goal.amountSpent
+        let dollar = Int(remaining)
+        budgetLabel.text = "$" + "\(dollar)"
+        let cent = Int(Double(Util.doubleToDecimalString(remaining - Double(dollar)))! * 100)
+        centLabel.text = String(format: "%02d", cent)
     }
 }
 
