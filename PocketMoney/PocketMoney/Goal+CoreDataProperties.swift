@@ -2,8 +2,8 @@
 //  Goal+CoreDataProperties.swift
 //  PocketMoney
 //
-//  Created by Daniel on 2017-11-13.
-//  Copyright © 2017 Daniel Bogomazov. All rights reserved.
+//  Created by Daniel on 2018-01-15.
+//  Copyright © 2018 Daniel Bogomazov. All rights reserved.
 //
 //
 
@@ -18,29 +18,29 @@ extension Goal {
     }
 
     @NSManaged public var amountSpent: Double
-    @NSManaged public var endDate: Date
     @NSManaged public var budget: Double
-    @NSManaged public var title: String
+    @NSManaged public var endDate: Date
     @NSManaged public var id: UUID
-    @NSManaged public var startDate: Date
     @NSManaged public var isOngoing: Bool
-    @NSManaged public var goalItemBridges: NSSet?
+    @NSManaged public var startDate: Date
+    @NSManaged public var title: String
+    @NSManaged public var transactions: NSSet?
 
 }
 
-// MARK: Generated accessors for goalItemBridges
+// MARK: Generated accessors for transactions
 extension Goal {
 
-    @objc(addGoalItemBridgesObject:)
-    @NSManaged public func addToGoalItemBridges(_ value: GoalItemBridge)
+    @objc(addTransactionsObject:)
+    @NSManaged public func addToTransactions(_ value: Transaction)
 
-    @objc(removeGoalItemBridgesObject:)
-    @NSManaged public func removeFromGoalItemBridges(_ value: GoalItemBridge)
+    @objc(removeTransactionsObject:)
+    @NSManaged public func removeFromTransactions(_ value: Transaction)
 
-    @objc(addGoalItemBridges:)
-    @NSManaged public func addToGoalItemBridges(_ values: NSSet)
+    @objc(addTransactions:)
+    @NSManaged public func addToTransactions(_ values: NSSet)
 
-    @objc(removeGoalItemBridges:)
-    @NSManaged public func removeFromGoalItemBridges(_ values: NSSet)
+    @objc(removeTransactions:)
+    @NSManaged public func removeFromTransactions(_ values: NSSet)
 
 }

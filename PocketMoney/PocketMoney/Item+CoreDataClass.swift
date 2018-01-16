@@ -2,8 +2,8 @@
 //  Item+CoreDataClass.swift
 //  PocketMoney
 //
-//  Created by Daniel on 2017-11-13.
-//  Copyright © 2017 Daniel Bogomazov. All rights reserved.
+//  Created by Daniel on 2018-01-15.
+//  Copyright © 2018 Daniel Bogomazov. All rights reserved.
 //
 //
 

@@ -17,7 +17,7 @@ class ViewArchiveGoalController: UIViewController {
     @IBOutlet weak var itemTableView: UITableView!
     
     var goal: Goal!
-    var bridges: [GoalItemBridge] = []
+    var transactions: [Transaction] = []
     
     var archiveIndex: Int!
     
@@ -29,7 +29,7 @@ class ViewArchiveGoalController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.white
 
-        bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
+        transactions = goal.transactions?.allObjects as! [Transaction]
         startDateLabel.textColor = Util.Color.VIOLET
         endDateLabel.textColor = Util.Color.VIOLET
         moneySpentLabel.textColor = Util.Color.VIOLET
@@ -65,22 +65,22 @@ class ViewArchiveGoalController: UIViewController {
 
 extension ViewArchiveGoalController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bridges.count
+        return transactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        let bridge = bridges[indexPath.row]
-        let item = bridges[indexPath.row].item
+        let transaction = transactions[indexPath.row]
+        let item = transactions[indexPath.row].item
         
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         cell.textLabel?.textColor = Util.Color.VIOLET
         let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Util.Color.VIOLET.withAlphaComponent(0.6)]
-        let str = NSMutableAttributedString(string: "\(bridge.itemQuantity)x ", attributes: attributes)
+        let str = NSMutableAttributedString(string: "\(transaction.quantity)x ", attributes: attributes)
         str.append(NSAttributedString(string: item.name))
         cell.textLabel?.attributedText = str
         
-        cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(item.price))/unit ($\(Util.doubleToDecimalString(item.price * Double(bridge.itemQuantity))) total)"
+        cell.detailTextLabel?.text = "$\(Util.doubleToDecimalString(item.price))/unit ($\(Util.doubleToDecimalString(item.price * Double(transaction.quantity))) total)"
         cell.detailTextLabel?.textColor = Util.Constant.TINT_COLOR.withAlphaComponent(0.6)
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 10)
         

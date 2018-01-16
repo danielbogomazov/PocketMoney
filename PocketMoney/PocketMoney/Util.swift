@@ -42,7 +42,7 @@ open class Util {
     open class func createGoal(title: String, budget: Double, startDate: Date, endDate: Date, isOngoing: Bool) -> Goal {
         let newGoal = Goal(context: PersistenceService.context)
         newGoal.id = UUID()
-        newGoal.goalItemBridges = nil
+        newGoal.transactions = nil
         newGoal.title = title
         newGoal.amountSpent = 0.0
         newGoal.budget = budget
@@ -204,12 +204,11 @@ open class Util {
         return ""
     }
 
-    
-    open class func findItemInGoal(_ goal: Goal, item: Item) -> GoalItemBridge? {
-        if let bridges: [GoalItemBridge] = goal.goalItemBridges?.allObjects as? [GoalItemBridge] {
-            for bridge in bridges {
-                if bridge.item == item {
-                    return bridge
+    open class func findItemInGoal(_ goal: Goal, item: Item) -> Transaction? {
+        if let transactions: [Transaction] = goal.transactions?.allObjects as? [Transaction] {
+            for transaction in transactions {
+                if transaction.item == item {
+                    return transaction
                 }
             }
         }
@@ -217,26 +216,20 @@ open class Util {
     }
     
     open class func addItemToGoal(_ goal: Goal, item: Item, quantity: Int16) {
-        if let bridge = findItemInGoal(goal, item: item) {
-            bridge.itemQuantity += quantity
-            bridge.lastUpdated = Date()
-            goal.amountSpent += item.price * Double(quantity)
-        } else {
-            let bridge = GoalItemBridge(context: PersistenceService.context)
-            bridge.id = UUID()
-            bridge.goal = goal
-            bridge.item = item
-            bridge.itemQuantity = quantity
-            bridge.lastUpdated = Date()
-            
-            goal.amountSpent += item.price * Double(quantity)
-            goal.addToGoalItemBridges(bridge)
-        }
+        let transaction = Transaction(context: PersistenceService.context)
+        transaction.id = UUID()
+        transaction.date = Date()
+        transaction.quantity = quantity
+        transaction.goal = goal
+        transaction.item = item
+        
+        goal.amountSpent += item.price * Double(quantity)
+        goal.addToTransactions(transaction)
+        
         PersistenceService.saveContext()
     }
     
     // MARK:- Date functions
-    
     
     /// Convert string to date with format MM-dd-yyyy
     ///

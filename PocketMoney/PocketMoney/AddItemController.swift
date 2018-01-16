@@ -235,9 +235,9 @@ extension AddItemController: UITextFieldDelegate {
             nameTextField.textColor = Util.Color.VIOLET
             autofill = nil
             
-            for bridge in viewGoalController.bridges {
-                if bridge.item.name.lowercased() == nameTextField.text!.lowercased() {
-                    priceTextField.text = Util.doubleToDecimalString(bridge.item.price)
+            for transaction in viewGoalController.transactions {
+                if transaction.item.name.lowercased() == nameTextField.text!.lowercased() {
+                    priceTextField.text = Util.doubleToDecimalString(transaction.item.price)
                     currencyButton.setTitleColor(Util.Color.BLUE, for: .normal)
                     priceLabel.textColor = Util.Color.BLUE
                     priceView.changeUnderline(to: Util.Color.BLUE)

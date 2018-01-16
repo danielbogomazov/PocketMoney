@@ -1,5 +1,5 @@
 //
-//  Goal+CoreDataClass.swift
+//  Transaction+CoreDataClass.swift
 //  PocketMoney
 //
 //  Created by Daniel on 2018-01-15.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Goal)
-public class Goal: NSManagedObject {
+@objc(Transaction)
+public class Transaction: NSManagedObject {
 
 }

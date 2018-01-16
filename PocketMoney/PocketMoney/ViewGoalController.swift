@@ -26,8 +26,8 @@ class ViewGoalController: UIViewController {
     var goalsController: GoalsController!
     /// Current goal - set in root controller before segue
     var goal: Goal!
-    /// Reference to goal's items + quantity - sorted by last update
-    var bridges: [GoalItemBridge] = []
+    /// Reference to goal's transactions - sorted by date
+    var transactions: [Transaction] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +51,9 @@ class ViewGoalController: UIViewController {
         budgetLabel.text = "$" + "\(dollar)"
         let cent = Int((goal.amountSpent - Double(dollar)) * 100)
         centLabel.text = "\(cent)"
-        /// Load goal's bridges and sort
-        bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
-        bridges.sort(by: {$0.lastUpdated > $1.lastUpdated})
+        /// Load goal's transactions sorted by date
+        transactions = goal.transactions?.allObjects as! [Transaction]
+        transactions.sort(by: {$0.date > $1.date})
         /// Init progressView
         progressView.initProgressView(for: goal)
     }
@@ -77,7 +77,8 @@ class ViewGoalController: UIViewController {
     }
     
     func reloadGoal() {
-        bridges = goal.goalItemBridges?.allObjects as! [GoalItemBridge]
+        transactions = goal.transactions?.allObjects as! [Transaction]
+        transactions.sort(by: {$0.date > $1.date})
 //        moneySpentLabel.text = "$\(Util.doubleToDecimalString(goal.amountSpent)) spent of $\(Util.doubleToDecimalString(goal.budget))"
         transactionsTableView.reloadData()
         goalsController.reloadGoals()
@@ -107,10 +108,11 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell") as! TransactionCell
         /// Pass transactions into table view
+        let transaction = transactions[indexPath.row]
         /// Name
-        cell.itemNameLabel.text = bridges[indexPath.row].item.name
+        cell.itemNameLabel.text = transaction.item.name
         /// Date
-        let day = Int(Date().timeIntervalSince(bridges[indexPath.row].lastUpdated)/60/60/24+1)
+        let day = Int(Date().timeIntervalSince(transaction.date)/60/60/24+1)
         cell.transactionDateLabel.text = "\(day) "
         if day <= 1 {
             cell.transactionDateLabel.text!.append("day ago")
@@ -118,7 +120,7 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
             cell.transactionDateLabel.text!.append("days ago")
         }
         /// Price
-        cell.itemPriceLabel.text = "$" + Util.doubleToDecimalString(bridges[indexPath.row].item.price)
+        cell.itemPriceLabel.text = "$" + Util.doubleToDecimalString(transaction.item.price)
         cell.itemPriceLabel.textColor = Util.Color.BLUE
 
         return cell

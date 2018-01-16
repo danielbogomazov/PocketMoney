@@ -29,13 +29,13 @@ class GoalsController: UIViewController {
         
         //MARK:- PRODUCTION CODE -- REMOVE AFTER TESTING
         if currentGoals.isEmpty {
-            currentGoals.append(Util.createGoal(title: "Books", budget: 200.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
-            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
-            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
-            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
-            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
-            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
-            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 200.0, startDate: Date(), endDate: Util.stringToDate("03-03-2025"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2024"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2023"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2022"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2021"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2020"), isOngoing: true))
+            currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2019"), isOngoing: true))
             currentGoals.append(Util.createGoal(title: "Books", budget: 100.0, startDate: Date(), endDate: Util.stringToDate("03-03-2018"), isOngoing: true))
 
             Util.addItemToGoal(currentGoals[0], item: Util.createItem(name: "A Game of Thrones", price: 11.99), quantity: 1)
