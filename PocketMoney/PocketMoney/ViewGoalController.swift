@@ -109,11 +109,11 @@ extension ViewGoalController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell") as! TransactionCell
         /// Pass transactions into table view
         let transaction = transactions[indexPath.row]
+        /// Quantity
+        cell.quantityLabel.text = String(format: "%02dx", transaction.quantity)
+        cell.quantityLabel.textColor = Util.Color.BLUE
         /// Name
-        let attribute = [NSAttributedStringKey.foregroundColor: Util.Color.BLUE]
-        let str: NSMutableAttributedString = NSMutableAttributedString(string: "\(transaction.quantity)x ", attributes: attribute)
-        str.append(NSMutableAttributedString(string: transaction.item.name))
-        cell.itemNameLabel.attributedText = str
+        cell.itemNameLabel.text = transaction.item.name
         /// Date
         let day = Int(Date().timeIntervalSince(transaction.date)/60/60/24+1)
         cell.transactionDateLabel.text = "\(day) "
@@ -135,4 +135,5 @@ class TransactionCell: UITableViewCell {
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var transactionDateLabel: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
+    @IBOutlet weak var quantityLabel: UILabel!
 }
